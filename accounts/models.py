@@ -25,20 +25,22 @@ from accounts.manager import CustomUserManager
 
 """
 Role = (
-    ('student', "Student"),
-    ('teacher', "Teacher"),
+    ('stu', "Student"),
+    ('tea', "Teacher"),
 )
 
 
 
 class CustomUser(AbstractUser):
-    # pass
 
-    email = models.EmailField(unique=True, blank=False,
+    email = models.EmailField(unique=True, blank=False,max_length=254,
                     error_messages={
                         'unique': "A user with that email already exists."
                     })
 
-    role  = models.ChoiceField(choice=Role,max_length=10)
+    role  = models.CharField(max_length=3,choices=Role)
+    
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
 
-    # objects = CustomUserManager()
+    objects = CustomUserManager()
