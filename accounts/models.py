@@ -5,25 +5,6 @@ from django.db import models
 from accounts.manager import CustomUserManager
 # Create your models here.
 
-"""
-
-# Tutorial
-    - name
-    - price
-    - description
-    - thumbnail
-    - demo - url -
-    - category [ foreign key ]
-    - lessons [ many to many ]
-
-# lessons
-    - name
-    - videos -1
-    - videos -2
-    - videos -3
-
-
-"""
 Role = (
     ('stu', "Student"),
     ('tea', "Teacher"),
@@ -41,6 +22,6 @@ class CustomUser(AbstractUser):
     role  = models.CharField(max_length=3,choices=Role)
     
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     objects = CustomUserManager()
