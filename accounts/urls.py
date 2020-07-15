@@ -1,7 +1,5 @@
 
 from django.urls import path
-
-
 from .views import InstructorRegisterView, LogInView, LogoutView, StudentRegisterView, create_course_with_lessons
 
 
