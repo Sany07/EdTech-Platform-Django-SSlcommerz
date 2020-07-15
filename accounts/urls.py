@@ -1,7 +1,19 @@
 
 from django.urls import path
-from .views import Reg
+
+
+from .views import InstructorRegisterView, LogInView, LogoutView, StudentRegisterView, create_course_with_lessons
+
+
+app_name = "accounts"
+
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path('r/', Reg),
+    
+    path('create/', create_course_with_lessons),
+    path('login/', LogInView.as_view(), name="login"),
+    path('logout/', LogoutView.as_view(), name="logout"),
+    path('student/register/', StudentRegisterView.as_view(), name="student-register"),
+    path('instructor/register/', InstructorRegisterView.as_view(), name="instructor-register"),
+ 
+    
 ]
