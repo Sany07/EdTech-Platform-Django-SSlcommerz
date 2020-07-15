@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #our installed app
+    'coresite.apps.CoresiteConfig',   
     'accounts.apps.AccountsConfig',
     'courses.apps.CoursesConfig',
     'siteconfigurations.apps.SiteconfigurationsConfig',

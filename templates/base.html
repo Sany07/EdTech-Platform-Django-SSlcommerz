@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+        {% include 'includes/_head.html' %}
+        <title> 
+             {% block title %}  {% endblock %} FinalYearProjects
+        </title>
+    </head>
+<body>
+    {% include 'includes/_header.html' %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% include 'includes/_footer.html' %}
+
+    {% include 'includes/_scripts.html' %}
+</body>
+</html>

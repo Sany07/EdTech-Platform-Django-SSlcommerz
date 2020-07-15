@@ -1,7 +1,15 @@
 
 from django.urls import path
-from .views import Reg
+from .views import  create_book_with_authors
+
+from .views import create_book_with_authors
+
+
+app_name = "courses"
+
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path('r/', Reg),
+    
+    path('create/', create_book_with_authors),
+ 
+    
 ]
