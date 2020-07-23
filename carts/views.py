@@ -57,6 +57,7 @@ def checkout(request, id):
     chart = Cart.objects.filter(id = id)
  
     return render(request, "carts/checkout.html")
+    
 
 # class CheckoutView(DetailView):
 #     model = Cart
