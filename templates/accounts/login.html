@@ -35,7 +35,7 @@
                                 {% endfor %}
                             {% endfor %}
                             {% for error in form.non_field_errors %}
-                                <div class="alert alert-danger alert-dismissable">
+                                <div class="alert alert-danger alert-dismissable fade in">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     <strong>{{ error|escape }}</strong>
                                 </div>
@@ -45,7 +45,6 @@
                                 <div class="form-group">
                                     <label>Username Or Email</label>
                                     <input name="email_or_username" type="text" class="form-control" placeholder="Username Or Email">
-
                                 </div>
                                 
                                 <div class="form-group">

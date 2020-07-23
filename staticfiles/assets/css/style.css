@@ -4190,3 +4190,135 @@ a:hover {
 .lsd {
   margin: 55px;
 }
+
+
+
+.icon-cart {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  overflow: hidden;
+  margin-left: 25px;
+  margin-bottom: 25px;
+}
+
+.icon-cart .cart-line-1 {
+  width: 15%;
+  height: 7%;
+  position: absolute;
+  left: 8%;
+  top: 25%;
+  -webkit-transform: rotate(5deg);
+  -moz-transform: rotate(5deg);
+  -ms-transform: rotate(5deg);
+  transform: rotate(5deg); 
+  background-color: #000;
+  border-bottom-left-radius: 35%;
+}
+
+.icon-cart .cart-line-2 {
+  width: 35%;
+  height: 7%;
+  position: absolute;
+  left: 6%;
+  top: 40%;
+  -webkit-transform: rotate(80deg);
+  -moz-transform: rotate(80deg);
+  -ms-transform: rotate(80deg);
+  transform: rotate(80deg); 
+  background-color: #000;
+}
+
+.icon-cart .cart-line-2:before {
+  content: "";
+  width: 120%;
+  height: 100%;
+  position: absolute;
+  left: 45%;
+  top: -280%;
+  -webkit-transform: rotate(-80deg);
+  -moz-transform: rotate(-80deg);
+  -ms-transform: rotate(-80deg);
+  transform: rotate(-80deg); 
+  background-color: inherit;
+}
+
+.icon-cart .cart-line-2:after {
+  content: "";
+  width: 70%;
+  height: 100%;
+  position: absolute;
+  left: 59%;
+  top: -670%;
+  background-color: inherit;
+  -webkit-transform: rotate(40deg);
+  -moz-transform: rotate(40deg);
+  -ms-transform: rotate(40deg);
+  transform: rotate(40deg); 
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 25%;
+}
+
+.icon-cart .cart-line-3 {
+  width: 30%;
+  height: 7%;
+  position: absolute;
+  left: 33%;
+  top: 45%;
+  background-color: #000;
+}
+
+.icon-cart .cart-line-3:after {
+  content: "";
+  width: 124%;
+  height: 100%;
+  position: absolute;
+  top: -150%;
+  left: -5%;
+  background-color: inherit;
+}
+
+.icon-cart .cart-wheel {
+  width: 12%;
+  height: 12%;
+  background-color: #000;
+  border-radius: 100%;
+  position: absolute;
+  left: 28%;
+  bottom: 20%;
+}
+
+.icon-cart .cart-wheel:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  border-radius: 100%;
+  position: absolute;
+  left: 200%;
+  bottom: 0;
+}
+
+.icofont-shopping-cart {
+  font-size: 34px;
+}
+
+
+.buy-cart {
+  position: relative;
+
+  margin-left: 22px;
+  margin-top: 26px;
+}
+
+.ls-title {
+  width: 73%;
+
+  margin: 0px !important;
+  padding-left: 20px;
+}
+
+
+.courses-img img {
+  height: 205px;
+}

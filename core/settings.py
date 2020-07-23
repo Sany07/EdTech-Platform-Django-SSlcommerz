@@ -43,6 +43,12 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'courses.apps.CoursesConfig',
     'siteconfigurations.apps.SiteconfigurationsConfig',
+    'reviews.apps.ReviewsConfig',
+    'carts.apps.CartsConfig',
+    'billings.apps.BillingsConfig',
+
+
+    'star_ratings',
     
 ]
 
@@ -54,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+      
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -69,8 +76,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # 3rd Party
+                # 'django.core.context_processors.request',
             ],
         },
+
     },
 ]
 
@@ -147,3 +158,13 @@ MEDIA_URL = '/media/'
 
 # User Model
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

@@ -1,7 +1,9 @@
 from django.contrib import messages, auth
-from django.shortcuts import render , redirect , HttpResponseRedirect
-from django.views.generic import CreateView, RedirectView, View , ListView, TemplateView, FormView
+from django.shortcuts import render , redirect , HttpResponseRedirect, get_object_or_404
+from django.views.generic import CreateView, DetailView, RedirectView, View , ListView, TemplateView, FormView
+from django.urls import reverse, reverse_lazy
 
+from accounts.models import *
 from courses.models import *
 from accounts.forms import *
 
@@ -88,10 +90,13 @@ class LogInView(FormView):
 
     def form_valid(self, form):
         auth.login(self.request, form.get_user())
+        messages.success(self.request, 'You are Successfully logged In')
         return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form):
         """If the form is invalid, render the invalid form."""
+        messages.error(self.request, 'Login Faild ! Try Again')
+        
         return self.render_to_response(self.get_context_data(form=form))    
 
 
@@ -103,8 +108,28 @@ class LogoutView(RedirectView):
 
     def get(self, request, *args, **kwargs):
         auth.logout(request)
-        messages.success(request, 'You are now logged out')
+        messages.success(self.request, 'You are Successfully logged Out')
         return super(LogoutView, self).get(request, *args, **kwargs)
+
+
+class ProfileView(DetailView):
+    model = CustomUser
+    context_object_name = 'profile'
+    pk_url_kwarg = 'id'
+    template_name = 'accounts/profile.html'
+
+
+    def get_course(self):               
+        return Course.objects.filter(instructor=self.object.id)
+        # return Lesson.objects.filter(course=self.object.id).values('video_link').count()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_courses'] = self.get_course()
+        context['total'] = self.get_course().count()
+
+        return context
+
 
 
 def create_course_with_lessons(request):
@@ -117,16 +142,17 @@ def create_course_with_lessons(request):
         courseform = CourseModelForm(request.POST or None , request.FILES or None)
         formset = LessonFormset(request.POST)
         ContentFormset = LessonContentFormset(request.POST)
+        use = get_object_or_404(CustomUser, id=request.user.id)
         
         if courseform.is_valid and formset.is_valid() and ContentFormset.is_valid():
             categories = Category.objects.get(id=1) 
             course  = courseform.save(commit=False)
-            # course.category=categories
+            course.instructor = use 
             course.save()
             
-            
             for form in ContentFormset:
-                lesson = form.save(commit=False)         
+                lesson = form.save(commit=False)   
+                    
                 lesson.save()
             for form in formset:
                 author = form.save(commit=False)
@@ -134,6 +160,10 @@ def create_course_with_lessons(request):
                 author.save()
                 author.video_link.add(lesson)
                 
+                return redirect(reverse("courses:single-course", kwargs={
+                                    'slug': course.slug
+                                    }))
+
     categories = Category.objects.all()   
     return render(request, 'courses/create-course.html', {
         'courseform': courseform,

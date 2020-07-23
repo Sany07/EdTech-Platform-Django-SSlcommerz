@@ -44,7 +44,7 @@
                 <div class="classy-nav-container breakpoint-off">
                     <!-- Classy Menu -->
                     <nav class="classy-navbar justify-content-between" id="EduStudyNav">
-
+                        
                         <!-- Logo -->
                         <a class="nav-brand" href="index.html"><img src="assets/img/logo.png" alt="logo"></a>
 
@@ -64,17 +64,47 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li class="pr-3"><a href="index.html">Home</a></li>   
-                                    <li class="pr-3"><a href="courses.html">Courses</a></li>
+                                    <li class="pr-3 active"><a href="{% url 'coresite:home' %}">Home</a></li>   
+                                    <li class="pr-3"><a href="{% url 'courses:courses' %}">Courses</a></li>
                                     <li class="pr-3"><a href="about.html">About Us</a></li>
-                                    <li class="active"><a href="cart.html">Cart</a></li>    
-                                    <li class="pr-3"><a href="contact">Contact</a></li>
-                                    <li class="pr-3"><a href="login.html">Login</a></li>
-                                    <li class="pr-3"><a href="register.html">Register</a></li>
+                                    <li class="cn-dropdown-item has-down pr12">
+                                        <a href="#">Category</a>
+                                        <ul class="dropdown">
+                                            {% for category in categories %}
+                                            <li><a href="{% url 'accounts:instructor-register' %}">{{ category}}</a></li>
+                                            {% endfor %}
+                                            
+                                        </ul>
+                                            <span class="dd-trigger"></span><span class="dd-arrow"></span>
+                                    </li>   
+                                    
+
+                                    {% if user.is_authenticated %}
+                                    <li class="pl-3"><a href="{% url 'accounts:logout' %}">Logout</a></li>
+
+                                    {% else %}
+                                    <li class="cn-dropdown-item has-down pr12">
+                                        <a href="#">Register</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'accounts:instructor-register' %}">Instructor</a></li>
+                                            <li><a href="{% url 'accounts:student-register' %}">Student</a></li>
+                                        </ul>
+                                            <span class="dd-trigger"></span><span class="dd-arrow"></span>
+                                    </li>
+                                        <li class="pl-3"><a href="{% url 'accounts:login' %}">Login</a></li>
+                                    {% endif %}
+
                                     <li class="pr-3"><a href="#search" class="search-btn"><i class="icofont-search-2"></i></a></li>
+                              
+                                    <li class=""><a href="{% url 'cart:cart' %}" class="shoping-chart"><i class="icofont-shopping-cart"></i>{{ request.session.cart_items }}</a></li>
+                                    
+                          
+                                    
+                                
+                                  
                                 </ul>
                             </div>
-                            <!-- Nav End -->
+
                         </div>
                     </nav>
                 </div>
@@ -91,4 +121,5 @@
             </form>
         </div>
         <!-- End Search Popup Area -->
+
         

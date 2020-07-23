@@ -107,4 +107,25 @@
         jQuery(window).on("load", function () {
             e(".preloader-area").fadeOut();
         });
+
+        // jQuery(document).on('click', '.alert', function (e) {
+        
+        //     console.log('heyhey')
+        // });
+
+        
+        jQuery(document).ready(function() {
+            setTimeout(function() {
+                
+                
+                $(".alert").removeClass('lightSpeedIn').addClass('lightSpeedOut ');
+
+
+              }, 6000);
+            });
+
+
+
+
+
 })(jQuery);

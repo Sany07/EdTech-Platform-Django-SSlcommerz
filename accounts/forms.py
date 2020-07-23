@@ -2,6 +2,8 @@ from django import forms
 from django.forms import modelformset_factory
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
+
 from accounts.models import CustomUser
 from courses.models import *
 
@@ -46,9 +48,7 @@ class StudentRegistrationForm(UserCreationForm):
 
         self.fields['password1'].error_messages.update({
             'required': 'Password is required'
-
-        })        
-
+        })
         self.fields['password2'].error_messages.update({
             'required': 'Confirm Password is required'
         })
@@ -122,86 +122,20 @@ class TeacherRegistrationForm(UserCreationForm):
             user.save()
         return user
 
-    def save(self, commit=True):
-        user = UserCreationForm.save(self,commit=False)
-        user.role = "stu"
-        if commit:
-            user.save()
-        return user
-
-class TeacherRegistrationForm(UserCreationForm):
-    def __init__(self, *args, **kwargs):
-        super(TeacherRegistrationForm, self).__init__(*args, **kwargs)
-
-        self.fields['first_name'].widget.attrs.update(
-            {
-                'placeholder': 'Enter First Name',
-            }
-        )
-        self.fields['last_name'].widget.attrs.update(
-            {
-                'placeholder': 'Enter Last Name',
-            }
-        )
-        self.fields['username'].widget.attrs.update(
-            {
-                'placeholder': 'Enter User Name',
-            }
-        )
-        self.fields['email'].widget.attrs.update(
-            {
-                'placeholder': 'Enter Email',
-            }
-        )
-        self.fields['password1'].widget.attrs.update(
-            {
-                'placeholder': 'Enter Password',
-            }
-        )
-        self.fields['password2'].widget.attrs.update(
-            {
-                'placeholder': 'Confirm Password',
-            }
-        )
-        for field in self.fields:
-            self.fields[field].required = True
-
-        self.fields['password1'].error_messages.update({
-            'required': 'Password is required'
-        })        
-        self.fields['password2'].error_messages.update({
-            'required': 'Confirm Password is required'
-        })
-
-    class Meta:
-        model = CustomUser
-        fields = ['email','username','first_name', 'last_name',  'password1', 'password2',]
-
-    def save(self, commit=True):
-        user = UserCreationForm.save(self,commit=False)
-        user.role = "tea"
-        if commit:
-            user.save()
-        return user   
 
 class StudentChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-
         fields = ['email', 'username', 'first_name', 'last_name',  'password']
 
 
-
-
 class UserLoginForm(forms.Form):
-    email = forms.CharField()
-
+    email_or_username = forms.CharField()
     password = forms.CharField(
         label="Password",
         strip=False,
         widget=forms.PasswordInput,
     )
-
 
     def clean(self, *args, **kwargs):
         email_or_username = self.cleaned_data.get("email_or_username")
@@ -221,7 +155,6 @@ class UserLoginForm(forms.Form):
 
                     raise forms.ValidationError("User Does Not Exist.")
 
-
             if not user.check_password(password):
                 raise forms.ValidationError("Password Does not Match.")
 
@@ -232,7 +165,6 @@ class UserLoginForm(forms.Form):
 
     def get_user(self):
         return self.user
-
 
 
 class CourseModelForm(forms.ModelForm):
@@ -249,10 +181,7 @@ class CourseModelForm(forms.ModelForm):
             {
                 'placeholder': 'eg : Python Basic to Advance',
             }
-
         )
-    
-
 
         self.fields['price'].widget.attrs.update(
             {
@@ -263,7 +192,6 @@ class CourseModelForm(forms.ModelForm):
             {
                 'placeholder': '',
             }
-
         )
 
     class Meta:
@@ -274,7 +202,8 @@ class CourseModelForm(forms.ModelForm):
             'price',
             'offer_price',
             'thumbnail',
-            'category'                      
+            'category',
+            'language'
 
         ]
 
@@ -317,12 +246,12 @@ LessonContentFormset = modelformset_factory(
     LessonContent,
     fields=('title', 'video_link', ),
     extra=1,
-
-    widgets={  
+    widgets={
         'title': forms.TextInput(
             attrs={
                 'class': 'form-control',
                 'placeholder': 'Enter Video title here'
+
             }
         ),
         'video_link': forms.TextInput(
@@ -332,6 +261,4 @@ LessonContentFormset = modelformset_factory(
             }
         )
     }
-
 )
-
