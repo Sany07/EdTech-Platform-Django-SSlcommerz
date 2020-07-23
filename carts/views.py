@@ -9,6 +9,9 @@ from courses.models import Course
 
 from .forms import BillingForm
 
+from sslcommerz_lib import SSLCOMMERZ
+from django.conf import settings
+
 class CartView(ListView):
     model = Cart
     template_name = "carts/cart.html"
@@ -91,20 +94,22 @@ class CheckoutView(View):
         return render(request, self.template_name,context)
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST or None)
         if form.is_valid():
-            user = Cart.objects.filter(user = request.user).values('user')
-            if user:
-             
-                
-                
-      
-                billing = form.save(commit=False)
-                billing.user = request.user
-                billing.save()
-                
+            is_save_billing = False
+            is_save_billing =  request.POST['is_save_billing']
 
-            return HttpResponseRedirect('/success/')
+            if is_save_billing:
+                user = Cart.objects.filter(user = request.user).values('user')
+                if user:
+                
+                    billing = form.save(commit=False)
+                    billing.user = request.user
+                    billing.save()
+                    return redirect(ssl(form))
+            else:
+                print("not save")
+                
 
         context={
 
@@ -112,3 +117,35 @@ class CheckoutView(View):
         
         }
         return render(request, self.template_name, context)
+
+    
+
+def ssl(request):
+    print(request.data["email"])
+    settings = {'store_id': 'graph5f0ae5eb36392',
+                'store_pass': 'graph5f0ae5eb36392@ssl', 'issandbox': True}
+    sslcommez = SSLCOMMERZ(settings)
+    post_body = {}
+    post_body['total_amount'] = '1000'
+    post_body['currency'] = "BDT"
+    post_body['tran_id'] = "aofhoaiao"
+    post_body['success_url'] = 'http://127.0.0.1:8000/'
+    post_body['fail_url'] = 'http://127.0.0.1:8000/'
+    post_body['cancel_url'] = 'http://127.0.0.1:8000/'
+    post_body['emi_option'] = 0
+    post_body['cus_name'] = request.data["full_name"]
+    post_body['cus_email'] = request.data["email"]
+    post_body['cus_phone'] = request.data["phone"]
+    post_body['cus_add1'] = request.data["address"]
+    post_body['cus_city'] = request.data["address"]
+    post_body['cus_country'] = 'Bangladesh'
+    post_body['shipping_method'] = "NO"
+    post_body['multi_card_name'] = ""
+    post_body['num_of_item'] = 1
+    post_body['product_name'] = "Test"
+    post_body['product_category'] = "Test Category"
+    post_body['product_profile'] = "general"
+
+    response = sslcommez.createSession(post_body)
+    return 'https://sandbox.sslcommerz.com/gwprocess/v4/gw.php?Q=pay&SESSIONKEY=' + response["sessionkey"]
+
