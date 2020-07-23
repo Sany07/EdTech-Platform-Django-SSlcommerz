@@ -1,11 +1,13 @@
 from django.contrib import messages, auth
 from django.shortcuts import render , redirect , HttpResponseRedirect, get_object_or_404
 from django.views.generic import CreateView, DetailView, RedirectView, View , ListView, TemplateView, FormView
-
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from .models import Cart
 from courses.models import Course
 
+from .forms import BillingForm
 
 class CartView(ListView):
     model = Cart
@@ -33,34 +35,80 @@ def cart_home(request):
 
 def cart_update(request):
     
-    
     product_id = request.POST.get('product_id')
     if product_id is not None:
         try:
             product_obj = Course.objects.get(id=product_id)
+
         except Product.DoesNotExist:
-            print("Show message to user, product is gone?")
             return redirect("cart:home")
         cart_obj, new_obj = Cart.objects.new_or_get(request)
         if product_obj in cart_obj.products.all():
             cart_obj.products.remove(product_obj)
+            messages.success(request, 'Item Was Removed From Cart')
         else:
-            cart_obj.products.add(product_obj)  
+            cart_obj.products.add(product_obj)
+            messages.success(request, 'Item Was Added On Cart')
 
     request.session['cart_items'] = cart_obj.products.count()
     
     return redirect("cart:cart")
 
 
-def checkout(request, id):
+# def checkout(request, id):
 
-    chart = Cart.objects.filter(id = id)
+#     chart = Cart.objects.filter(id = id)
  
-    return render(request, "carts/checkout.html")
+#     return render(request, "carts/checkout.html")
     
 
-# class CheckoutView(DetailView):
-#     model = Cart
-#     template_name = 'carts/checkout.html'
+class CheckoutView(View):
+    """
+        Provides the ability to login as a user with an email and password
+    """
+    form_class = BillingForm
+    template_name = 'carts/checkout.html'
+
+    success_url = '/'
 
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(self.request, *args, **kwargs)
+
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        
+        
+        cart= get_object_or_404(Cart,id = self.kwargs['id'] )
+
+        context={
+
+            'form': form,
+            'cart':cart
+        }
+        return render(request, self.template_name,context)
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            user = Cart.objects.filter(user = request.user).values('user')
+            if user:
+             
+                
+                
+      
+                billing = form.save(commit=False)
+                billing.user = request.user
+                billing.save()
+                
+
+            return HttpResponseRedirect('/success/')
+
+        context={
+
+            'form': form,
+        
+        }
+        return render(request, self.template_name, context)

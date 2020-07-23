@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import  CartView, cart_home, cart_update, checkout
+from .views import  CartView, CheckoutView, cart_home, cart_update
 
 
 
@@ -11,7 +11,7 @@ urlpatterns = [
 
     
     path('', cart_home, name='cart'),
-    path('checkout/<int:id>/', checkout, name='checkout'),
+    path('checkout/<int:id>', CheckoutView.as_view(), name='checkout'),
     path('update/', cart_update, name='cart-update'),
 
 ]

@@ -27,11 +27,11 @@
                                     <thead>
                                         <tr>
                                             <!-- <th scope="col">Product</th> -->
-                                            <th scope="col">Product Name</th>
-                                            <th scope="col">Price</th>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Course Name</th>
                     
-                                            <th scope="col">Sub Total</th>
                                             <th scope="col">Total</th>
+                                            <th scope="col">Sub Total</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -43,9 +43,16 @@
                                             </td> -->
                                             <td>{{ forloop.counter }}</td>
                                             <td class="text-left"><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></td>
+                                            {% if course.offer_price %}
+                                            <td>{{ course.offer_price }}</td>
+                                            {% else %}
                                             <td>{{ course.price }}</td>
-       
+                                            {% endif %}
+                                            {% if course.offer_price %}
+                                            <td>{{ course.offer_price }}</td>
+                                            {% else %}
                                             <td>{{ course.price }}</td>
+                                            {% endif %}
 
                                             <form method='POST' action='{% url "cart:cart-update" %}'> 
                                                 {% csrf_token %}

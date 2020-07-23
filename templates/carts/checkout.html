@@ -2,252 +2,196 @@
 {% load static %}
 
 
+
 {% block content %}
 
 
-<!-- Start Page Title Area -->
-<div class="page-title">
-    <div class="d-table">
-        <div class="d-table-cell">
-            <div class="container">
-                <h3>Checkout</h3>
+    <!-- Start Page Title Area -->
+    <div class="page-title">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <h3>Checkout</h3>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- End Page Title Area -->
+    <!-- End Page Title Area -->
 
 
-<!-- Start Checkout Area -->
-<section class="checkout-area ptb-100">
-    <div class="container">
-        <form>
-            <div class="row">
-                <div class="col-lg-6 col-md-12">
-                    <div class="checkout-form">
-                        <h3>Billing Address</h3>
-
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>First Name*</label>
-                                    <input type="text" class="form-control">
+    <!-- Start Checkout Area -->
+    <section class="checkout-area ptb-100">
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="checkout-form">
+                            <h3>Billing Address</h3>
+                  
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Full Name*</label>
+                                        <input class="form-control" type="text" name="full_name" maxlength="50" placeholder="Enter First Name" required="" id="id_full_name">
+                                        
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Last Name*</label>
-                                    <input type="text" class="form-control">
+    
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Email*</label>
+                                        
+                                        <input  class="form-control type="email" name="email" maxlength="50" required="" id="id_email">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Company Name</label>
-                                    <input type="text" class="form-control">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone*</label>
+                                        <input type="text" name="phone" maxlength="13" required="" id="id_phone" class="form-control">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Email*</label>
-                                    <input type="email" class="form-control">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Country*</label>
+                                        <select class="form-control">
+                                            <option>Select Your Country</option>
+                                            <option>United States</option>
+                                            <option>Brazil</option>
+                                            <option>Mexico</option>
+                                            <option>Canada</option>
+                                            <option>Russia</option>
+                                            <option>Argentina</option>
+                                            <option>Bolivia</option>
+                                            <option>Colombia</option>
+                                            <option>Paraguay</option>
+                                            <option>Indonesia</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Phone*</label>
-                                    <input type="text" class="form-control">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Addreess*</label>
+                                        <input type="text" name="address" maxlength="50" required="" id="id_address" class="form-control">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Country*</label>
-                                    <select class="form-control">
-                                        <option>Select Your Country</option>
-                                        <option>United States</option>
-                                        <option>Brazil</option>
-                                        <option>Mexico</option>
-                                        <option>Canada</option>
-                                        <option>Russia</option>
-                                        <option>Argentina</option>
-                                        <option>Bolivia</option>
-                                        <option>Colombia</option>
-                                        <option>Paraguay</option>
-                                        <option>Indonesia</option>
-                                    </select>
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Street addreess</label>
+                                        <input type="text" name="Street_addreess" maxlength="50" required="" id="id_Street_addreess" class="form-control">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Addreess*</label>
-                                    <input type="text" class="form-control">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Town/City*</label>
+                                        <input type="text" name="city" maxlength="50" required="" id="id_city" class="form-control">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Street addreess</label>
-                                    <input type="text" class="form-control">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>District*</label>
+                                        <select class="form-control">
+                                            <option>Select Your District</option>
+                                            <option>United States</option>
+                                            <option>Brazil</option>
+                                            <option>Mexico</option>
+                                            <option>Canada</option>
+                                            <option>Russia</option>
+                                            <option>Argentina</option>
+                                            <option>Bolivia</option>
+                                            <option>Colombia</option>
+                                            <option>Paraguay</option>
+                                            <option>Indonesia</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Town/City*</label>
-                                    <input type="text" class="form-control">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Postcode/ZIP*</label>
+                                        <input type="text" name="post_code" maxlength="50" required="" id="id_post_code" class="form-control">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>District*</label>
-                                    <select class="form-control">
-                                        <option>Select Your District</option>
-                                        <option>United States</option>
-                                        <option>Brazil</option>
-                                        <option>Mexico</option>
-                                        <option>Canada</option>
-                                        <option>Russia</option>
-                                        <option>Argentina</option>
-                                        <option>Bolivia</option>
-                                        <option>Colombia</option>
-                                        <option>Paraguay</option>
-                                        <option>Indonesia</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Postcode/ZIP*</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-check">
-                                    <input type="checkbox">
-                                    <label>Create an account?</label>
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-check">
+                                        <input id="is_save_billing" name="is_save_billing" type="checkbox">
+                                        <label>Save Billing Address</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-6 col-md-12">
-                    <div class="order-box">
-                        <h3>Your Order</h3>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="order-box">
+                            <h3>Your Order</h3>
 
-                        <div class="order-table table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Photo</th>
-                                        <th scope="col">Product Name</th>
-                                        <th scope="col">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="assets/img/shop1.jpg" alt="shop">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="#">Calculator</a> x2
-                                        </td>
-                                        <td>
-                                            <span class="amount">$25.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="assets/img/shop2.jpg" alt="shop">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="#">Book</a> x2
-                                        </td>
-                                        <td>
-                                            <span class="amount">$25.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="assets/img/shop3.jpg" alt="shop">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="#">Pencil Box</a> x2
-                                        </td>
-                                        <td>
-                                            <span class="amount">$25.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cart Subtotal</td>
-                                        <td></td>
-                                        <td>$85.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shipping and Handling</td>
-                                        <td></td>
-                                        <td>$5.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Order Total</td>
-                                        <td></td>
-                                        <td>$90.00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            <div class="order-table table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                          
+                                        {% for course in cart.products.all %}
+                           
+                                        <tr>
+                                            <td>
+                                                <span class="amount">{{ forloop.counter }}</span>
+                                            </td>
+                                            <td class="text-left">
+                                                <a href="{{ course.get_absolute_url }}">{{ course.title }}</a> 
+                                            </td>
+                                            <td>
+                                                {% if course.offer_price %}
+                                                <span class="amount">{{ course.price }}</span>
+                                                {% else %}
+                                                <span class="amount">{{ course.price }}</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
 
-                        <div class="payment-information">
-                            <h3>Payment Information</h3>
-
-                            <div class="form-group">
-                                <input type="checkbox" id="option1">
-                                <label>Direct Bank Transfer</label>
-                                <p>Make your payment directly into our bank account. Please use your Order ID as the
-                                    payment reference. Your order won’t be shipped until the funds have cleared in our
-                                    account.</p>
+                                    </tbody>
+                                </table>
                             </div>
 
-                            <div class="form-group">
-                                <input type="checkbox" id="option2">
-                                <label>Cheque Payment</label>
-                                <p>Make your payment directly into our bank account. Please use your Order ID as the
-                                    payment reference. Your order won’t be shipped until the funds have cleared in our
-                                    account.</p>
+                            <div class="payment-information">
+                                <h3>Payment Information</h3>
+                             
+                                <div class="form-group">
+                                    <input type="checkbox" id="option1">
+                                    <label>Direct Bank Transfer</label>
+                                    <p>Make your payment directly into our bank account. Please use your Order ID as the
+                                        payment reference. Your order won’t be shipped until the funds have cleared in our
+                                        account.</p>
+                                </div>
+                        
+
                             </div>
 
-                            <div class="form-group">
-                                <input type="checkbox" id="option3">
-                                <label>PayPal Payment</label>
-                                <p>Make your payment directly into our bank account. Please use your Order ID as the
-                                    payment reference. Your order won’t be shipped until the funds have cleared in our
-                                    account.</p>
+                            <div class="place-order">
+                                <button type="submit" class="btn btn-primary">Complete Order</button>
                             </div>
-                        </div>
-
-                        <div class="place-order">
-                            <button type="submit" class="btn btn-primary">Place Order</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-</section>
-<!-- End Checkout Area -->
+            </form>
+        </div>
+    </section>
+    <!-- End Checkout Area -->
 
 {% endblock %}
