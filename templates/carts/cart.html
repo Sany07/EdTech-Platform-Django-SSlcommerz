@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+        
+        <!-- Start Page Title Area -->
+        <div class="page-title">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <h3>Cart</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Title Area -->
+        
+        <!-- Start Cart Area -->
+        <section class="cart-area ptb-100">
+            <div class="container">
+            
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="cart-table table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th scope="col">Product</th> -->
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Price</th>
+                    
+                                            <th scope="col">Sub Total</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for course in cart.products.all %}
+                                        <tr>
+<!--                                             <td class="product-thumbnail">
+                                                <a href="#"><img src="assets/img/shop1.jpg" alt="shop"></a>
+                                            </td> -->
+                                            <td>{{ forloop.counter }}</td>
+                                            <td class="text-left"><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></td>
+                                            <td>{{ course.price }}</td>
+       
+                                            <td>{{ course.price }}</td>
+
+                                            <form method='POST' action='{% url "cart:cart-update" %}'> 
+                                                {% csrf_token %}
+                                                <input type='hidden' name='product_id' value='{{ course.id }}' />
+                                                <td class="cart-buttons"><button class="btn btn-primary"><i class="icofont-close"></i></a></td>
+                                            </form>
+                                            
+                                        </tr>
+
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-8 col-md-12">
+                            <div class="cart-buttons">
+                                <button type="submit" class="btn btn-primary">Update Cart</button>
+                                <a href="#" class="btn btn-primary">Continue Shopping</a>
+                            </div>
+                            
+                            <div class="cart-coupon">
+                                <h4>Coupon</h4>
+                                <p>Enter your coupon code if you have one.</p>
+                                <div class="cuppon-form">
+                                    <input type="text" class="form-control" placeholder="Coupon Code">
+                                    <button type="submit" class="btn btn-primary">Apply Coupon</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-12">
+                            <div class="cart-total">
+                                <h3>Cart Totals</h3>
+                                
+                                <div class="cart-total-table table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Subtotal</td>
+                                                <td class="amount">{{ cart.subtotal }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total</td>
+                                                <td>{{ cart.total }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="proceed-to-checkout">
+                                    <a href="{% url 'cart:checkout' cart.id %}" type="submit" class="btn btn-primary">Proceed To Checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+           
+            </div>
+        </section>
+        <!-- End Cart Area -->
+        
+{% endblock %}

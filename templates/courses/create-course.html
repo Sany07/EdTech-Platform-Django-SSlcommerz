@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Start Page Title Area -->
+<div class="page-title">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <h3>Add New Course</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Start Register Area -->
+<section class="register-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <div class="register-content" style="max-width:100%">
+
+
+                    <div class="">
+                        <div class="mb-5">
+
+                            <ul class="nav nav-tabs cnv" id="myTab" role="tablist">
+                                <li class="nav-item lnv" role="presentation">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#course" role="tab"
+                                        aria-controls="course" aria-selected="true">Course</a>
+                                </li>
+                                <li class="nav-item lnv" role="presentation">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                        aria-controls="profile" aria-selected="false">Lessons</a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <form class="lsd" method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="course" role="tabpanel"
+                                    aria-labelledby="course-tab">
+                                    {% for field in courseform %}
+                                    {% if field.name == 'price'%}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <div class="form-group">
+                                                <label class="labelc" for="id_price">Price</label>
+                                                <input type="number" class="form-control" name="{{ field.name }}"
+                                                    id="id_price" placeholder="Enter The Course Price">
+                                            </div>
+                                        </div>
+
+                                        {% elif field.name == 'offer_price'%}
+
+                                        <div class="form-group col-md-6">
+                                            <div class="form-group">
+                                                <label class="labelc" for="id_offer_price">Offer price</label>
+                                                <input type="number" class="form-control" name="{{ field.name }}"
+                                                    id="id_offer_price"
+                                                    placeholder="Enter The Course Discount Price (If Discount)">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {% elif field.name == 'thumbnail'%}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label class="labelc" for="thumbnail">Thumbnail</label>
+
+                                            <div class="custom-file">
+                                                <input type="file" name="{{ field.name }}" class="custom-file-input"
+                                                    id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose
+                                                    file</label>
+                                            </div>
+                                        </div>
+                                        {% elif field.name == 'category' %}
+                                        <div class="form-group col-md-6">
+                                            <label class="labelc" for="category">Category</label>
+                                            <select name="category" class="form-control">
+                                                <option selected disabled>Choose...</option>
+                                                {% for category in categories %}
+                                                <option value="{{ category.id }}">{{ category.name }}</option>
+
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    {% else %}
+                                    <div class="form-group">
+                                        <label class="labelc" for="id_{{ field.name }}">{{ field.label }}</label>
+                                        <input type="{{ field.field.widget.input_type }}" class="form-control"
+                                            name="{{ field.name }}" id="id_{{ field.name }}"
+                                            placeholder="{{ field.field.widget.attrs.placeholder }}">
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                    {{ formset.management_form }}
+                                    {% for form in formset %}
+                                    <div class="form-row-lisson">
+                                        <div class="input-group table-responsive">
+                                            <table class="table table-bordered text-center">
+
+                                                <tr class="addlessoncontentlink">
+                                                    <td><span class="lesson-number">1</span></td>
+                                                    <td> {{ form.title }}</td>
+                                                    <td>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-success add-form-row">+</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                            <div class="input-group table-responsive">
+                                                <table class="table table-bordered text-center">
+                                                    <tr>
+                                                        <th>Lesson</th>
+                                                        <th>Title</th>
+
+                                                        <th>Content</th>
+                                                        <th>Duration / Pages</th>
+                                                        <th> <button class="btn btn-success addlessoncontent">+</button>
+                                                        </th>
+                                                    </tr>
+                                                    {% for form in ContentFormset %}
+                                                    <tr class="addlessoncontentlink">
+                                                        <td><span class="lesson-number">1</span></td>
+                                                        <td> {{ form.title }}</td>
+
+                                                        <td>{{ form.video_link }}</td>
+                                                        <td><input type="text" name="curriculum[1][lesson][1][duration]"
+                                                                placeholder="3:00 min / 5 pages"
+                                                                class="lesson-duration"></td>
+                                                        <td>
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-danger addlessoncontent"
+                                                                    disabled="disabled">-</button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="row spacer">
+                                        <div class="col-4 offset-4 align-center mt-5">
+                                            <button type="submit" class="btn btn-block btn-primary">Publish</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="nav nav-tabs cnv" id="myTab" role="tablist">
+                                    <li class="nav-item lnv" role="presentation">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#course"
+                                            role="tab" aria-controls="course" aria-selected="true">Previous</a>
+                                    </li>
+                                    <li class="nav-item lnv" role="presentation">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+                                            role="tab" aria-controls="profile" aria-selected="false">Next</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+<!-- End Register Area -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script type="text/javascript">
+    function updateElementIndex(el, prefix, ndx) {
+        var id_regex = new RegExp('(' + prefix + '-\\d+)');
+        var replacement = prefix + '-' + ndx;
+        if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+        if (el.id) el.id = el.id.replace(id_regex, replacement);
+        if (el.name) el.name = el.name.replace(id_regex, replacement);
+    }
+    function cloneMore(selector, prefix) {
+        var newElement = $(selector).clone(true);
+        var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+        newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function () {
+            var name = $(this).attr('name')
+          
+    
+            if (name) {
+                name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                var id = 'id_' + name;
+                
+
+                
+                $(this).attr({ 'name': name, 'id': id }).val('').removeAttr('checked');
+            }
+        });
+        newElement.find('lesson-number').each(function () {
+            var forValue = $(this).css('lesson-number');
+           console.log(forValue);
+            if (forValue) {
+                $("#test1")
+                forValue = forValue.replace(total);
+                $(this).text(forValue);
+            }
+        });
+
+     
+            
+   
+        total++;
+        $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+        $(selector).after(newElement);
+        var conditionRow = $('.form-row-lisson:not(:last)');
+        conditionRow.find('.btn.add-form-row')
+            .removeClass('btn-success').addClass('btn-danger')
+            .removeClass('add-form-row').addClass('remove-form-row')
+            .html('-');
+        return false;
+    }
+    function deleteForm(prefix, btn) {
+        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (total > 1) {
+            btn.closest('.form-row-lisson').remove();
+            var forms = $('.form-row-lisson');
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).find(':input').each(function () {
+                    updateElementIndex(this, prefix, i);
+                });
+            }
+        }
+        return false;
+    }
+    $(document).on('click', '.add-form-row', function (e) {
+        e.preventDefault();
+        cloneMore('.form-row-lisson:last', 'form');
+        return false;
+    });
+    $(document).on('click', '.remove-form-row', function (e) {
+        e.preventDefault();
+        deleteForm('form', $(this));
+        return false;
+    });
+
+    function Link(selector, prefix) {
+        var newElement = $(selector).clone(true);
+        var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+        newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function () {
+            var name = $(this).attr('name')
+            if (name) {
+                name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                var id = 'id_' + name;
+                $(this).attr({ 'name': name, 'id': id }).val('').removeAttr('checked');
+            }
+        });
+        newElement.find('label').each(function () {
+            var forValue = $(this).attr('for');
+            if (forValue) {
+                forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                $(this).attr({ 'for': forValue });
+            }
+        });
+        total++;
+
+        $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+        $(selector).after(newElement);
+        var conditionRow = $('.addlessoncontentlink:not(:first)');
+        conditionRow.find('.btn.addlessoncontent')
+            .removeClass('btn-success').addClass('btn-danger')
+            .removeClass('addlessoncontent').addClass('removelessoncontent')
+            .prop('disabled', false)
+            .html('-');
+
+
+        return false;
+    }
+    function deleteLink(prefix, btn) {
+        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        console.log(total);
+        if (total > 1) {
+            btn.closest('.addlessoncontentlink').remove();
+
+            var forms = $('.addlessoncontentlink');
+
+            for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).find(':input').each(function () {
+                    updateElementIndex(this, prefix, i);
+                });
+            }
+        }
+
+
+        // $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+        //     if (total < 1) {
+        //         forms.find('.btn.removelessoncontent')
+        //     .prop('disabled','true')
+        //     .html('-');
+        //     }
+
+        return false;
+    }
+
+
+
+    $(document).on('click', '.addlessoncontent', function (e) {
+        e.preventDefault();
+        Link('.addlessoncontentlink:last', 'form');
+        return false;
+    });
+    $(document).on('click', '.removelessoncontent', function (e) {
+        e.preventDefault();
+        deleteLink('form', $(this));
+        return false;
+    });
+
+</script>
+{% endblock %}

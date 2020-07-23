@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load ratings %}
+
+{% block content %}
+
+
+<!-- Start Page Title Area -->
+<div class="page-title">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <h3>{{ course.title }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start Course Details Area -->
+<section class="course-details-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="courses-details">
+                    <div class="courses-details-meta">
+                        <ul>
+                            <li>
+                                <div class="teacher-img">
+                                    <img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" />
+                                </div>
+
+                                Teacher: {{ course.instructor.get_short_name }}
+                            </li>
+
+                            <li>
+                                Category: {{ course.category }}
+                        </ul>
+
+                        <div class="apply-btn">
+                            <!-- <a href="#" class="btn btn-primary">Enroll Now</a> -->
+
+                            <form method='POST' action='{% url "cart:cart-update" %}'> 
+                                {% csrf_token %}
+                                <input type='hidden' name='product_id' value='{{ course.id }}' />
+                                {% if course in cart.products.all %}
+                                    <button type='submit' class='btn btn-danger'>Added</button>
+                                {% else %}
+                                    <button type='submit'  class='btn btn-danger'>Add to cart</button>
+                                {% endif %}
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <div class="courses-details-img">
+                        <img src="{{ course.thumbnail.url }}" alt="">
+                    </div>
+
+
+                   
+
+
+                    <h3>{{ course.title }}</h3>
+
+                    <!-- <p>Learn how to use NumPy, Pandas, Seaborn, Matplotlib, Plotly, Scikit-Learn, Machine Learning, Tensorflow, and more!</p> -->
+
+                    <div class="course-details-tabs">
+                        <ul id="tabs">
+                            <li class="active" id="tab_1">Description</li>
+                            <li class="inactive" id="tab_2">Curriculum</li>
+                            <li class="inactive" id="tab_3">Instructors</li>
+                            <li class="inactive" id="tab_4">Review</li>
+                        </ul>
+
+                        <div class="content show" id="tab_1_content">
+                            <h4 class="title">Course Details</h4>
+
+
+                            <p class="mb-0">{{ course.description }}</p>
+                            {{ course.id }}
+                            <div class="requirements-list">
+                                <h4 class="title">Requirements</h4>
+
+                                <ul>
+                                    <li><i class="icofont-double-right"></i> Use Python for Data Science and Machine
+                                        Learning</li>
+                                    <li><i class="icofont-double-right"></i> Use Spark for Big Data Analysis</li>
+                                    <li><i class="icofont-double-right"></i> Implement Machine Learning Algorithms</li>
+                                    <li><i class="icofont-double-right"></i> Learn to use NumPy for Numerical Data</li>
+                                    <li><i class="icofont-double-right"></i> Learn to use Pandas for Data Analysis</li>
+                                    <li><i class="icofont-double-right"></i> Learn to use Matplotlib for Python Plotting
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="certification">
+                                <h4 class="title">Certification</h4>
+
+                                <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting
+                                    industry. Lorem Ipsum has been the industry’s standard dummy text ever since the
+                                    1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                                    specimen book. It has survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged.</p>
+                            </div>
+                        </div>
+
+                        <div class="content" id="tab_2_content">
+                            <div class="accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                                {% for lesson in course.course.all %}
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="heading-{{ forloop.counter }}">
+                                        <a {% if forloop.first %} {% else %} class="collapsed" {% endif %}
+                                            data-toggle="collapse" data-parent="#accordionEx"
+                                            href="#collapse-{{ forloop.counter }}"
+                                            aria-expanded="{% if forloop.first %} true {% else %} false {% endif %}"
+                                            aria-controls="collapse-{{ forloop.counter }}">
+                                            <h5 class="mb-0">
+                                                {{ forloop.counter }}. {{ lesson.title }} <span><i
+                                                        class="icofont-rounded-down"></i></span>
+                                            </h5>
+                                        </a>
+                                    </div>
+
+                                    <div id="collapse-{{ forloop.counter }}"
+                                        class="collapse {% if forloop.first %}show  {% endif %}" role="tabpanel"
+                                        aria-labelledby="heading-{{ forloop.counter }}" data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <ul>
+                                                {% for lessoncontent in lesson.video_link.all %}
+                                                <li>
+                                                    <a class="popup-video" id="{{ lessoncontent.id }}"
+                                                        href="{{ lessoncontent.video_link }}">
+                                                        <i class="icofont-ui-play"></i> Lecture {{ forloop.counter }}
+
+                                                        <span class="ls-title">{{ lessoncontent.title }}</span>
+
+                                                        <span class="duration"><i class="icofont-clock-time"></i> 50
+                                                            min</span>
+
+                                                    </a>
+                                                </li>
+                                                {% endfor %}
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                                <!-- <div class="card">
+                                            <div class="card-header" role="tab" id="headingTwo">
+                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    <h5 class="mb-0">
+                                                    2. What is Python <span><i class="icofont-rounded-down"></i></span>
+                                                    </h5>
+                                                </a>
+                                            </div>
+                                
+                                            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordionEx">
+                                                <div class="card-body">
+                                                    <ul>
+                                                        <li>
+                                                            <i class="icofont-ui-play"></i> Lecture 1.1
+                                                            
+                                                            <span><a href="#">What is Python?</a></span>
+                                                            
+                                                            <span class="duration"><i class="icofont-clock-time"></i> 50 min</span>
+                                                            
+                                                            <a href="#" class="preview">Preview</a>
+                                                        </li>
+                                             
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                            </div>
+                        </div>
+
+                        <div class="content" id="tab_3_content">
+                            <div class="course-author">
+                                <div class="img">
+                                    <img src="{% static 'assets/img/teacher-one.jpg' %}" alt="teacher">
+                                </div>
+
+                                <div class="author-content">
+                                    <h4><a href="{% url 'accounts:profile' course.instructor.id %}">{{ course.instructor.get_full_name }}</a></h4>
+                                 
+                                    <ul>
+                                        <li><a href="#"><i class="icofont-facebook"></i></a></li>
+                                        <li><a href="#"><i class="icofont-instagram"></i></a></li>
+                                        <li><a href="#"><i class="icofont-twitter"></i></a></li>
+                                        <li><a href="#"><i class="icofont-linkedin"></i></a></li>
+                                    </ul>
+                                    <p>Aliquam pulvinar blandit eros, vel tempor tellus eleifend eget. Vestibulum
+                                        ultricies egestas ante, eu consectetur leo pretium vel. Aliquam mollis dolor
+                                        libero, ac sagittis velit dignissim at. Nulla a tellus eu enim porta posuere.
+                                        Sed posuere at lectus ac fringilla.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content" id="tab_4_content">
+                            <div class="courses-review">
+                                
+                                    <div class="apply-form">
+                                       
+                                        <form method="POST" action="">
+                                            {% csrf_token %}
+
+                                            <div class="form-group"><input type="text" class="form-control" name="content"  id="id_content" placeholder="Write Your Review"></div>
+                                            <input type="hidden" name="content_type" id="id_content_type" value="">
+                                            <input type="hidden" name="object_id" id="id_object_id" value="{{ course.id }}">
+                                            <button type="submit" class="btn btn-primary">Post</button>
+                                        </form>
+                                </div>
+
+
+                                {% for review in reviews %}
+
+                                <div class="single-review">
+                                    <div class="img">
+                                        <img src="assets/img/teacher-one.jpg" alt="client">
+                                    </div>
+
+                                    <div class="client-content">
+                                        <h4>{{ review.user.username }}</h4>
+                                        <ul>
+                                            {{ review.timestamp  | timesince }}
+                                            <!-- <li><i class="icofont-star"></i></li>
+                                            <li><i class="icofont-star"></i></li>
+                                            <li><i class="icofont-star"></i></li>
+                                            <li><i class="icofont-star"></i></li>
+                                            <li><i class="icofont-star"></i></li> -->
+                                        </ul>
+                                        <p>{{ review.content }}</p>
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <div class="side-bar mb-0">
+                    <div class="single-widget features-box">
+                        <h3 class="title">Course Features</h3>
+
+                        <ul>
+                            <li><i class="icofont-file-fill"></i> Lectures <span>{{ total_lecture }}</span></li>
+
+                            <li><i class="icofont-clock-time"></i> Duration <span>1.5 hours</span></li>
+
+                            <li><i class="icofont-caret-up"></i> Skill level <span>All level</span></li>
+
+                            <li><i class="icofont-read-book"></i> Language <span>English</span></li>
+
+                            <li><i class="icofont-users-social"></i> Students <span>560</span></li>
+
+                            <!-- <li><i class="icofont-certificate-alt-1"></i> Certificate <span>Yes</span></li> -->
+
+                            <!-- <li><i class="icofont-checked"></i> Assessments <span>Yes</span></li> -->
+
+                            <li><i class="icofont-price"></i> Price <span>{{ course.price }}</span></li>
+                            <li><i class="icofont-price"></i> Ratings <span>{% ratings object %}</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="single-widget share-boxes">
+                        <h3 class="title">Share Courses</h3>
+
+                        <ul>
+                            <li><a href="#"><i class="icofont-facebook"></i></a></li>
+                            <li><a href="#"><i class="icofont-twitter"></i></a></li>
+                            <li><a href="#"><i class="icofont-instagram"></i></a></li>
+                            <li><a href="#"><i class="icofont-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="single-widget latest-courses">
+                        <h3 class="title">Similar Category Courses</h3>
+
+                        {% for similar_category_course in similar_category_courses %}
+                        <div class="single-latest-courses">
+                            <div class="img">
+                                <img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" />
+                            </div>
+
+                            <div class="content">
+                                <h4><a href="{{ similar_category_course.get_absolute_url }}">{{ similar_category_course.title }}</a></h4>
+                                {% if similar_category_course.offer_price %}
+                                <p><span> {{ similar_category_course.price }}</span> {{ similar_category_course.offer_price }}</p>
+                                    {% elif similar_category_course.price  %}
+                                <p>   {{ similar_category_course.price }} </p>
+                                    {% else %}
+                                <p>     Free </p>
+                                    {% endif %}
+                                
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="similar-courses">
+        <div class="container">
+            <h2>Similar Courses</h2>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-courses-item">
+                        <div class="courses-img">
+                            <img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" />
+                        </div>
+
+                        <div class="courses-content">
+                            <h3><a href="#">Python Bootcamp</a></h3>
+                            <ul>
+                                
+                                <li><i class="icofont-star"></i></li>
+                                <li><i class="icofont-star"></i></li>
+                                <li><i class="icofont-star"></i></li>
+                                <li><i class="icofont-star"></i></li>
+                                <li><i class="icofont-star"></i></li>
+                            </ul>
+                        </div>
+
+                        <div class="courses-content-bottom">
+                            <h4><i class="icofont-ui-user"></i> 120 Students</h4>
+                            <h4 class="price">$120</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div> -->
+</section>
+
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
+
+{% endblock %}

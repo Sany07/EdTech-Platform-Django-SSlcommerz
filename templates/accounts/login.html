@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- End Search Popup Area -->
+        
+        <!-- Start Page Title Area -->
+        <div class="page-title">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <h3>Login</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Title Area -->
+        
+        <!-- Start Login Area -->
+        <section class="login-area ptb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+
+                        <form method="POST" id="login-form">
+                            {% csrf_token %}
+                            <div class="heading">Login</div>
+                            {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger alert-dismissable fade in">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                          {% endif %}
+                            <div class="left">
+                                <div class="form-group">
+                                    <label>Username Or Email</label>
+                                    <input name="email_or_username" type="text" class="form-control" placeholder="Username Or Email">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input name="password" type="password" class="form-control" placeholder="Password">
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                            
+                            <div class="right">
+                                <div class="connect">Connect with</div>
+                                <a href="#" class="facebook"><i class="icofont-facebook"></i> Facebook</a>
+                                <a href="#" class="twitter"><i class="icofont-twitter"></i> Twitter</a>
+                                <a href="#" class="google-plus"><i class="icofont-google-plus"></i> Google Plus</a>
+                            </div>
+                        </form>  
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Login Area -->
+        
+{% endblock %}

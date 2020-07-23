@@ -1,0 +1,125 @@
+<!-- Top Bar -->
+
+
+
+        <!-- Start Preloader Area -->
+        <div class="preloader-area">
+            <div class="loader">
+                <div class="dots">
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+
+                    <i class="dots-item"></i>
+
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+                </div>
+            </div>
+        </div>
+        <!-- End Preloader Area -->
+       
+        <!-- Start Main Menu Area -->
+        <div class="main-header-area navbar-area header-sticky">
+            <div class="container">
+                <div class="classy-nav-container breakpoint-off">
+                    <!-- Classy Menu -->
+                    <nav class="classy-navbar justify-content-between" id="EduStudyNav">
+                        
+                        <!-- Logo -->
+                        <a class="nav-brand" href="index.html"><img src="assets/img/logo.png" alt="logo"></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li class="pr-3 active"><a href="{% url 'coresite:home' %}">Home</a></li>   
+                                    <li class="pr-3"><a href="{% url 'courses:courses' %}">Courses</a></li>
+                                    <li class="pr-3"><a href="about.html">About Us</a></li>
+                                    <li class="cn-dropdown-item has-down pr12">
+                                        <a href="#">Category</a>
+                                        <ul class="dropdown">
+                                            {% for category in categories %}
+                                            <li><a href="{% url 'accounts:instructor-register' %}">{{ category}}</a></li>
+                                            {% endfor %}
+                                            
+                                        </ul>
+                                            <span class="dd-trigger"></span><span class="dd-arrow"></span>
+                                    </li>   
+                                    
+
+                                    {% if user.is_authenticated %}
+                                    <li class="pl-3"><a href="{% url 'accounts:logout' %}">Logout</a></li>
+
+                                    {% else %}
+                                    <li class="cn-dropdown-item has-down pr12">
+                                        <a href="#">Register</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'accounts:instructor-register' %}">Instructor</a></li>
+                                            <li><a href="{% url 'accounts:student-register' %}">Student</a></li>
+                                        </ul>
+                                            <span class="dd-trigger"></span><span class="dd-arrow"></span>
+                                    </li>
+                                        <li class="pl-3"><a href="{% url 'accounts:login' %}">Login</a></li>
+                                    {% endif %}
+
+                                    <li class="pr-3"><a href="#search" class="search-btn"><i class="icofont-search-2"></i></a></li>
+                              
+                                    <li class=""><a href="{% url 'cart:cart' %}" class="shoping-chart"><i class="icofont-shopping-cart"></i>{{ request.session.cart_items }}</a></li>
+                                    
+                          
+                                    
+                                
+                                  
+                                </ul>
+                            </div>
+
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Menu Area -->
+        
+        <!-- Start Search Popup Area -->
+        <div id="search-area">
+            <button type="button" class="close">×</button>
+            <form>
+                <input type="search" value="" placeholder="Search Kewword(s)">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <!-- End Search Popup Area -->
+
+        
