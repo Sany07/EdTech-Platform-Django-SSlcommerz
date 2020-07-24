@@ -140,14 +140,13 @@
                                         <tr>
                                             <th scope="col">No</th>
                                             <th scope="col">Product Name</th>
-                                            <th scope="col">Total</th>
+                                            <th scope="col">Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                          
+                                        
                                         {% for course in cart.products.all %}
-                           
+                                        
                                         <tr>
                                             <td>
                                                 <span class="amount">{{ forloop.counter }}</span>
@@ -157,16 +156,27 @@
                                             </td>
                                             <td>
                                                 {% if course.offer_price %}
-                                                <span class="amount">{{ course.price }}</span>
+                                                <span class="amount">{{ course.offer_price }}</span>
                                                 {% else %}
                                                 <span class="amount">{{ course.price }}</span>
                                                 {% endif %}
                                             </td>
+                                            
                                         </tr>
                                         {% endfor %}
-
+                                        </thead>
                                     </tbody>
                                 </table>
+                                <div class="cart-total-table table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Total</td>
+                                                <td class="text-right">{{ cart.total }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
                             <div class="payment-information">
@@ -184,7 +194,7 @@
                             </div>
 
                             <div class="place-order">
-                                <button type="submit" class="btn btn-primary">Complete Order</button>
+                                <button type="submit" class="btn btn-primary">Complete Payment</button>
                             </div>
                         </div>
                     </div>

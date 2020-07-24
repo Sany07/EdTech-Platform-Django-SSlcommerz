@@ -58,13 +58,6 @@ def cart_update(request):
     return redirect("cart:cart")
 
 
-# def checkout(request, id):
-
-#     chart = Cart.objects.filter(id = id)
- 
-#     return render(request, "carts/checkout.html")
-    
-
 class CheckoutView(View):
     """
         Provides the ability to login as a user with an email and password
@@ -72,33 +65,39 @@ class CheckoutView(View):
     form_class = BillingForm
     template_name = 'carts/checkout.html'
 
-    success_url = '/'
-
-
+ 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(self.request, *args, **kwargs)
 
 
+    def get_cart_item(self):
+        return get_object_or_404(Cart,id = self.kwargs['id'] )
+
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         
         
-        cart= get_object_or_404(Cart,id = self.kwargs['id'] )
+        # cart= get_object_or_404(Cart,id = self.kwargs['id'] )
 
         context={
 
             'form': form,
-            'cart':cart
+            'cart':self.get_cart_item()
         }
         return render(request, self.template_name,context)
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST or None)
+        
         if form.is_valid():
-            is_save_billing = False
-            is_save_billing =  request.POST['is_save_billing']
-
+            cart_total = self.get_cart_item().total
+            
+            try:
+                is_save_billing =  request.POST['is_save_billing']
+            except:
+                is_save_billing = False
+            
             if is_save_billing:
                 user = Cart.objects.filter(user = request.user).values('user')
                 if user:
@@ -106,9 +105,9 @@ class CheckoutView(View):
                     billing = form.save(commit=False)
                     billing.user = request.user
                     billing.save()
-                    return redirect(ssl(form))
+                    return redirect(sslcommerz_gateway(cart_total, form))
             else:
-                print("not save")
+                return redirect(sslcommerz_gateway(form))
                 
 
         context={
@@ -120,13 +119,14 @@ class CheckoutView(View):
 
     
 
-def ssl(request):
-    print(request.data["email"])
+def sslcommerz_gateway(request):
+    
+ 
     settings = {'store_id': 'graph5f0ae5eb36392',
                 'store_pass': 'graph5f0ae5eb36392@ssl', 'issandbox': True}
     sslcommez = SSLCOMMERZ(settings)
     post_body = {}
-    post_body['total_amount'] = '1000'
+    post_body['total_amount'] = '222.00'
     post_body['currency'] = "BDT"
     post_body['tran_id'] = "aofhoaiao"
     post_body['success_url'] = 'http://127.0.0.1:8000/'
