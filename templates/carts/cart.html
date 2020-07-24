@@ -45,13 +45,17 @@
                                             <td class="text-left"><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></td>
                                             {% if course.offer_price %}
                                             <td>{{ course.offer_price }}</td>
-                                            {% else %}
+                                            {% elif course.price  %}
                                             <td>{{ course.price }}</td>
+                                            {% else %}
+                                            <td>Free</td>
                                             {% endif %}
                                             {% if course.offer_price %}
                                             <td>{{ course.offer_price }}</td>
-                                            {% else %}
+                                            {% elif course.price  %}
                                             <td>{{ course.price }}</td>
+                                            {% else %}
+                                            <td>Free</td>
                                             {% endif %}
 
                                             <form method='POST' action='{% url "cart:cart-update" %}'> 

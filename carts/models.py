@@ -50,11 +50,12 @@ def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
         products = instance.products.all()
         total = 0
-        for x in products:
-            if x.offer_price:
-                total += x.offer_price
-            else:
-                total += x.price
+        for product in products:
+            if product.price is not None or product.offer_price is not None:
+                if product.offer_price:
+                    total += product.offer_price
+                else:
+                    total += product.price
                 
         if instance.subtotal != total:
             instance.subtotal = total
