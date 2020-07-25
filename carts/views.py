@@ -18,6 +18,7 @@ class CartView(ListView):
     def get_queryset(self):
         return self.model.objects.new_or_get(self.request)
     
+    
 
 def cart_home(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
@@ -61,7 +62,7 @@ def cart_update(request):
 
 class CheckoutView(View):
     """
-        Provides the ability to login as a user with an email and password
+        Provides the ability to checkout if user is authenticated
     """
     form_class = BillingForm
     template_name = 'carts/checkout.html'
