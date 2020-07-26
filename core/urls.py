@@ -9,6 +9,8 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('courses/', include('courses.urls')),
     path('carts/', include('carts.urls')),
+    path('payment/', include('billings.urls')),
+    path('mycourses/', include('enrolls.urls')),
     path('admin/', admin.site.urls),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
 ]

@@ -28,7 +28,7 @@ class BillingForm(forms.ModelForm):
         # fields = ['email', 'username', 'first_name',
         #           'last_name',  'password1', 'password2', ]
 
-        exclude = ('user', 'timestamp',)         
+        exclude = ('user', 'timestamp', 'products')         
 
 
 

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'reviews.apps.ReviewsConfig',
     'carts.apps.CartsConfig',
     'billings.apps.BillingsConfig',
+    'enrolls.apps.EnrollsConfig',
 
 
     'star_ratings',

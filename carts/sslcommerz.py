@@ -1,18 +1,19 @@
 from sslcommerz_lib import SSLCOMMERZ
 from django.conf import settings
+import json
 
-def sslcommerz_payment_gateway(request, cart_total):
-
-    settings = {'store_id': 'Your Store Id',
-                'store_pass': 'Your Store pass@ssl', 'issandbox': True}
+def sslcommerz_payment_gateway(request, cart, user):
+    
+    settings = {'store_id': 'graph5f0ae5eb36392',
+                'store_pass': 'graph5f0ae5eb36392@ssl', 'issandbox': True}
     sslcommez = SSLCOMMERZ(settings)
     post_body = {}
-    post_body['total_amount'] = cart_total
+    post_body['total_amount'] = cart.total
     post_body['currency'] = "BDT"
     post_body['tran_id'] = "aofhoaiao"
-    post_body['success_url'] = 'http://127.0.0.1:8000/'
+    post_body['success_url'] = 'http://127.0.0.1:8000/payment/success/'
     post_body['fail_url'] = 'http://127.0.0.1:8000/'
-    post_body['cancel_url'] = 'http://127.0.0.1:8000/'
+    post_body['cancel_url'] = 'http://127.0.0.1:8000/carts/'
     post_body['emi_option'] = 0
     post_body['cus_name'] = request.data["full_name"]
     post_body['cus_email'] = request.data["email"]
@@ -26,6 +27,13 @@ def sslcommerz_payment_gateway(request, cart_total):
     post_body['product_name'] = "Test"
     post_body['product_category'] = "Test Category"
     post_body['product_profile'] = "general"
+
+    # OPTIONAL PARAMETERS
+    post_body['value_a'] = user.id
+    post_body['value_b'] = cart.id
+
+
+
 
     response = sslcommez.createSession(post_body)
     return 'https://sandbox.sslcommerz.com/gwprocess/v4/gw.php?Q=pay&SESSIONKEY=' + response["sessionkey"]
