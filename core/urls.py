@@ -11,8 +11,9 @@ urlpatterns = [
     path('carts/', include('carts.urls')),
     path('payment/', include('billings.urls')),
     path('mycourses/', include('enrolls.urls')),
-    path('admin/', admin.site.urls),
+    path('dashboard/', include('dashboard.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
+    path('admin/', admin.site.urls),
 ]
 
 

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'carts.apps.CartsConfig',
     'billings.apps.BillingsConfig',
     'enrolls.apps.EnrollsConfig',
+    'dashboard.apps.DashboardConfig',
 
 
     'star_ratings',

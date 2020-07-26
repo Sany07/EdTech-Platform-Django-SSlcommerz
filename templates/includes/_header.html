@@ -80,8 +80,15 @@
                                     
 
                                     {% if user.is_authenticated %}
-                                    <li class="pl-3"><a href="{% url 'accounts:logout' %}">Logout</a></li>
-
+                                    <li class="cn-dropdown-item has-down pr12 pl-3">
+                                        <a href="#">Dashboard</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'dashboard:my-courses' %}">My Courses</a></li>
+                                            <li><a href="{% url 'accounts:student-register' %}">Settings</a></li>
+                                            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                                        </ul>
+                                            <span class="dd-trigger"></span><span class="dd-arrow"></span>
+                                    </li>
                                     {% else %}
                                     <li class="cn-dropdown-item has-down pr12">
                                         <a href="#">Register</a>
@@ -92,16 +99,13 @@
                                             <span class="dd-trigger"></span><span class="dd-arrow"></span>
                                     </li>
                                         <li class="pl-3"><a href="{% url 'accounts:login' %}">Login</a></li>
-                                    {% endif %}
 
+
+                                    {% endif %}
                                     <li class="pr-3"><a href="#search" class="search-btn"><i class="icofont-search-2"></i></a></li>
                               
                                     <li class=""><a href="{% url 'cart:cart' %}" class="shoping-chart"><i class="icofont-shopping-cart"></i>{{ request.session.cart_items }}</a></li>
-                                    
-                          
-                                    
-                                
-                                  
+                                   
                                 </ul>
                             </div>
 
