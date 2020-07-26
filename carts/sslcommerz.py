@@ -1,6 +1,16 @@
-from sslcommerz_lib import SSLCOMMERZ
+import string
+import random
 from django.conf import settings
-import json
+
+from sslcommerz_lib import SSLCOMMERZ
+
+
+def unique_trangection_id_generator(size=10, chars=string.ascii_uppercase + string.digits):
+    """
+    This is for a Django project and it assumes your instance 
+    has a model with a slug field and a title character (char) field.
+    """
+    return ''.join(random.choice(chars) for _ in range(size))
 
 def sslcommerz_payment_gateway(request, cart, user):
     
@@ -10,9 +20,9 @@ def sslcommerz_payment_gateway(request, cart, user):
     post_body = {}
     post_body['total_amount'] = cart.total
     post_body['currency'] = "BDT"
-    post_body['tran_id'] = "aofhoaiao"
+    post_body['tran_id'] = unique_trangection_id_generator()
     post_body['success_url'] = 'http://127.0.0.1:8000/payment/success/'
-    post_body['fail_url'] = 'http://127.0.0.1:8000/'
+    post_body['fail_url'] = 'http://127.0.0.1:8000/payment/faild/'
     post_body['cancel_url'] = 'http://127.0.0.1:8000/carts/'
     post_body['emi_option'] = 0
     post_body['cus_name'] = request.data["full_name"]

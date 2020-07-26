@@ -7,7 +7,7 @@ from courses.models import Course
 
 class EnrollCouese(models.Model):
 
-    user        = models.ForeignKey(User, unique=True, on_delete=models.DO_NOTHING)
+    user        = models.OneToOneField(User, on_delete=models.DO_NOTHING)
     products    = models.ManyToManyField(Course, blank=True)
     timestamp   = models.DateTimeField(auto_now_add=True)
 

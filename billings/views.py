@@ -1,11 +1,12 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import CreateView, DetailView, RedirectView, View, ListView, TemplateView, FormView
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import View, TemplateView
 from django.views.decorators.csrf import csrf_exempt
-from accounts.models import CustomUser
 from django.utils.decorators import method_decorator
-
+from django.contrib import messages
 from .models import Transaction
+
 from carts.models import Cart
+from accounts.models import CustomUser
 from enrolls.models import EnrollCouese
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -18,12 +19,13 @@ class CheckoutSuccessView(View):
 
         user = get_object_or_404(CustomUser, id=request.user.id)
         del self.request.session['cart_items'] #here deleting the total items on cart session 
+
         return render(request, self.template_name)
 
     def post(self, request, *args, **kwargs):
 
         data = self.request.POST
-
+        
         user = get_object_or_404(CustomUser, id=data['value_a']) #value_a is a user instance
         cart = get_object_or_404(Cart, id = data['value_b'] ) #value_b is a user cart instance
 
@@ -60,7 +62,21 @@ class CheckoutSuccessView(View):
         elif new_user:
             for item in cart.products.all():
                 new_user.products.add(item)
+        
+        #delete the individual cart
+        cart = cart.delete()
+        messages.success(request,'Payment Successfull')
 
-        cart = cart.delete() #delete the individual cart
+        #Redirect on this view because we have to delete the cart items total count
+        return redirect('billing:success')
 
+@method_decorator(csrf_exempt, name='dispatch')
+class CheckoutFaildView(View):
+    template_name = 'carts/checkout-faild.html'
+
+
+    def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        return redirect('billing:faild')
