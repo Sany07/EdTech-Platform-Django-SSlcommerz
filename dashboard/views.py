@@ -34,7 +34,7 @@ class StartCourseView(DetailView):
 
     model= Course
     context_object_name = 'course'
-    template_name = 'courses/start-course.html'
+    template_name = 'courses/classroom.html'
 
     # def get_queryset(self):
         

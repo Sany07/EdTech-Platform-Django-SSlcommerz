@@ -129,3 +129,18 @@
 
 
 })(jQuery);
+
+
+
+jQuery(document).ready(function() {
+    $('#iframe1').on('load', function () {
+        $('#loader1').hide();
+        console.log("loading");
+        
+    });
+
+    $('.myButtons').on('click', function () {
+        $('#loader1').show();
+        console.log("ok");
+    });
+});

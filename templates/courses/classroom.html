@@ -21,14 +21,10 @@
 <section class="course-details-area ptb-100">
     <div class="container-fluid">
         <div class="row">
+            
             <div class="col-lg-4 col-md-10">
+                <div id="loader1" style="background-color: #ddd">Loadin</div>
                 <div class="courses-details">
-
-
-
-                   
-
-
                     <h3>{{ course.title }}</h3>
 
                     <!-- <p>Learn how to use NumPy, Pandas, Seaborn, Matplotlib, Plotly, Scikit-Learn, Machine Learning, Tensorflow, and more!</p> -->
@@ -60,7 +56,7 @@
                                                 {% youtube_link_replace lessoncontent as videourl %}
                                                 <li>
                                                     <!-- <p><a href="http://www.youtube.com/embed/Q5im0Ssyyus" target="someFrame" class="myButtons">Charlie 1</a></p> -->
-                                                    <a class="" target="someFrame" id="{{ lessoncontent.id }}"
+                                                    <a class="myButtons" target="someFrame" id="{{ lessoncontent.id }}"
                                                     {% if videourl %}
                                                         href="{% youtube_link_replace lessoncontent%}?&autoplay=true&crosstime=701"
                                                          {% else %}
@@ -95,12 +91,13 @@
             <div class="col-lg-8 col-md-10">
 
                 <div class="" style="background-color: #333;">
+
                     <div class="embed-responsive embed-responsive-16by9">
 
-                        <iframe name="someFrame" src="" id="iframe-ember1021" 
-                        scrolling="no" seamless="" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" oallowfullscreen="" msallowfullscreen="" allow="autoplay" title="Video Lesson" class="_videoproxy__iframe_3iu414" __idm_id__="883481602" height="232.60000610351562"></iframe>
+                        <!-- <iframe name="someFrame" id="iframe1" 
+                        scrolling="no" seamless="" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" oallowfullscreen="" msallowfullscreen="" allow="autoplay" title="Video Lesson" class="_videoproxy__iframe_3iu414" __idm_id__="883481602" height="232.60000610351562"></iframe> -->
 
-                        <!-- <iframe id="iframe1" name="someFrame" src="" allow="autoplay"></iframe> -->
+                        <iframe id="iframe1" src="http://www.youtube.com/embed/eaCCkfjPm0o" name="someFrame" src="" allow="autoplay"></iframe>
                         <!-- <iframe width="100%" height="500" class="embed-responsive-item"
                                 src="{{ lesson.url }}" frameborder="0"
                                 allowfullscreen>
@@ -116,19 +113,4 @@
 
  
 </section>
-
-<script>
-    $(document).ready(function () {
-        $('#iframe1').on('load', function () {
-            $('#loader1').hide();
-        });
-
-        $('.myButtons').on('click', function () {
-            $('#loader1').show();
-        });
-    });
-
-
-
-</script>
 {% endblock %}
