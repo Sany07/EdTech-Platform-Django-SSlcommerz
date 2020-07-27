@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load youtube_link_replace %}
+
+{% block content %}
+
+
+<!-- Start Page Title Area -->
+<div class="page-title">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <h3>{{ course.title }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start Course Details Area -->
+<section class="course-details-area ptb-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-10">
+                <div class="courses-details">
+
+
+
+                   
+
+
+                    <h3>{{ course.title }}</h3>
+
+                    <!-- <p>Learn how to use NumPy, Pandas, Seaborn, Matplotlib, Plotly, Scikit-Learn, Machine Learning, Tensorflow, and more!</p> -->
+
+                    <div class="">
+                        <div class="content" id="tab_2_content">
+                            <div class="accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                                {% for lesson in course.course.all %}
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="heading-{{ forloop.counter }}">
+                                        <a {% if forloop.first %} {% else %} class="collapsed" {% endif %}
+                                            data-toggle="collapse" data-parent="#accordionEx"
+                                            href="#collapse-{{ forloop.counter }}"
+                                            aria-expanded="{% if forloop.first %} true {% else %} false {% endif %}"
+                                            aria-controls="collapse-{{ forloop.counter }}">
+                                            <h5 class="mb-0">
+                                                {{ forloop.counter }}. {{ lesson.title }} <span><i
+                                                        class="icofont-rounded-down"></i></span>
+                                            </h5>
+                                        </a>
+                                    </div>
+
+                                    <div id="collapse-{{ forloop.counter }}"
+                                        class="collapse {% if forloop.first %}show  {% endif %}" role="tabpanel"
+                                        aria-labelledby="heading-{{ forloop.counter }}" data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <ul>
+                                                {% for lessoncontent in lesson.video_link.all %}
+                                                {% youtube_link_replace lessoncontent as videourl %}
+                                                <li>
+                                                    <!-- <p><a href="http://www.youtube.com/embed/Q5im0Ssyyus" target="someFrame" class="myButtons">Charlie 1</a></p> -->
+                                                    <a class="" target="someFrame" id="{{ lessoncontent.id }}"
+                                                    {% if videourl %}
+                                                        href="{% youtube_link_replace lessoncontent%}?&autoplay=true&crosstime=701"
+                                                         {% else %}
+                                                         href="{{ lessoncontent.video_url }}?&autoplay=true&crosstime=701"
+                                                        {% endif %}>
+                                                         <i class="icofont-ui-play"></i> Lecture {{ forloop.counter }}
+
+                                                        <span class="ls-title">{{ lessoncontent.title }}</span>
+
+                                                        <span class="duration"><i class="icofont-clock-time"></i> 50
+                                                            min</span>
+
+                                                    </a>
+                                                </li>
+                                                {% endfor %}
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-8 col-md-10">
+
+                <div class="" style="background-color: #333;">
+                    <div class="embed-responsive embed-responsive-16by9">
+
+                        <iframe name="someFrame" src="" id="iframe-ember1021" 
+                        scrolling="no" seamless="" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" oallowfullscreen="" msallowfullscreen="" allow="autoplay" title="Video Lesson" class="_videoproxy__iframe_3iu414" __idm_id__="883481602" height="232.60000610351562"></iframe>
+
+                        <!-- <iframe id="iframe1" name="someFrame" src="" allow="autoplay"></iframe> -->
+                        <!-- <iframe width="100%" height="500" class="embed-responsive-item"
+                                src="{{ lesson.url }}" frameborder="0"
+                                allowfullscreen>
+                        </iframe> -->
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+ 
+</section>
+
+<script>
+    $(document).ready(function () {
+        $('#iframe1').on('load', function () {
+            $('#loader1').hide();
+        });
+
+        $('.myButtons').on('click', function () {
+            $('#loader1').show();
+        });
+    });
+
+
+
+</script>
+{% endblock %}

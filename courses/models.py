@@ -48,6 +48,7 @@ class Course(models.Model):
 
     def get_absolute_url(self):
         return reverse("courses:single-course", kwargs={'slug': self.slug})
+
  
     #for review section
     # def get_content_type(self):
@@ -99,8 +100,8 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
     
 
 class LessonContent(models.Model):
-    title  = models.CharField(max_length=250, blank=True)
-    video_link = models.URLField(max_length=500, blank=False)
+    title  = models.CharField(max_length=250, blank=False)
+    video_link = models.URLField(max_length=500, blank=True, null=True)
 
     class Meta:
         verbose_name = "Lesson Content"
