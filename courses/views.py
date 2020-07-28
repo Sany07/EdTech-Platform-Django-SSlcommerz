@@ -17,7 +17,7 @@ from carts.models import Cart
 class CourseListView(ListView):
     model = Course
     context_object_name = 'courses'
- 
+    paginate_by = 5
     template_name = "courses/courses.html"
 
     def get_queryset(self):
