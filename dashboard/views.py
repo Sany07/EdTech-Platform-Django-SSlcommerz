@@ -21,36 +21,19 @@ class MyCourseListView(ListView):
     def get_queryset(self):
         return self.model.objects.filter(user = self.request.user).first()
 
-
-# def courseview(request, id):
-#     course = None
-#     # if EnrollCouese.objects.filter(user = request.user, products = id):
-#     #     course = get_object_or_404(Course, id=id)
-    
-#     return render(request, 'courses/start-course.html', {'course':course})
-    
-
 class StartCourseView(DetailView):
 
     model= Course
     context_object_name = 'course'
     template_name = 'site/classroom.html'
 
-    # def get_queryset(self):
-        
-    #     course = self.model.objects.filter(slug = self.kwargs['slug'])
-        
-    #     a=EnrollCouese.objects.filter(user = self.request.user, products = course.first().id)
-    #     if a:
-    #         return course
-    #     raise Http404('course not found')
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
         
     def get_object(self, queryset=None):
         obj = super(StartCourseView, self).get_object(queryset=queryset)
-        print(obj)
+        
         if obj is not None:
             enrolledOrnot = get_object_or_404(EnrollCouese, user = self.request.user, products = obj)
             return obj
@@ -58,7 +41,6 @@ class StartCourseView(DetailView):
     def get(self, request, *args, **kwargs):
         try:
             self.object = self.get_object()
-            print(self.object)
         except Http404:
             raise Http404("Course doesn't exists")
         context = self.get_context_data(object=self.object)

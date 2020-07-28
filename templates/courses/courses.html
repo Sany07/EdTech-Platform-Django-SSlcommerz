@@ -63,17 +63,22 @@
                                     {% endif %}
                                 </h4>
                                 <h4 class="buy-cart cart-buttons"> 
-                                    {% if course.price is none %}                              
+                                    {% if course.price is none %} 
+                                    <form method='POST' style="display: inline-block;" action='{% url "enrollment:enroll" %}'> 
+                                        {% csrf_token %}
+                                        <input type='hidden' name='product_id' value='{{ course.id }}' />                             
                                     <a href="" class=""><button class="btn btn-danger">Enroll Now</button></a>
+                                    </form>
                                     {% else %}
                                     <form method='POST' style="display: inline-block;" action='{% url "cart:cart-update" %}'> 
                                         {% csrf_token %}
                                         <input type='hidden' name='product_id' value='{{ course.id }}' />
-                                        <a href="" class=""><button class="btn btn-danger">Wish List</button></a>
                                         {% if product in cart.products.all %}
-                                            <button type='submit' class='btn btn-link'>Remove?</button>
+                                        <a href="" class=""><button class="btn btn-danger">Add to cart</button></a>
+                                         
                                         {% else %}
-                                            <button type='submit'  class='btn btn-danger'>Add to cart</button>
+                                        <a href="" class=""><button class="btn btn-danger">Remove From cart</button></a>
+
                                         {% endif %}
                                     </form>
                                     {% endif %}
@@ -88,31 +93,7 @@
                     {% endfor %}
 
 
-                    <div class="col-lg-12 col-md-12">
-                        <div class="pagination-area">
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <i class="icofont-stylish-left"></i>
-                                        </a>
-                                    </li>
-                                    
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <i class="icofont-stylish-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                    {% include 'includes/_pagination.html' %}
                 </div>
             </div>
         </section>

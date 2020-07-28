@@ -17,7 +17,7 @@ from carts.models import Cart
 class CourseListView(ListView):
     model = Course
     context_object_name = 'courses'
-    paginate_by = 5
+    paginate_by = 6
     template_name = "courses/courses.html"
 
     def get_queryset(self):
@@ -25,9 +25,9 @@ class CourseListView(ListView):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
-
         return context
     
+
 class SingleCourseView(FormMixin, DetailView):
     model = Course
     context_object_name = 'course'

@@ -1,11 +1,11 @@
 
-from django.contrib import admin
 from django.urls import include, path
-from django.conf import settings
-from django.conf.urls.static import static
+from .views import EnrollView
 
+
+app_name = "enrollment"
 urlpatterns = [
-    # path('', include('coresite.urls')),
+    path('enroll/', EnrollView.as_view(), name="enroll"),
 
 ]
 
