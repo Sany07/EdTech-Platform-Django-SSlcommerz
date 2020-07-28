@@ -133,11 +133,7 @@
 
 
 jQuery(document).ready(function() {
-    $('#iframe1').on('load', function () {
-        $('#loader1').hide();
-        console.log("loading");
-        
-    });
+
 
     $('.myButtons').on('click', function () {
         $('#loader1').show();
@@ -155,6 +151,10 @@ jQuery(document).ready(function() {
     $('.myButtons').on('click', function () { 
         // $('#video-content').toggle(); //hide the button
         $('#text-content').hide(1000)
+        $('#iframe1').on('load', function () {
+            $('#loader1').hide();
+            
+        });
 
         $('#video-content').show(); //hide the button
         });

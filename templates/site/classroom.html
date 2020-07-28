@@ -20,6 +20,8 @@
 <!-- Start Course Details Area -->
 <section class="course-details-area ptb-100">
     <div class="container-fluid">
+        
+     
         <div class="row m-1">
 
             <div class="col-lg-4 col-md-10">
@@ -30,6 +32,7 @@
                     <!-- <p>Learn how to use NumPy, Pandas, Seaborn, Matplotlib, Plotly, Scikit-Learn, Machine Learning, Tensorflow, and more!</p> -->
 
                     <div class="">
+                        
                         <div class="content" id="tab_2_content">
                             <div class="accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
                                 {% for lesson in course.course.all %}
@@ -55,7 +58,8 @@
                                                 {% for lessoncontent in lesson.video_link.all %}
                                                     {% if not lessoncontent.text_content %}
                                                     {% youtube_link_replace lessoncontent as videourl %}
-                                                    <li>
+                                                    
+                                                    <li class="p-1 mpb">
 
                                                         <a class="myButtons"  target="someFrame" id="{{ lessoncontent.id }}"
                                                             {% if videourl %}
@@ -63,25 +67,28 @@
                                                             {% else %}
                                                             href="{{ lessoncontent.video_url }}?&autoplay=true&crosstime=701"
                                                             {% endif %}>
-                                                            <i class="icofont-ui-play"></i> Lecture {{ forloop.counter }}
+                                                            <i class="icofont-ui-play pr-2"></i>Lecture {{ forloop.counter }}
 
-                                                            <span class="ls-title">{{ lessoncontent.title }}</span>
-
-                                                            <span class="duration"><i class="icofont-clock-time"></i> 50
-                                                                min</span>
-
+                                                            <span class="ls-title "> {{ lessoncontent.title }}</span>
                                                         </a>
-                                                    </li>
+                                                            <span class="duration-r"><i class="icofont-clock-time"></i>
+                                                                 50 min
+                                                            </span>
 
+                                                      
+                                                
+                                                    </li>
                                                 {% else %}
-                                                <li class="pb-5">
-                                                    <a  id="ch-{{ lessoncontent.id }}"><input id="myText" type="hidden"
-                                                        value="{{ lessoncontent.text_content }}">
-                                                    {{ lessoncontent.title }}</a>
+                                                <li class="p-1">
+                                                    <a  href="#" id="ch-{{ lessoncontent.id }}" style="cursor:pointer">
+                                                        <input id="myText" type="hidden" value="{{ lessoncontent.text_content }}">
+                                                    <i class="icofont-ui-text-chat pr-2"></i>Lecture {{ forloop.counter }}
+                                                        <span class="ls-title"> {{ lessoncontent.title }}</span>
+                                                    </a>
                                                 </li>
                                                 {% endif %}
                                                 {% endfor %}
-
+                                            </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -98,10 +105,10 @@
 
 
             <div class="col-lg-8 col-md-10">
-                <!-- <div id="loader1" style="background-color: #ddd; z-index: 99999;"><i class="icofont-spinner"></i> <h1>Loading</h1>
-            </div> -->
+
                 <div id="video-content" style="background-color: #333;">
                     <div id='reload-iframe' class="embed-responsive embed-responsive-16by9">
+                        <!-- <i id="loader1" class="icofont-spinner"></i>  -->
                         <iframe id="iframe1" src="" width="100%" height="500"
                             name="someFrame" allow="false">
                         </iframe>
@@ -133,7 +140,7 @@ jQuery(document).ready(function() {
     $('#video-content').hide(1000);
     var val = $('input[id^="myText"]', this).val();
     // $('#text-content').html(val);fadeIn(3000)
-    $('#text-content').show().html(val).fadeIn('fast',3000);
+    $('#text-content').show().html(val).fadeIn('fast',);
     $('#text-content').show() //hide the button
     $('#reload-iframe').load(' #reload-iframe > *');
     //$(".rf").show().html().fadeIn('fast');

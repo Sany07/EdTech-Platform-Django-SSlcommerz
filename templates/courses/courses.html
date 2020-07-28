@@ -62,19 +62,23 @@
                                     Free
                                     {% endif %}
                                 </h4>
-                                <h4 class="buy-cart cart-buttons">                               
-                                    <a href="" class="buy"><button class="btn btn-danger">Purchase</button></a>
-
-
-                                    <form method='POST' action='{% url "cart:cart-update" %}'> 
+                                <h4 class="buy-cart cart-buttons"> 
+                                    {% if course.price is none %}                              
+                                    <a href="" class=""><button class="btn btn-danger">Enroll Now</button></a>
+                                    {% else %}
+                                    <form method='POST' style="display: inline-block;" action='{% url "cart:cart-update" %}'> 
                                         {% csrf_token %}
                                         <input type='hidden' name='product_id' value='{{ course.id }}' />
+                                        <a href="" class=""><button class="btn btn-danger">Wish List</button></a>
                                         {% if product in cart.products.all %}
                                             <button type='submit' class='btn btn-link'>Remove?</button>
                                         {% else %}
                                             <button type='submit'  class='btn btn-danger'>Add to cart</button>
                                         {% endif %}
                                     </form>
+                                    {% endif %}
+
+
                                 </h4>
  
 

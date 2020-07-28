@@ -4351,3 +4351,17 @@ a:hover {
 .stt{
   visibility: hidden;
 }
+
+
+.icofont-spinner {
+  text-align: center;
+  justify-content: center;
+  display: block;
+  font-size: 80px;
+}
+
+
+.duration-r {
+
+  padding-left: 143px;
+}
