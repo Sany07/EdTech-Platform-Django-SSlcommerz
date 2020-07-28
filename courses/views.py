@@ -39,8 +39,8 @@ class SingleCourseView(FormMixin, DetailView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    def get_similar_category_courses(self):               
-        return Course.objects.filter(category=self.object.category).order_by("-id")[:5]
+    def get_similar_category_courses(self):      
+        return self.model.objects.filter(category=self.object.category).order_by("-id")[:5]
 
     def get_total_lecture(self):               
         return Lesson.objects.filter(course=self.object.id).values('video_link').count()
@@ -60,7 +60,7 @@ class SingleCourseView(FormMixin, DetailView):
 
         cart_obj, new_obj = Cart.objects.new_or_get(self.request)
         context['cart'] = cart_obj
-        print(cart_obj)
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -94,8 +94,8 @@ class SingleCourseView(FormMixin, DetailView):
 
 def lesson_content(request,id):
 
-   data= get_object_or_404(LessonContent, id=id)
-
+   data= get_object_or_404(Course, id=id)
+   print(data)
    context={
        'data':data
    }

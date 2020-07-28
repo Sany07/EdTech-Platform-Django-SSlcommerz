@@ -4322,3 +4322,32 @@ a:hover {
 .courses-img img {
   height: 205px;
 }
+
+
+.student-dashboard__banner {
+  background-color: #f0f0f0;
+}
+
+
+
+.student-dashboard__container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+
+.student-dashboard__welcome {
+  margin: 0;
+  /* font-family: "Muli",Sans-Serif; */
+  font-size: 1.77689em;
+  font-weight: 400;
+}
+
+.stt{
+  visibility: hidden;
+}

@@ -34,7 +34,7 @@ class StartCourseView(DetailView):
 
     model= Course
     context_object_name = 'course'
-    template_name = 'courses/classroom.html'
+    template_name = 'site/classroom.html'
 
     # def get_queryset(self):
         
@@ -44,7 +44,10 @@ class StartCourseView(DetailView):
     #     if a:
     #         return course
     #     raise Http404('course not found')
-    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+        
     def get_object(self, queryset=None):
         obj = super(StartCourseView, self).get_object(queryset=queryset)
         print(obj)

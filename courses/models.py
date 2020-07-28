@@ -49,7 +49,9 @@ class Course(models.Model):
     def get_absolute_url(self):
         return reverse("courses:single-course", kwargs={'slug': self.slug})
 
- 
+    @property
+    def lesson(self):
+        return self.lesson_set.all()
     #for review section
     # def get_content_type(self):
     #     return self.get_content_type
@@ -102,6 +104,7 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 class LessonContent(models.Model):
     title  = models.CharField(max_length=250, blank=False)
     video_link = models.URLField(max_length=500, blank=True, null=True)
+    text_content = models.TextField(blank=True, null=True)
 
     class Meta:
         verbose_name = "Lesson Content"
@@ -109,12 +112,9 @@ class LessonContent(models.Model):
         db_table = "lessonsContents"
 
     def __str__(self):
-        return self.video_link
+        return self.title
 
-    @property
 
-    def lesson(self):
-        return self.lesson_set.all()
 
 class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course')
@@ -130,3 +130,7 @@ class Lesson(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def lesson(self):
+        return self.lessoncontent_set.all()

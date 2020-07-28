@@ -1,5 +1,7 @@
 @media only screen and (max-width:767px) {
- .ptb-100 {
+ 
+
+.ptb-100 {
   padding-top:60px;
   padding-bottom:60px
  }
@@ -990,6 +992,12 @@
  }
 }
 @media only screen and (min-width:992px) and (max-width:1199px) {
+
+.student-dashboard__welcome {
+    font-size: 3.15733em;
+}
+
+
  .classynav ul li.cn-dropdown-item {
   padding:0 10px!important
  }

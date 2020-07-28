@@ -143,4 +143,21 @@ jQuery(document).ready(function() {
         $('#loader1').show();
         console.log("ok");
     });
+
+    // $('#ch').on('click', function () { 
+    //     // $('#video-content').toggle(); //hide the button
+    //     $('#video-content').hide();
+    //     $('#text-content').show() //hide the button
+    //     var val = $('input[id^="myText"]', this).val();
+    //     $('#text-content').html(val);
+      
+    //     });
+    $('.myButtons').on('click', function () { 
+        // $('#video-content').toggle(); //hide the button
+        $('#text-content').hide(1000)
+
+        $('#video-content').show(); //hide the button
+        });
+
+
 });
