@@ -1,102 +1,114 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load ratings %}
+{% load is_already_enrolled %}
+{% load add_or_remove_from_cart %}
 
 {% block content %}
-        
-        <!-- Start Search Popup Area -->
-        <div id="search-area">
-            <button type="button" class="close">×</button>
-            <form>
-                <input type="search" value="" placeholder="Search Kewword(s)">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-        </div>
-        <!-- End Search Popup Area -->
-        
-        <!-- Start Page Title Area -->
-        <div class="page-title">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="container">
-                        <h3>All Courses</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Page Title Area -->
-        
-        <!-- Start Courses Area -->
-        <section class="courses-area ptb-100">
+
+<!-- Start Search Popup Area -->
+<div id="search-area">
+    <button type="button" class="close">×</button>
+    <form>
+        <input type="search" value="" placeholder="Search Kewword(s)">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+<!-- End Search Popup Area -->
+
+<!-- Start Page Title Area -->
+<div class="page-title">
+    <div class="d-table">
+        <div class="d-table-cell">
             <div class="container">
-                <div class="row"> 
-                {% for course in courses %}
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-courses-item">
-                            <div class="courses-img">
-                                <img src="{{ course.thumbnail.url }}" alt="course" />
-                            </div>
-                            
-                            <div class="courses-content">
-                                <h3><a href="{{ course.get_absolute_url }}">{{ course.title}}</a></h3>
-                                <ul>
-                                    {{ course.ratings.Rating }}
-                                    <li><i class="icofont-star"></i></li>
-                                    <li><i class="icofont-star"></i></li>
-                                    <li><i class="icofont-star"></i></li>
-                                    <li><i class="icofont-star"></i></li>
-                                    <li><i class="icofont-star"></i></li>
-                                    
-                                </ul>
-                            </div>
-                            
-                            <div class="courses-content-bottom">
-                                <h4><i class="icofont-ui-user"></i> 120 Students</h4>
+                <h3>All Courses</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
 
-                                <h4 class="price">
-                                    {% if course.offer_price %}
-                                    <span> {{ course.price }}</span> {{ course.offer_price }}
-                                    {% elif course.price  %}
-                                    {{ course.price }}
-                                    {% else %}
-                                    Free
-                                    {% endif %}
-                                </h4>
-                                <h4 class="buy-cart cart-buttons"> 
-                                    {% if course.price is none %} 
-                                    <form method='POST' style="display: inline-block;" action='{% url "enrollment:enroll" %}'> 
-                                        {% csrf_token %}
-                                        <input type='hidden' name='product_id' value='{{ course.id }}' />                             
-                                    <a href="" class=""><button class="btn btn-danger">Enroll Now</button></a>
-                                    </form>
-                                    {% else %}
-                                    <form method='POST' style="display: inline-block;" action='{% url "cart:cart-update" %}'> 
-                                        {% csrf_token %}
-                                        <input type='hidden' name='product_id' value='{{ course.id }}' />
-                                        {% if product in cart.products.all %}
-                                        <a href="" class=""><button class="btn btn-danger">Add to cart</button></a>
-                                         
-                                        {% else %}
-                                        <a href="" class=""><button class="btn btn-danger">Remove From cart</button></a>
-
-                                        {% endif %}
-                                    </form>
-                                    {% endif %}
-
-
-                                </h4>
- 
-
-                            </div>
-                        </div>
+<!-- Start Courses Area -->
+<section class="courses-area ptb-100">
+    <div class="container">
+        <div class="row">
+            {% for course in courses %}
+            <div class="col-lg-4 col-md-6">
+                <div class="single-courses-item">
+                    <div class="courses-img">
+                        <img src="{{ course.thumbnail.url }}" alt="course" />
                     </div>
-                    {% endfor %}
+
+                    <div class="courses-content">
+                        <h3><a href="{{ course.get_absolute_url }}">{{ course.title}}</a></h3>
+                        <ul>
+                            {{ course.ratings.Rating }}
+                            <li><i class="icofont-star"></i></li>
+                            <li><i class="icofont-star"></i></li>
+                            <li><i class="icofont-star"></i></li>
+                            <li><i class="icofont-star"></i></li>
+                            <li><i class="icofont-star"></i></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="courses-content-bottom">
+                        <h4><i class="icofont-ui-user"></i> 120 Students</h4>
+
+                        <h4 class="price">
+                            {% if course.offer_price %}
+                            <span> {{ course.price }}</span> {{ course.offer_price }}
+                            {% elif course.price  %}
+                            {{ course.price }}
+                            {% else %}
+                            Free
+                            {% endif %}
+                        </h4>
+                        <h4 class="buy-cart cart-buttons">
+
+                            {% is_already_enrolled request.user course as is_enrolled %}
+                            
+                            {% if is_enrolled %}
+                            <a href="{% url 'dashboard:start-course' course.slug %}" class=""><button class="btn btn-danger">Start Course</button></a>
+                            {% else %}
+                           
+                            
+                            {% if course.price is none %}
+                            <form method='POST' style="display: inline-block;" action='{% url "enrollment:enroll" %}'>
+                                {% csrf_token %}
+                                <input type='hidden' name='product_id' value='{{ course.id }}' />
+                                <a href="" class=""><button class="btn btn-danger">Enroll Now</button></a>
+                            </form>
+                            {% else %}
+                            <form method='POST' style="display: inline-block;" action='{% url "cart:cart-update" %}'>
+                                {% csrf_token %}
+                                <input type='hidden' name='product_id' value='{{ course.id }}' />
+                               
+                               {% add_or_remove_from_cart request course as add_or_remove %}
+                               {% if add_or_remove %}
+                                <a href="" class=""><button class="btn btn-danger">Remove From cart</button></a>
+                                {% else %}
+                                <a href="" class=""><button class="btn btn-danger">Add to cart</button></a>
+                                {% endif %}
 
 
-                    {% include 'includes/_pagination.html' %}
+                            </form>
+                            {% endif %}
+                            {% endif %}
+
+
+                        </h4>
+
+
+                    </div>
                 </div>
             </div>
-        </section>
-        <!-- End Courses Area -->
-        
+            {% endfor %}
+
+
+            {% include 'includes/_pagination.html' %}
+        </div>
+    </div>
+</section>
+<!-- End Courses Area -->
+
 {% endblock %}

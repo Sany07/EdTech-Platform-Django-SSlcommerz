@@ -22,9 +22,14 @@ class CourseListView(ListView):
 
     def get_queryset(self):
         return self.model.objects.order_by('-id')
+
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
+        cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        context['cart_obj'] = cart_obj
+        # context['enrolled'] = EnrolledList(self.request)
+        
         return context
     
 

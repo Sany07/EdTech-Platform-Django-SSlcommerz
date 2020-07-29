@@ -80,7 +80,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-
+                # custom
+                # 'enrolls.context_processors.couese_enroll_processor',
 
                 # 3rd Party
 		        # 'whitenoise.middleware.WhiteNoiseMiddleware',

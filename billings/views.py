@@ -54,7 +54,7 @@ class CheckoutSuccessView(View):
         )
 
         old_user, new_user = EnrollCouese.objects.get_or_create(user = user)
-
+ 
         if old_user:
             for item in cart.products.all():
                 old_user.products.add(item)

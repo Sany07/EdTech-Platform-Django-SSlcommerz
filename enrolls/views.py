@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
-from django.views.generic import View
+from django.views.generic import View, ListView, RedirectView
+
 
 from .models import EnrollCouese
 from courses.models import Course
@@ -40,28 +41,28 @@ class EnrollView(View):
 
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        return redirect('courses:courses')
 
     def post(self, request, *args, **kwargs):
         product_id = request.POST.get('product_id')
-        try:
-            if product_id is not None:
-                product_obj = Course.objects.get(id=product_id)
-        except Product.DoesNotExist:
-            return redirect("cart:home")
-        old_user, new_user = EnrollCouese.objects.get_or_create(user = self.request.user)
-
-        if old_user:
-            for item in old_user.products.all():
-                if item.id != product_obj.id:
-                    old_user.products.add(product_obj)
-        if new_user:
-            for item in new_user.products.all():
-                if item.id != product_obj.id:
-                    new_user.products.add(product_obj)
-            messages.success(self.request, 'You are successfuly Enrolled the Course')    
-        # elif new_user:
-        #     for item in cart.products.all():
-        #         new_user.products.add(item)
         
-        return redirect('dashboard:my-courses')
+        if product_id is not None:
+            product_obj = get_object_or_404(Course, id=product_id)
+        if product_obj.price ==  None and product_obj.offer_price == None: 
+            old_user, new_user = EnrollCouese.objects.get_or_create(user = self.request.user)
+
+            if old_user:
+                old_user.products.add(product_obj)
+                messages.success(self.request, 'You are successfuly Enrolled the Course')    
+
+            elif new_user:
+                new_user.products.add(product_obj)
+                messages.success(self.request, 'You are successfuly Enrolled the Course')    
+
+            
+            return redirect('dashboard:my-courses')
+
+        messages.error(self.request, 'Something was wrong')    
+
+
+        
