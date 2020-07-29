@@ -2,10 +2,9 @@ from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
 from courses.models import Category
 
-class HomeView(ListView):
+class HomeView(TemplateView):
     
-    model = Category
-    context_object_name = 'categories'
+
     template_name = 'site/index.html'
 
 

@@ -81,7 +81,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 # custom
-                # 'enrolls.context_processors.couese_enroll_processor',
+                'coresite.context_processors.categories_context_processor',
 
                 # 3rd Party
 		        # 'whitenoise.middleware.WhiteNoiseMiddleware',
