@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load ratings %}
-
+{% load is_already_enrolled %}
+{% load add_or_remove_from_cart %}
 {% block content %}
 
 
@@ -39,16 +40,33 @@
 
                         <div class="apply-btn">
                             <!-- <a href="#" class="btn btn-primary">Enroll Now</a> -->
-
-                            <form method='POST' action='{% url "cart:cart-update" %}'> 
+                            {% is_already_enrolled request.user course as is_enrolled %}
+                            
+                            {% if is_enrolled %}
+                            <a href="{% url 'dashboard:start-course' course.slug %}" class=""><button class="btn btn-danger">Start Course</button></a>
+                            {% else %}
+                            {% if course.price is none %}
+                            <form method='POST' style="display: inline-block;" action='{% url "enrollment:enroll" %}'>
                                 {% csrf_token %}
                                 <input type='hidden' name='product_id' value='{{ course.id }}' />
-                                {% if course in cart.products.all %}
-                                    <button type='submit' class='btn btn-danger'>Added</button>
-                                {% else %}
-                                    <button type='submit'  class='btn btn-danger'>Add to cart</button>
-                                {% endif %}
+                                <a href="" class=""><button class="btn btn-danger">Enroll Now</button></a>
                             </form>
+                            {% else %}
+                            <form method='POST' style="display: inline-block;" action='{% url "cart:cart-update" %}'>
+                                {% csrf_token %}
+                                <input type='hidden' name='product_id' value='{{ course.id }}' />
+                               
+                               {% add_or_remove_from_cart request course as add_or_remove %}
+                               {% if add_or_remove %}
+                                <a href="" class=""><button class="btn btn-danger">Remove From cart</button></a>
+                                {% else %}
+                                <a href="" class=""><button class="btn btn-danger">Add to cart</button></a>
+                                {% endif %}
+
+
+                            </form>
+                            {% endif %}
+                            {% endif %}
 
                         </div>
                     </div>
@@ -78,7 +96,7 @@
 
 
                             <p class="mb-0">{{ course.description }}</p>
-                            {{ course.id }}
+                       
                             <div class="requirements-list">
                                 <h4 class="title">Requirements</h4>
 
