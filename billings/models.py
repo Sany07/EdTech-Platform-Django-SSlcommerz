@@ -31,14 +31,16 @@ class Billing(models.Model):
 class Transaction(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    # biling_profile = models.ForeignKey(Billing, on_delete=models.DO_NOTHING)
+    # products    = models.ManyToManyField(Course, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    tran_id = models.CharField(max_length=100)
-    val_id = models.CharField(max_length=100)
+    tran_id = models.CharField(max_length=15)
+    val_id = models.CharField(max_length=75)
     card_type = models.CharField(max_length=150)
-    store_amount = models.DecimalField(max_digits=10000, decimal_places=2)
+    store_amount = models.DecimalField(max_digits=10, decimal_places=2)
     card_no = models.CharField(max_length=55, null=True)
-    bank_tran_id = models.CharField(max_length=1555, null=True)
-    status = models.CharField(max_length=5555)
+    bank_tran_id = models.CharField(max_length=155, null=True)
+    status = models.CharField(max_length=55)
     tran_date = models.DateTimeField()
     currency = models.CharField(max_length=10)
     card_issuer = models.CharField(max_length=255)
@@ -50,12 +52,3 @@ class Transaction(models.Model):
     verify_sign_sha2 = models.CharField(max_length=255)
     risk_level = models.CharField(max_length=15)
     risk_title = models.CharField(max_length=25)
-
-
-    class Meta:
-        verbose_name = "Transaction"
-        verbose_name_plural = "Transactions"
-        # db_table = "transaction"
-
-    def __str__(self):
-        return self.user.username
