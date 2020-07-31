@@ -1,5 +1,69 @@
-<h1>
+{% load static %}
+<!DOCTYPE html>
+<html>
+        {% include 'includes/_head.html' %}
+        <title> 
+             {% block title %}  {% endblock %} GAINSKILL
+        </title>
+    </head>
+<body>
+    <body>
+        <!-- Start Preloader Area -->
+        <div class="preloader-area">
+            <div class="loader">
+                <div class="dots">
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-up"></i>
 
-    404
+                    <i class="dots-item"></i>
 
-</h1>
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+                    <i class="dots-item dots-item-move-down"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-left"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-right"></i>
+                    <i class="dots-item dots-item-move-up"></i>
+                </div>
+            </div>
+        </div>
+        <!-- End Preloader Area -->
+       
+        <!-- Start Error Area -->
+        <section class="error-area">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="error-content">
+                            <h1>404 !</h1>
+                            <p>This Page Cannot Be Found !</p>
+                            <a href="{% url 'coresite:home' %}" class="btn btn-primary">Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Error Area -->
+        
+        <!-- Back to top -->
+        <a class="scrolltop" href="#top"><i class="icofont-hand-drawn-up"></i></a>
+        <!-- End Back to top -->
+        
+        {% include 'includes/_scripts.html' %}
+    </body>
+</html>
