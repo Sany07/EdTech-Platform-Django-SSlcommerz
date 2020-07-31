@@ -35,7 +35,11 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single-courses-item">
                     <div class="courses-img">
+                        {% if course.thumbnail.url %}
                         <img src="{{ course.thumbnail.url }}" alt="course" />
+                        {% else %}
+                        <!-- <img src="" alt="course" /> -->
+                        {% endif %}
                     </div>
 
                     <div class="courses-content">
