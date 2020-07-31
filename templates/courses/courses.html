@@ -5,14 +5,6 @@
 
 {% block content %}
 
-<!-- Start Search Popup Area -->
-<div id="search-area">
-    <button type="button" class="close">×</button>
-    <form>
-        <input type="search" value="" placeholder="Search Kewword(s)">
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-</div>
 <!-- End Search Popup Area -->
 
 <!-- Start Page Title Area -->
@@ -36,6 +28,7 @@
                 <div class="single-courses-item">
                     <div class="courses-img">
                         {% if course.thumbnail %}
+                        
                         <img src="{{ course.thumbnail.url }}" alt="course" />
                         {% else %}
                         <!-- <img src="" alt="course" /> -->
@@ -43,7 +36,7 @@
                     </div>
 
                     <div class="courses-content">
-                        <h3><a href="{{ course.get_absolute_url }}">{{ course.title}}</a></h3>
+                        <h3><a href="{{ course.get_absolute_url }}">{{ course.id}}</a></h3>
                         <ul>
                             {{ course.ratings.Rating }}
                             <li><i class="icofont-star"></i></li>

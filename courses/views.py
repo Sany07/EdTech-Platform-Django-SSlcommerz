@@ -52,6 +52,7 @@ class SingleCourseView(FormMixin, DetailView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
+
     def get_similar_category_courses(self):      
         return self.model.objects.filter(category=self.object.category).order_by("-id")[:5]
 
@@ -71,48 +72,10 @@ class SingleCourseView(FormMixin, DetailView):
         context['reviews'] = self.get_reviews()
         context['form'] = self.get_form()
 
-        cart_obj, new_obj = Cart.objects.new_or_get(self.request)
-        context['cart'] = cart_obj
 
         return context
 
-    def post(self, request, *args, **kwargs):
 
-        """Check Operation If the form is valid or invalid."""
-
-        reviewform = self.get_form()
-        if reviewform.is_valid():            
-           return self.form_valid(reviewform)
-
-        else:
-            return self.form_invalid(reviewform)    
-
-    def form_valid(self, reviewform):
-
-        """If the form is valid, start save operation."""
-
-        form= reviewform.save(commit = False)
-        form.user = self.request.user
-        form.content_type = self.get_c_t()
-        form.save()           
-        return HttpResponseRedirect("/")
-
-    def form_invalid(self, form):
-
-        """If the form is invalid, render the invalid form."""
-
-        return self.render_to_response(self.get_context_data(form=form))
-
-
-
-def lesson_content(request,id):
-
-   data= get_object_or_404(Course, id=id)
-   print(data)
-   context={
-       'data':data
-   }
-   return render(request,'courses/single-courses.html', context)
 
 @login_required
 @user_is_instructor
