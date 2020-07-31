@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
 
 
+    # 3rd Party
     'star_ratings',
     
 ]
@@ -63,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
       
 ]
 
@@ -84,7 +86,7 @@ TEMPLATES = [
                 'coresite.context_processors.categories_context_processor',
 
                 # 3rd Party
-                'whitenoise.middleware.WhiteNoiseMiddleware',
+
             ],
         },
 
@@ -148,11 +150,11 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-STATIC_ROOT= os.path.join(BASE_DIR, 'static')
+STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'staticfiles'),
+    os.path.join(BASE_DIR, 'static'),
     
 )
 

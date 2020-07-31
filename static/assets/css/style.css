@@ -1261,7 +1261,7 @@ a:hover {
 }
 .courses-details-meta .apply-btn {
  float:right;
- margin-top:-73px
+ margin-top:-87px
 }
 .courses-details-meta .apply-btn .btn {
  padding:15px 30px;
@@ -4316,4 +4316,62 @@ a:hover {
 
   margin: 0px !important;
   padding-left: 20px;
+}
+
+
+.courses-img img {
+  height: 205px;
+}
+
+
+.student-dashboard__banner {
+  background-color: #f0f0f0;
+}
+
+
+
+.student-dashboard__container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+
+.student-dashboard__welcome {
+  margin: 0;
+  /* font-family: "Muli",Sans-Serif; */
+  font-size: 1.77689em;
+  font-weight: 400;
+}
+
+.stt{
+  visibility: hidden;
+}
+
+
+.icofont-spinner {
+  text-align: center;
+  justify-content: center;
+  display: block;
+  font-size: 80px;
+}
+
+
+.duration-r {
+
+  padding-left: 143px;
+}
+
+
+.course-details-single {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+  padding: 20px;
+  border-left: 4px solid #001d4a;
+  margin: 10px 0;
 }

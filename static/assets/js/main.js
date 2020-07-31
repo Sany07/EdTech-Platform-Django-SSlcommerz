@@ -107,4 +107,57 @@
         jQuery(window).on("load", function () {
             e(".preloader-area").fadeOut();
         });
+
+        // jQuery(document).on('click', '.alert', function (e) {
+        
+        //     console.log('heyhey')
+        // });
+
+        
+        jQuery(document).ready(function() {
+            setTimeout(function() {
+                
+                
+                $(".alert").removeClass('lightSpeedIn').addClass('lightSpeedOut ');
+
+
+              }, 1500);
+            });
+
+
+
+
+
 })(jQuery);
+
+
+
+jQuery(document).ready(function() {
+
+
+    $('.myButtons').on('click', function () {
+        $('#loader1').show();
+        console.log("ok");
+    });
+
+    // $('#ch').on('click', function () { 
+    //     // $('#video-content').toggle(); //hide the button
+    //     $('#video-content').hide();
+    //     $('#text-content').show() //hide the button
+    //     var val = $('input[id^="myText"]', this).val();
+    //     $('#text-content').html(val);
+      
+    //     });
+    $('.myButtons').on('click', function () { 
+        // $('#video-content').toggle(); //hide the button
+        $('#text-content').hide(1000)
+        $('#iframe1').on('load', function () {
+            $('#loader1').hide();
+            
+        });
+
+        $('#video-content').show(); //hide the button
+        });
+
+
+});
