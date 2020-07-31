@@ -27,16 +27,16 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single-courses-item">
                     <div class="courses-img">
-                        {% if course.thumbnail %}
+                        {% if course.thumbnail.url == 'None' %}
                         
-                        <img src="{{ course.thumbnail.url }}" alt="course" />
+                        <img src="{{ course.thumbnail.url }}" alt="" />
                         {% else %}
-                        <!-- <img src="" alt="course" /> -->
+                        <img src="" alt="course" />
                         {% endif %}
                     </div>
 
                     <div class="courses-content">
-                        <h3><a href="{{ course.get_absolute_url }}">{{ course.id}}</a></h3>
+                        <h3><a href="{{ course.get_absolute_url }}">{{ course.title}}</a></h3>
                         <ul>
                             {{ course.ratings.Rating }}
                             <li><i class="icofont-star"></i></li>
