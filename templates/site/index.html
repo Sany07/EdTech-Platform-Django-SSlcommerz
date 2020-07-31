@@ -8,7 +8,7 @@
         <div class="main-banner-content">
             <div class="home-slides">
                 <div class="hero-content">
-                    <h1>Welcome To <span>FinalProjects</span></h1>
+                    <h1>Welcome To <span>GAINSKILL</span></h1>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                         ex ea commodo consequat.
@@ -24,7 +24,7 @@
                     <a href="admission.html" class="btn btn-primary">Apply Now</a>
                 </div>
                 <div class="hero-content">
-                    <h1>Welcome To <span>FinalProjects</span></h1>
+                    <h1>Welcome To <span>GAINSKILL</span></h1>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                         ex ea commodo consequat.
@@ -133,123 +133,45 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco .</p>
         </div>
         <div class="row">
+            {% for course in courses %}
             <div class="col-lg-4 col-md-6">
                 <div class="single-courses-item">
-                    <div class="courses-img"><img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" /></div>
+                    <div class="courses-img">
+                        <img src="{{ course.thumbnail.url }}" alt="course" />
+                    </div>
+
                     <div class="courses-content">
-                        <h3><a href="single-courses.html">Machine Learning</a></h3>
+                        <h3><a href="{{ course.get_absolute_url }}">{{ course.title}}</a></h3>
                         <ul>
+                            {{ course.ratings.Rating }}
                             <li><i class="icofont-star"></i></li>
                             <li><i class="icofont-star"></i></li>
                             <li><i class="icofont-star"></i></li>
                             <li><i class="icofont-star"></i></li>
                             <li><i class="icofont-star"></i></li>
+
                         </ul>
                     </div>
+
                     <div class="courses-content-bottom">
                         <h4><i class="icofont-ui-user"></i> 120 Students</h4>
-                        <h4 class="price">$120</h4>
+
+                        <h4 class="price">
+                            {% if course.offer_price %}
+                            <span> {{ course.price }}</span> {{ course.offer_price }}
+                            {% elif course.price  %}
+                            {{ course.price }}
+                            {% else %}
+                            Free
+                            {% endif %}
+                        </h4>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-courses-item">
-                    <div class="courses-img"><img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" /></div>
-                    <div class="courses-content">
-                        <h3><a href="single-courses.html">Learning Analytics Course</a></h3>
-                        <ul>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                        </ul>
-                    </div>
-                    <div class="courses-content-bottom">
-                        <h4><i class="icofont-ui-user"></i> 120 Students</h4>
-                        <h4 class="price"><span>$140</span> $120</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-courses-item">
-                    <div class="courses-img"><img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" /></div>
-                    <div class="courses-content">
-                        <h3><a href="single-courses.html">Complete Python Bootcamp: Go from zero to hero in Python 3</a></h3>
-                        <ul>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                        </ul>
-                    </div>
-                    <div class="courses-content-bottom">
-                        <h4><i class="icofont-ui-user"></i> 120 Students</h4>
-                        <h4 class="price">$120</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-courses-item">
-                    <div class="courses-img"><img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" /></div>
-                    <div class="courses-content">
-                        <h3><a href="single-courses.html">AWS Serverless APIs & Apps - A Complete Introduction</a></h3>
-                        <ul>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                        </ul>
-                    </div>
-                    <div class="courses-content-bottom">
-                        <h4><i class="icofont-ui-user"></i> 120 Students</h4>
-                        <h4 class="price">$120</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-courses-item">
-                    <div class="courses-img"><img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" /></div>
-                    <div class="courses-content">
-                        <h3><a href="single-courses.html">Mathematical Coaching</a></h3>
-                        <ul>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                        </ul>
-                    </div>
-                    <div class="courses-content-bottom">
-                        <h4><i class="icofont-ui-user"></i> 120 Students</h4>
-                        <h4 class="price">$120</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-courses-item">
-                    <div class="courses-img"><img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" /></div>
-                    <div class="courses-content">
-                        <h3><a href="single-courses.html">Data Science</a></h3>
-                        <ul>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                        </ul>
-                    </div>
-                    <div class="courses-content-bottom">
-                        <h4><i class="icofont-ui-user"></i> 120 Students</h4>
-                        <h4 class="price"><span>$140</span> $120</h4>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
             <div class="col-lg-12 col-md-12">
                 <div class="view-all text-center">
-                    <a href="single-courses.html" class="btn btn-primary">View All Courses <i class="icofont-rounded-double-right"></i></a>
+                    <a href="{% url 'courses:courses' %}" class="btn btn-primary">View All Courses <i class="icofont-rounded-double-right"></i></a>
                 </div>
             </div>
         </div>
@@ -289,7 +211,7 @@
         </div>
     </div>
 </section>
-<section class="upcoming-events-area ptb-100">
+<!-- <section class="upcoming-events-area ptb-100">
     <div class="container">
         <div class="section-title">
             <h3>Upcoming Events</h3>
@@ -400,7 +322,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <section class="apply-area ptb-100">
     <div class="container">
         <div class="row">
@@ -423,7 +345,7 @@
         </div>
     </div>
 </section>
-<section class="how-it-works ptb-100">
+<!-- <section class="how-it-works ptb-100">
     <div class="container">
         <div class="section-title">
             <h3>How It Works<span>?</span></h3>
@@ -623,8 +545,8 @@
             </div>
         </div>
     </div>
-</section>
-<section class="newsletter-area ptb-100">
+</section> -->
+<!-- <section class="newsletter-area ptb-100">
     <div class="container">
         <div class="newsletter">
             <h3>Sign up to our newsletter</h3>
@@ -632,9 +554,9 @@
             <form><input class="form-control" placeholder="Enter your email address..." /> <button type="submit" class="btn btn-primary">Subscribe Now</button></form>
         </div>
     </div>
-</section>
+</section> -->
 
-<section class="teacher-area ptb-100">
+<!-- <section class="teacher-area ptb-100">
     <div class="container">
         <div class="section-title">
             <h3>Our Teacher</h3>
@@ -799,7 +721,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <section class="newsletter-area ptb-100">
     <div class="container">
         <div class="newsletter">
@@ -812,7 +734,7 @@
 <section class="news-area ptb-100">
     <div class="container">
         <div class="section-title">
-            <h3>FinalProjects News</h3>
+            <h3>GAINSKILL News</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco .</p>
         </div>
         <div class="row">

@@ -48,7 +48,7 @@
                     <nav class="classy-navbar justify-content-between" id="EduStudyNav">
                         
                         <!-- Logo -->
-                        <a class="nav-brand" href="index.html"><img src="assets/img/logo.png" alt="logo"></a>
+                        <a class="nav-brand" href="index.html"><img src="assets/img/logo.png" alt="GAINSKILL"></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -68,7 +68,7 @@
                                 <ul>
                                     <li class="pr-3 active"><a href="{% url 'coresite:home' %}">Home</a></li>   
                                     <li class="pr-3"><a href="{% url 'courses:courses' %}">Courses</a></li>
-                                    <li class="pr-3"><a href="about.html">About Us</a></li>
+                                    <li class="pr-3"><a href="{% url 'coresite:about' %}">About Us</a></li>
                                     <li class="cn-dropdown-item has-down pr12">
                                         <a href="#">Category</a>
                                         <ul class="dropdown">
@@ -83,9 +83,15 @@
 
                                     {% if user.is_authenticated %}
                                     <li class="cn-dropdown-item has-down pr12 pl-3">
-                                        <a href="#">Dashboard</a>
+                                        <a href="{% url 'dashboard:my-courses' %}">{{ request.user.username }}</a>
                                         <ul class="dropdown">
+                                            <li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+                                            {% if request.user.role == 'stu' %}
                                             <li><a href="{% url 'dashboard:my-courses' %}">My Courses</a></li>
+                                            {% elif request.user.role == 'tea' %}
+                                            <li><a href="{% url 'dashboard:instructor-courses' %}">My Courses</a></li>
+                                            {% endif %}
+                                            <li><a href="{% url 'courses:create-course' %}">Pubsish New Course</a></li>
                                             <li><a href="{% url 'accounts:student-register' %}">Settings</a></li>
                                             <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
                                         </ul>

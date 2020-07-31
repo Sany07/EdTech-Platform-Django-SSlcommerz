@@ -4,14 +4,16 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import MyCourseListView, StartCourseView
+from .views import DashboardView, MyEnrolledCourseListView, StartCourseView, InstructorCourseListView
 
 
 
 app_name = "dashboard"
 
 urlpatterns = [
-    path('my-courses/', MyCourseListView.as_view(), name="my-courses"),
+    path('', DashboardView.as_view(), name="dashboard"),
+    path('my-published-courses/', InstructorCourseListView.as_view(), name="instructor-courses"),
+    path('my-courses/', MyEnrolledCourseListView.as_view(), name="my-courses"),
     path('classroom/<slug:slug>/', StartCourseView.as_view(), name="start-course"),
 ]
 

@@ -4365,3 +4365,13 @@ a:hover {
 
   padding-left: 143px;
 }
+
+
+.course-details-single {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+  padding: 20px;
+  border-left: 4px solid #001d4a;
+  margin: 10px 0;
+}

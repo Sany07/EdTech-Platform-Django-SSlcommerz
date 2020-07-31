@@ -4,7 +4,6 @@ from django.views.generic import CreateView, DetailView, RedirectView, View , Li
 from django.urls import reverse, reverse_lazy
 
 from accounts.models import *
-from courses.models import *
 from accounts.forms import *
 
 class InstructorRegisterView(CreateView):
@@ -129,49 +128,6 @@ class ProfileView(DetailView):
         context['total'] = self.get_course().count()
 
         return context
-
-
-
-def create_course_with_lessons(request):
-    courseform = CourseModelForm(request.POST or None)
-    formset = LessonFormset(queryset=Lesson.objects.none())
-    ContentFormset = LessonContentFormset(queryset=LessonContent.objects.none())
-    
-    if request.method == 'POST':
-
-        courseform = CourseModelForm(request.POST or None , request.FILES or None)
-        formset = LessonFormset(request.POST)
-        ContentFormset = LessonContentFormset(request.POST)
-        use = get_object_or_404(CustomUser, id=request.user.id)
-        
-        if courseform.is_valid and formset.is_valid() and ContentFormset.is_valid():
-            categories = Category.objects.get(id=1) 
-            course  = courseform.save(commit=False)
-            course.instructor = use 
-            course.save()
-            
-            for form in ContentFormset:
-                lesson = form.save(commit=False)   
-                    
-                lesson.save()
-            for form in formset:
-                author = form.save(commit=False)
-                author.course = course
-                author.save()
-                author.video_link.add(lesson)
-                
-                return redirect(reverse("courses:single-course", kwargs={
-                                    'slug': course.slug
-                                    }))
-
-    categories = Category.objects.all()   
-    return render(request, 'courses/create-course.html', {
-        'courseform': courseform,
-        'formset': formset,
-        'ContentFormset':ContentFormset,
-        'categories':categories
-
-    })
 
 
 

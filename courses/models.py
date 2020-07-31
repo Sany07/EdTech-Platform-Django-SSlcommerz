@@ -7,6 +7,11 @@ from django.db.models.signals import pre_save, post_save
 from django.contrib.contenttypes.fields import GenericRelation
 from courses.utils import unique_slug_generator
 from django.contrib.contenttypes.models import ContentType 
+from django.conf import settings
+# Create your models here.
+
+User = settings.AUTH_USER_MODEL
+
 
 from star_ratings.models import Rating
 from reviews.models import Review
@@ -26,16 +31,16 @@ class Category(models.Model):
 
 class Course(models.Model):
     title = models.CharField(max_length=250,blank=False)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=300)
     description = models.TextField()
     thumbnail = models.ImageField(upload_to='photos/course/%Y-%m-%d/')
     price = models.DecimalField(max_digits=100, decimal_places=2,null=True,blank=True)
     offer_price =  models.DecimalField(max_digits=100, decimal_places=2,null=True,blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    language = models.CharField(max_length=50)
+    # language = models.CharField(max_length=50)
     ratings = GenericRelation(Rating, related_query_name='ratings')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
-    instructor = models.ForeignKey("accounts.CustomUser", on_delete=models.CASCADE, related_name='instructor')
+    instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='instructor')
 
 
     class Meta:

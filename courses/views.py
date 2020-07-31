@@ -2,17 +2,25 @@ from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, re
 from django.views.generic import ListView, DetailView
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.db.models import Count,Q
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 from star_ratings.models import Rating , UserRating, AbstractBaseRating
 from django.contrib.contenttypes.models import ContentType
-from django.urls import reverse, reverse_lazy
 
 
 from django.views.generic.edit import FormMixin
 
+
 from .models import *
+from .forms import *
+from .decorators import user_is_instructor
+
+from accounts.models import CustomUser
+from carts.models import Cart
 from reviews.models import Review
 from reviews.forms import ReviewForm
-from carts.models import Cart
 
 class CourseListView(ListView):
     model = Course
@@ -105,4 +113,49 @@ def lesson_content(request,id):
        'data':data
    }
    return render(request,'courses/single-courses.html', context)
+
+@login_required
+@user_is_instructor
+def create_course_with_lessons(request):
+    courseform = CourseModelForm(request.POST or None)
+    formset = LessonFormset(queryset=Lesson.objects.none())
+    ContentFormset = LessonContentFormset(queryset=LessonContent.objects.none())
     
+    if request.method == 'POST':
+
+        courseform = CourseModelForm(request.POST or None , request.FILES or None)
+        formset = LessonFormset(request.POST)
+        ContentFormset = LessonContentFormset(request.POST)
+        user = get_object_or_404(CustomUser, id=request.user.id)
+        
+        if courseform.is_valid and formset.is_valid() and ContentFormset.is_valid():
+            categories = Category.objects.get(id=1) 
+            course  = courseform.save(commit=False)
+            course.instructor = user
+            course.save()
+            
+            for form in ContentFormset:
+                lesson = form.save(commit=False)   
+                    
+                lesson.save()
+            for form in formset:
+                author = form.save(commit=False)
+                author.course = course
+                author.save()
+                author.video_link.add(lesson)
+                
+                return redirect(reverse("courses:single-course", kwargs={
+                                    'slug': course.slug
+                                    }))
+
+    categories = Category.objects.all()   
+    return render(request, 'courses/create-course.html', {
+        'courseform': courseform,
+        'formset': formset,
+        'ContentFormset':ContentFormset,
+        'categories':categories
+
+    })
+
+
+
