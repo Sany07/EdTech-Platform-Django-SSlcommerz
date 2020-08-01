@@ -14,8 +14,11 @@ def unique_trangection_id_generator(size=10, chars=string.ascii_uppercase + stri
 
 def sslcommerz_payment_gateway(request, cart, user):
     
-    settings = {'store_id': 'graph5f0ae5eb36392',
-                'store_pass': 'graph5f0ae5eb36392@ssl', 'issandbox': True}
+    settings = {'store_id': 'Your Store ID',
+                'store_pass': 'Your Store Pass', 'issandbox': True}
+
+
+      
     sslcommez = SSLCOMMERZ(settings)
     post_body = {}
     post_body['total_amount'] = cart.total

@@ -4299,9 +4299,7 @@ a:hover {
   bottom: 0;
 }
 
-.icofont-shopping-cart {
-  font-size: 34px;
-}
+
 
 
 .buy-cart {
@@ -4374,4 +4372,58 @@ a:hover {
   padding: 20px;
   border-left: 4px solid #001d4a;
   margin: 10px 0;
+}
+
+
+.mR-10 {
+  margin-right: 10px !important;
+}
+.peer {
+  display: block;
+  height: auto;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.peer > img {
+  max-width: none;
+}
+.bdrs-50p {
+  border-radius: 50% !important;
+}
+.sz-2r, .w-2r {
+  width: 32px;
+  width: 2rem;
+}
+.peer > img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+
+.lh-1 {
+  line-height: 1 !important;
+}
+.ai-c {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.fxw-nw {
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+.peers {
+  display: flex !important;
+}
+
+.pr-12 {
+  padding-right: 12px !important;
+}
+
+.icofont-shopping-cart {
+  font-size: 34px;
+  position: absolute;
+  top: 33px;
 }

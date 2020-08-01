@@ -67,10 +67,10 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li class="pr-3 active"><a href="{% url 'coresite:home' %}">Home</a></li>   
-                                    <li class="pr-3"><a href="{% url 'courses:courses' %}">Courses</a></li>
-                                    <li class="pr-3"><a href="{% url 'coresite:about' %}">About Us</a></li>
-                                    <li class="cn-dropdown-item has-down pr12">
+                                    <li class="pr-12 active"><a href="{% url 'coresite:home' %}">Home</a></li>   
+                                    <li class="pr-12"><a href="{% url 'courses:courses' %}">Courses</a></li>
+                                    <li class=""><a href="{% url 'coresite:about' %}">About Us</a></li>
+                                    <li class="cn-dropdown-item has-down pr-12">
                                         <a href="#">Category</a>
                                         <ul class="dropdown">
                                             {% for category in categories %}
@@ -82,10 +82,31 @@
                                     </li>   
                                     
 
-                                    {% if user.is_authenticated %}
-                                    <li class="cn-dropdown-item has-down pr12 pl-3">
-                                        <a href="{% url 'dashboard:my-courses' %}">{{ request.user.username }}</a>
+                                    {% if not user.is_authenticated %}
+
+                                    <li class="cn-dropdown-item has-down pr-12">
+                                        <a href="#">Register</a>
                                         <ul class="dropdown">
+                                            <li><a href="{% url 'accounts:instructor-register' %}">Instructor</a></li>
+                                            <li><a href="{% url 'accounts:student-register' %}">Student</a></li>
+                                        </ul>
+                                            <span class="dd-trigger"></span><span class="dd-arrow"></span>
+                                    </li>
+                                        <li class="pl-3 pr-12"><a href="{% url 'accounts:login' %}">Login</a></li>
+
+
+                                    {% endif %}
+                                    <li class="pr-12"><a href="#search" class="search-btn"><i class="icofont-search-2"></i></a></li>
+                                    {% if user.is_authenticated %}                            
+                                    <li class="cn-dropdown-item has-down pr-12 pl-3">
+                                        <div class=" no-after peers fxw-nw ai-c lh-1">
+                                        <div class="peer mR-10"><img class="w-2r bdrs-50p" src="https://randomuser.me/api/portraits/men/10.jpg"
+                                            alt=""></div>
+                                    </div>
+
+                                    <ul class="dropdown profile">
+                                        <span class="ss">
+                                            <h6 class="card-title text-center text-uppercase"> Wellcome Back <br><br>{{ request.user.username }} </h6>
                                             <li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
                                             {% if request.user.role == 'stu' %}
                                             <li><a href="{% url 'dashboard:my-courses' %}">My Courses</a></li>
@@ -95,27 +116,19 @@
                                             {% endif %}
                                             <li><a href="{% url 'accounts:student-register' %}">Settings</a></li>
                                             <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                                        </span>
                                         </ul>
                                             <span class="dd-trigger"></span><span class="dd-arrow"></span>
                                     </li>
-                                    {% else %}
-                                    <li class="cn-dropdown-item has-down pr12">
-                                        <a href="#">Register</a>
-                                        <ul class="dropdown">
-                                            <li><a href="{% url 'accounts:instructor-register' %}">Instructor</a></li>
-                                            <li><a href="{% url 'accounts:student-register' %}">Student</a></li>
-                                        </ul>
-                                            <span class="dd-trigger"></span><span class="dd-arrow"></span>
-                                    </li>
-                                        <li class="pl-3"><a href="{% url 'accounts:login' %}">Login</a></li>
-
-
                                     {% endif %}
-                                    <li class="pr-3"><a href="#search" class="search-btn"><i class="icofont-search-2"></i></a></li>
-                              
-                                    <li class=""><a href="{% url 'cart:cart' %}" class="shoping-chart"><i class="icofont-shopping-cart"></i>{{ request.session.cart_items }}</a></li>
-                                   
-                                </ul>
+                                    <li class="pl-3">
+                                        <a href="{% url 'cart:cart' %}" class="">
+                                        <i class="icofont-shopping-cart"></i>{{ request.session.cart_items }}
+                                        </a>
+                                    </li>
+                                    
+
+                             </ul>
                             </div>
 
                         </div>
