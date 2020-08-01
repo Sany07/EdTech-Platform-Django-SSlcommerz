@@ -28,10 +28,11 @@
                 <div class="single-courses-item">
                     <div class="courses-img">
                         {% if course.thumbnail.url == 'None' %}
-                        
-                        <img src="{{ course.thumbnail.url }}" alt="" />
-                        {% else %}
                         <img src="" alt="course" />
+                        
+                        {% else %}
+                        <img src="{{ course.thumbnail.url }}" alt="" />
+
                         {% endif %}
                     </div>
 

@@ -234,8 +234,8 @@
 
                         <div class="content" id="tab_4_content">
                             <div class="courses-review">
-                                
-                                    <div class="apply-form">
+                                <div class="apply-form">
+                                    {% if is_enrolled %}
                                        
                                         <form method="POST" action="">
                                             {% csrf_token %}
@@ -245,7 +245,9 @@
                                             <input type="hidden" name="object_id" id="id_object_id" value="{{ course.id }}">
                                             <button type="submit" class="btn btn-primary">Post</button>
                                         </form>
-                                </div>
+                                    {% endif %}
+                                
+                                    </div>
 
 
                                 {% for review in reviews %}
