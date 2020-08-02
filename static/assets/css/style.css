@@ -4427,3 +4427,9 @@ a:hover {
   position: absolute;
   top: 33px;
 }
+
+.count {
+  position: absolute;
+  right: -40px;
+  top: 39px;
+}

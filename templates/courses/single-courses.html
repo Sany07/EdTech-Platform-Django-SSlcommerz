@@ -147,18 +147,18 @@
                                             <ul>
                                                 {% for lessoncontent in lesson.video_link.all %}
                                                 {% if not lessoncontent.text_content %}
+
                                                 <li>
-                                                    <a class="popup-video" id="{{ lessoncontent.id }}"
-                                                        href="{{ lessoncontent.video_link }}">
-                                                        <i class="icofont-ui-play"></i> Lecture {{ forloop.counter }}
-
-                                                        <span class="ls-title">{{ lessoncontent.title }}</span>
-
-                                                        <span class="duration"><i class="icofont-clock-time"></i> 50
-                                                            min</span>
-
-                                                    </a>
+                                                    <i class="icofont-ui-play"></i> Lecture {{ forloop.counter }}
+                                                    
+                                                    <span><a href="#">{{ lessoncontent.title }}</a></span>
+                                                    
+                                                    <span class="duration"><i class="icofont-clock-time"></i> 50 min</span>
+                                                    
+                                                    <a id="{{ lessoncontent.id }}" href="{{ lessoncontent.video_link }}" class="preview popup-video">Preview</a>
                                                 </li>
+
+                                     
                                                 {% else %}
                                                 <li>
                                                     <a  href="#"  style="cursor:pointer">
