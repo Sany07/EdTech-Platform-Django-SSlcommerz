@@ -19,20 +19,27 @@ class CourseModelForm(forms.ModelForm):
 
         self.fields['title'].widget.attrs.update(
             {
-                'placeholder': 'eg : Python Basic to Advance',
+                'placeholder': 'Course Title',
+            }
+        )
+
+        self.fields['description'].widget.attrs.update(
+            {
+                'placeholder': 'Course Description',
             }
         )
 
         self.fields['price'].widget.attrs.update(
             {
-                'placeholder': '199.0',
+                'placeholder': 'Leave Blank You If Free ',
             }
-        )
+        ) 
         self.fields['offer_price'].widget.attrs.update(
             {
-                'placeholder': '',
+                'placeholder': 'Offer Price If you Have',
             }
         )
+
 
     class Meta:
         model = Course

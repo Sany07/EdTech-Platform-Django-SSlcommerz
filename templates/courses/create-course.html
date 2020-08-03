@@ -15,169 +15,150 @@
 
 <!-- Start Register Area -->
 <section class="register-area ptb-100">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12">
 
-                <div class="register-content" style="max-width:100%">
-
-
-                    <div class="">
-                        <div class="mb-5">
-
-                            <ul class="nav nav-tabs cnv" id="myTab" role="tablist">
-                                <li class="nav-item lnv" role="presentation">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#course" role="tab"
-                                        aria-controls="course" aria-selected="true">Course</a>
-                                </li>
-                                <li class="nav-item lnv" role="presentation">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                        aria-controls="profile" aria-selected="false">Lessons</a>
-                                </li>
+                <div class=" p-5 m-5">
+                    <div class="apply-form">
+                        <h3>Publish Course</h3>       
+                        <div class="course-details-tabs">
+                            <ul id="tabs" class="nav-tabs">
+                                <li class="active" id="tab_1">Description</li>
+                                <li class="inactive" id="tab_2">Curriculum</li>
+    
                             </ul>
+                            <form class="lsd" method="POST" action="" enctype="multipart/form-data">
+                            
 
-                        </div>
+                                {% csrf_token %}
+                            <div class="content show" id="tab_1_content">
+                                {% for field in courseform %}
 
-                        <form class="lsd" method="POST" action="" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="course" role="tabpanel"
-                                    aria-labelledby="course-tab">
-                                    {% for field in courseform %}
-                                    {% if field.name == 'price'%}
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <div class="form-group">
-                                                <label class="labelc" for="id_price">Price</label>
-                                                <input type="number" class="form-control" name="{{ field.name }}"
-                                                    id="id_price" placeholder="Enter The Course Price">
-                                            </div>
-                                        </div>
-
-                                        {% elif field.name == 'offer_price'%}
-
-                                        <div class="form-group col-md-6">
-                                            <div class="form-group">
-                                                <label class="labelc" for="id_offer_price">Offer price</label>
-                                                <input type="number" class="form-control" name="{{ field.name }}"
-                                                    id="id_offer_price"
-                                                    placeholder="Enter The Course Discount Price (If Discount)">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {% elif field.name == 'thumbnail'%}
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label class="labelc" for="thumbnail">Thumbnail</label>
-
-                                            <div class="custom-file">
-                                                <input type="file" name="{{ field.name }}" class="custom-file-input"
-                                                    id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                                <label class="custom-file-label" for="inputGroupFile01">Choose
-                                                    file</label>
-                                            </div>
-                                        </div>
-                                        {% elif field.name == 'category' %}
-                                        <div class="form-group col-md-6">
-                                            <label class="labelc" for="category">Category</label>
-                                            <select name="category" class="form-control">
-                                                <option selected disabled>Choose...</option>
-                                                {% for category in categories %}
-                                                <option value="{{ category.id }}">{{ category.name }}</option>
-
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                    {% else %}
-                                    <div class="form-group">
-                                        <label class="labelc" for="id_{{ field.name }}">{{ field.label }}</label>
-                                        <input type="{{ field.field.widget.input_type }}" class="form-control"
-                                            name="{{ field.name }}" id="id_{{ field.name }}"
-                                            placeholder="{{ field.field.widget.attrs.placeholder }}">
-                                    </div>
-                                    {% endif %}
-                                    {% endfor %}
+                                {% if field.name == 'category' %}
+                                <div class="form-group p-5">
+                                    <!-- <label class="labelc" for="category">Category</label> -->
+                                    <select name="category" class="form-control">
+                                        <option selected disabled>Choose Category</option>
+                                        {% for category in categories %}
+                                        <option value="{{ category.id }}">{{ category.name }}</option>
+    
+                                        {% endfor %}
+                                    </select>
                                 </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    {{ formset.management_form }}
-                                    {% for form in formset %}
-                                    <div class="form-row-lisson">
+    
+    
+                                {% else %}
+    
+                                <div class="form-group p-5">
+                                <input type="{{ field.field.widget.input_type }}" class="form-control"
+                                name="{{ field.name }}" id="id_{{ field.name }}"
+                                placeholder="{{ field.field.widget.attrs.placeholder }}"></div>
+    
+    
+                                {% endif %}
+    
+                                {% endfor %}
+    
+                           
+    
+    
+    
+                            </div>
+    
+                            <div class="content" id="tab_2_content">
+                                {{ formset.management_form }}
+                                {% for form in formset %}
+                                <div class="form-row-lisson">
+                                    <div class="input-group table-responsive">
+                                        <table class="table table-bordered text-center">
+
+                                            <tr class="addlessoncontentlink">
+                                                <td><span class="lesson-number">Course</span></td>
+                                                <td class="ctitle"> {{ form.title }}</td>
+                                                <td>
+                                                    <div class="text-right">
+                                                        <button class="btn btn-success add-form-row">+</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </table>
                                         <div class="input-group table-responsive">
                                             <table class="table table-bordered text-center">
+                                                <tr>
+                                                    <th>Lesson</th>
+                                                    <th>Title</th>
 
+                                                    <th>Content</th>
+                                                    <th>Duration / Pages</th>
+                                                    <th class="text-right"> <button class="btn btn-success addlessoncontent">+</button>
+                                                    </th>
+                                                </tr>
+                                                {% for form in ContentFormset %}
                                                 <tr class="addlessoncontentlink">
                                                     <td><span class="lesson-number">1</span></td>
                                                     <td> {{ form.title }}</td>
+
+                                                    <td>{{ form.video_link }}</td>
+                                                    <td><input type="text" name="curriculum[1][lesson][1][duration]"
+                                                            placeholder="3:00 min / 5 pages"
+                                                            class="form-control"></td>
                                                     <td>
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-success add-form-row">+</button>
+                                                        <div class="text-right">
+                                                            <button class="btn btn-danger addlessoncontent"
+                                                                disabled="disabled">-</button>
                                                         </div>
                                                     </td>
                                                 </tr>
-
+                                                {% endfor %}
                                             </table>
-                                            <div class="input-group table-responsive">
-                                                <table class="table table-bordered text-center">
-                                                    <tr>
-                                                        <th>Lesson</th>
-                                                        <th>Title</th>
-
-                                                        <th>Content</th>
-                                                        <th>Duration / Pages</th>
-                                                        <th> <button class="btn btn-success addlessoncontent">+</button>
-                                                        </th>
-                                                    </tr>
-                                                    {% for form in ContentFormset %}
-                                                    <tr class="addlessoncontentlink">
-                                                        <td><span class="lesson-number">1</span></td>
-                                                        <td> {{ form.title }}</td>
-
-                                                        <td>{{ form.video_link }}</td>
-                                                        <td><input type="text" name="curriculum[1][lesson][1][duration]"
-                                                                placeholder="3:00 min / 5 pages"
-                                                                class="lesson-duration"></td>
-                                                        <td>
-                                                            <div class="input-group-append">
-                                                                <button class="btn btn-danger addlessoncontent"
-                                                                    disabled="disabled">-</button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    {% endfor %}
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-                                    <div class="row spacer">
-                                        <div class="col-4 offset-4 align-center mt-5">
-                                            <button type="submit" class="btn btn-block btn-primary">Publish</button>
                                         </div>
                                     </div>
                                 </div>
-                                <ul class="nav nav-tabs cnv" id="myTab" role="tablist">
-                                    <li class="nav-item lnv" role="presentation">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#course"
-                                            role="tab" aria-controls="course" aria-selected="true">Previous</a>
-                                    </li>
-                                    <li class="nav-item lnv" role="presentation">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
-                                            role="tab" aria-controls="profile" aria-selected="false">Next</a>
-                                    </li>
-                                </ul>
-
+                                {% endfor %}
+                                <div class="row spacer">
+                                    <div class="col-4 offset-4 align-center mt-5">
+                                        <button type="submit" class="btn btn-block btn-primary">Publish</button>
+                                    </div>
+                                </div>
                             </div>
-
                         </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 </section>
 <!-- End Register Area -->
+
+<style style="text/css">
+    div.slide-up {
+      height:200px;
+      overflow:hidden;
+    }
+    div.slide-up p {
+      animation: 10s slide-up;
+      margin-top:0%;
+    }
+    
+    @keyframes slide-up {
+      from {
+        margin-top: 100%;
+        height: 300%; 
+      }
+    
+      to {
+        margin-top: 0%;
+        height: 100%;
+      }
+    }
+    </style>
+    
+
+    
+
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

@@ -47,6 +47,14 @@ class InstructorCourseListView(ListView):
     def get_queryset(self):
         return self.model.objects.filter(instructor = self.request.user)
 
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total'] = self.get_queryset().count()
+
+        return context
+
+
 class MyEnrolledCourseListView(ListView):
     model = EnrollCouese
     context_object_name = 'mycourses'
@@ -89,9 +97,6 @@ class StartCourseView(DetailView):
             raise Http404("Course doesn't exists")
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
-
-
-
 
 
 
