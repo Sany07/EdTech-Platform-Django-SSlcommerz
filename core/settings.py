@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')ce3afwgsfm@2*4to89yxs&=$nqxcz(cujim3$cm6$#*z2v)gb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['gainskill.herokuapp.com']
 
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 
     # 3rd Party
     'star_ratings',
-    
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -149,21 +149,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-    
-)
-
-# Media Folder Settings
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
-
-
 # User Model
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -180,11 +165,24 @@ MESSAGE_TAGS = {
 
 
 
+# # Static files (CSS, JavaScript, Images)
+# STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+    
+# )
+
+# # Media Folder Settings
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
 
 
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+# # Activate Django-Heroku.
+# django_heroku.settings(locals())
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+from core.aws.conf import *
