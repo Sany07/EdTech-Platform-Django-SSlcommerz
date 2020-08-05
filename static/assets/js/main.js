@@ -121,7 +121,7 @@
                 $(".alert").removeClass('lightSpeedIn').addClass('lightSpeedOut ');
 
 
-              }, 1500);
+              }, 2000);
             });
 
 

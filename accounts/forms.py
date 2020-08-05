@@ -2,6 +2,7 @@ from django import forms
 from django.forms import modelformset_factory
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib import messages
 
 
 from accounts.models import CustomUser
@@ -154,6 +155,7 @@ class UserLoginForm(forms.Form):
                 except CustomUser.DoesNotExist:
 
                     raise forms.ValidationError("User Does Not Exist.")
+                    
 
             if not user.check_password(password):
                 raise forms.ValidationError("Password Does not Match.")
