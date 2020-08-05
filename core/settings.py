@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')ce3afwgsfm@2*4to89yxs&=$nqxcz(cujim3$cm6$#*z2v)gb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['gainskill.herokuapp.com']
+ALLOWED_HOSTS = ['gainskill.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -180,9 +180,9 @@ MESSAGE_TAGS = {
 
 
 
-# # Activate Django-Heroku.
-# django_heroku.settings(locals())
+# Activate Django-Heroku.
+django_heroku.settings(locals())
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 from core.aws.conf import *
