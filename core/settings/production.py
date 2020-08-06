@@ -12,7 +12,7 @@ SECRET_KEY = ')ce3afwgsfm@2*4to89yxs&=$22qxcz(cujim3$cm6$#*z2v)gb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gainskill.herokuapp.com']
+ALLOWED_HOSTS = ['gainskill.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -89,7 +89,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
