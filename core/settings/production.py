@@ -137,6 +137,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+# Activate Django-Heroku.
+django_heroku.settings(locals())
 
 
 # import aws s3.
