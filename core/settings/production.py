@@ -12,7 +12,7 @@ SECRET_KEY = ')ce3afwgsfm@2*4to89yxs&=$22qxcz(cujim3$cm6$#*z2v)gb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gainskill.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['gainskill.herokuapp.com']
 
 
 # Application definition
@@ -136,6 +136,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
 
 
 # import aws s3.
