@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')ce3afwgsfm@2*4to89yxs&=$nqxcz(cujim3$cm6$#*z2v)gb'
+SECRET_KEY = ')ce3afwgsfm@2*4to89yxs&=$22qxcz(cujim3$cm6$#*z2v)gb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -137,13 +137,6 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-
-
-
-
-
-# Activate Django-Heroku.
-# django_heroku.settings(locals())
 
 # import aws s3.
 from core.aws.conf import *
