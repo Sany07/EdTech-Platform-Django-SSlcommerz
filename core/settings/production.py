@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = ')ce3afwgsfm@2*4to89yxs&=$22qxcz(cujim3$cm6$#*z2v)gb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['gainskill.herokuapp.com','127.0.0.1']
 
