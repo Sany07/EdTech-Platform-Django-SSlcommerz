@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'learning_db',
         'USER': 'postgres',
         'PASSWORD': '1234',
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
