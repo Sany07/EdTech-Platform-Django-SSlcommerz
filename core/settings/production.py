@@ -4,13 +4,11 @@ import django_heroku
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')ce3afwgsfm@2*4to89yxs&=$22qxcz(cujim3$cm6$#*z2v)gb'
+SECRET_KEY = ')ce3afwgsvm@2*9to89xcd&=$22qxcz(cujim3$cm6$#*z2v)gb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['gainskill.herokuapp.com']
 
@@ -85,9 +83,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'learning_db',
+        'NAME': 'Your DB Name',
         'USER': 'postgres',
-        'PASSWORD': '1234',
+        'PASSWORD': 'Your DB Pass',
         'HOST': 'localhost',
         'PORT': '',
     }

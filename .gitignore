@@ -136,6 +136,8 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
+core/settings/production.py
+core/settings/local.py
 carts/sslcommerz.py
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
