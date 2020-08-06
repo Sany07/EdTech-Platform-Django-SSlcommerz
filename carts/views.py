@@ -59,6 +59,10 @@ def cart_update(request):
     return redirect("cart:cart")
 
 
+
+
+
+
 class CheckoutView(View):
     """
         Provides the ability to checkout if user is authenticated

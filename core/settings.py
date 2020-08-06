@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')ce3afwgsfm@2*4to89yxs&=$nqxcz(cujim3$cm6$#*z2v)gb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['gainskill.herokuapp.com',]
 
@@ -157,18 +157,18 @@ MESSAGE_TAGS = {
 
 
 
-# # Static files (CSS, JavaScript, Images)
-# STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
-# STATIC_URL = '/static/'
+# Static files (CSS, JavaScript, Images)
+STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
     
-# )
+)
 
-# # Media Folder Settings
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = '/media/'
+# Media Folder Settings
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 
@@ -177,4 +177,4 @@ django_heroku.settings(locals())
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-from core.aws.conf import *
+# from core.aws.conf import *

@@ -121,14 +121,14 @@
                                             <span class="dd-trigger"></span><span class="dd-arrow"></span>
                                     </li>
                                     {% endif %}
-                                   
                                     {% if not request.user.role == 'tea' %}
-                                    <li class="pl-3">
+                                    <li class="pl-5">
                                         <a href="{% url 'cart:cart' %}" class="">
-                                        <i class="icofont-shopping-cart"></i><div class="count">{{ request.session.cart_items }}</div>
+                                        <i class="icofont-shopping-cart count_c"></i>{{ request.session.cart_items }}
                                         </a>
                                     </li>
                                     {% endif %}
+
                                      
 
                              </ul>

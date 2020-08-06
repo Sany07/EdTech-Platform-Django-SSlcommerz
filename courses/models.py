@@ -75,36 +75,51 @@ pre_save.connect(rl_pre_save_receiver, sender=Course)
   
   
 
-# @receiver(models.signals.post_delete, sender=Course)
-# def auto_delete_file_on_delete(sender, instance, **kwargs):
-#     """
-#     Deletes file from filesystem
-#     when corresponding `MediaFile` object is deleted.
-#     """
-#     if instance.thumbnail:
-#         if os.path.isfile(instance.thumbnail.path):
-#             os.remove(instance.thumbnail.path)
+@receiver(models.signals.post_delete, sender=Course)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Deletes file from filesystem
+    when corresponding `MediaFile` object is deleted.
+    """
+    if instance.thumbnail:
+        #for local server
+        
+        # if os.path.isfile(instance.thumbnail.path):
+        #     os.remove(instance.thumbnail.path)
+        
+        #for aws s3
+        instance.thumbnail.delete(save=False)
+            
 
-# @receiver(models.signals.pre_save, sender=Course)
-# def auto_delete_file_on_change(sender, instance, **kwargs):
-#     """
-#     Deletes old file from filesystem
-#     when corresponding `MediaFile` object is updated
-#     with new file.
-#     """
-#     if not instance.pk:
-#         return False
 
-#     try:
-#         old_file = sender.objects.get(pk=instance.pk).thumbnail
-#     except sender.DoesNotExist:
-#         return False
+@receiver(models.signals.pre_save, sender=Course)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    """
+    Deletes old file from filesystem
+    when corresponding `MediaFile` object is updated
+    with new file.
+    """
+    if not instance.pk:
+        return False
 
-#     new_file = instance.thumbnail
-#     if not old_file == new_file:
-#         if os.path.isfile(old_file.path):
-#             os.remove(old_file.path)
+    try:
+        old_file = sender.objects.get(pk=instance.pk).thumbnail
+    except sender.DoesNotExist:
+        return False
+
+    #for local server
+    # new_file = instance.thumbnail
+    # if not old_file == new_file:
+    #     if os.path.isfile(old_file.path):
+    #         os.remove(old_file.path)
     
+    #for aws s3
+    new_avatar = instance.thumbnail
+    if old_file and old_file.url != new_avatar.url:
+        old_file.delete(save=False)
+
+
+
 
 class LessonContent(models.Model):
     title  = models.CharField(max_length=250, blank=False)
