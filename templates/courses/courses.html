@@ -77,15 +77,15 @@
                                 <a href="" class=""><button class="btn btn-danger">Enroll Now</button></a>
                             </form>
                             {% else %}
-                            <form method='POST' style="display: inline-block;" action='{% url "cart:cart-update" %}'>
+                            <form method='POST' class="course-ajax" style="display: inline-block;" action='{% url "cart:cart-update" %}'>
                                 {% csrf_token %}
                                 <input type='hidden' name='product_id' value='{{ course.id }}' />
                                
                                {% add_or_remove_from_cart request course as add_or_remove %}
                                {% if add_or_remove %}
-                                <a href="" class=""><button class="btn btn-danger">Remove From cart</button></a>
+                                <a href="" class="button-ajax"><button class="btn btn-danger">Remove From cart</button></a>
                                 {% else %}
-                                <a href="" class=""><button class="btn btn-danger">Add to cart</button></a>
+                                <a href="" class="button-ajax"><button class="btn btn-danger">Add to cart</button></a>
                                 {% endif %}
 
 
@@ -108,5 +108,12 @@
     </div>
 </section>
 <!-- End Courses Area -->
+
+
+<script>
+
+
+  </script>
+
 
 {% endblock %}

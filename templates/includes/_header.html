@@ -2,153 +2,152 @@
 
 
 
-        <!-- Start Preloader Area -->
-        <div class="preloader-area">
-            <div class="loader">
-                
-                <div class="dots">
-                    <!-- <i class="icofont-spinner ss"></i> -->
-                    <i class="dots-item dots-item-move-down"></i>
-                    <i class="dots-item dots-item-move-left"></i>
-                    <i class="dots-item dots-item-move-left"></i>
-                    <i class="dots-item dots-item-move-left"></i>
-                    <i class="dots-item dots-item-move-left"></i>
-                    <i class="dots-item dots-item-move-down"></i>
-                    <i class="dots-item dots-item-move-right"></i>
-                    <i class="dots-item dots-item-move-right"></i>
-                    <i class="dots-item dots-item-move-down"></i>
-                    <i class="dots-item dots-item-move-up"></i>
-                    <i class="dots-item dots-item-move-down"></i>
-                    <i class="dots-item dots-item-move-up"></i> 
+<!-- Start Preloader Area -->
+<div class="preloader-area">
+    <div class="loader">
 
-                    <i class="dots-item"></i>
+        <div class="dots">
+            <!-- <i class="icofont-spinner ss"></i> -->
+            <i class="dots-item dots-item-move-down"></i>
+            <i class="dots-item dots-item-move-left"></i>
+            <i class="dots-item dots-item-move-left"></i>
+            <i class="dots-item dots-item-move-left"></i>
+            <i class="dots-item dots-item-move-left"></i>
+            <i class="dots-item dots-item-move-down"></i>
+            <i class="dots-item dots-item-move-right"></i>
+            <i class="dots-item dots-item-move-right"></i>
+            <i class="dots-item dots-item-move-down"></i>
+            <i class="dots-item dots-item-move-up"></i>
+            <i class="dots-item dots-item-move-down"></i>
+            <i class="dots-item dots-item-move-up"></i>
 
-                    <i class="dots-item dots-item-move-down"></i>
-                    <i class="dots-item dots-item-move-up"></i>
-                    <i class="dots-item dots-item-move-down"></i>
-                    <i class="dots-item dots-item-move-up"></i>
-                    <i class="dots-item dots-item-move-left"></i>
-                    <i class="dots-item dots-item-move-left"></i>
-                    <i class="dots-item dots-item-move-up"></i>
-                    <i class="dots-item dots-item-move-right"></i>
-                    <i class="dots-item dots-item-move-right"></i>
-                    <i class="dots-item dots-item-move-right"></i>
-                    <i class="dots-item dots-item-move-right"></i>
-                    <i class="dots-item dots-item-move-up"></i>
+            <i class="dots-item"></i>
+
+            <i class="dots-item dots-item-move-down"></i>
+            <i class="dots-item dots-item-move-up"></i>
+            <i class="dots-item dots-item-move-down"></i>
+            <i class="dots-item dots-item-move-up"></i>
+            <i class="dots-item dots-item-move-left"></i>
+            <i class="dots-item dots-item-move-left"></i>
+            <i class="dots-item dots-item-move-up"></i>
+            <i class="dots-item dots-item-move-right"></i>
+            <i class="dots-item dots-item-move-right"></i>
+            <i class="dots-item dots-item-move-right"></i>
+            <i class="dots-item dots-item-move-right"></i>
+            <i class="dots-item dots-item-move-up"></i>
+        </div>
+    </div>
+</div>
+<!-- End Preloader Area -->
+
+<!-- Start Main Menu Area -->
+<div class="main-header-area navbar-area header-sticky">
+    <div class="container">
+        <div class="classy-nav-container breakpoint-off">
+            <!-- Classy Menu -->
+            <nav class="classy-navbar justify-content-between" id="EduStudyNav">
+
+                <!-- Logo -->
+                <a class="nav-brand" href="index.html">
+                    <img src="" alt="GAINSKILL"></a>
+
+                <!-- Navbar Toggler -->
+                <div class="classy-navbar-toggler">
+                    <span class="navbarToggler"><span></span><span></span><span></span></span>
                 </div>
-            </div>
-        </div>
-        <!-- End Preloader Area -->
-       
-        <!-- Start Main Menu Area -->
-        <div class="main-header-area navbar-area header-sticky">
-            <div class="container">
-                <div class="classy-nav-container breakpoint-off">
-                    <!-- Classy Menu -->
-                    <nav class="classy-navbar justify-content-between" id="EduStudyNav">
-                        
-                        <!-- Logo -->
-                        <a class="nav-brand" href="index.html">
-                            <img src="" alt="GAINSKILL"></a>
 
-                        <!-- Navbar Toggler -->
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
-                        </div>
+                <!-- Menu -->
+                <div class="classy-menu">
 
-                        <!-- Menu -->
-                        <div class="classy-menu">
+                    <!-- close btn -->
+                    <div class="classycloseIcon">
+                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                    </div>
 
-                            <!-- close btn -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                            </div>
+                    <!-- Nav Start -->
+                    <div class="classynav">
+                        <ul>
+                            <li class="pr-12 active"><a href="{% url 'coresite:home' %}">Home</a></li>
+                            <li class="pr-12"><a href="{% url 'courses:courses' %}">Courses</a></li>
+                            <li class=""><a href="{% url 'coresite:about' %}">About Us</a></li>
+                            <li class="cn-dropdown-item has-down pr-12">
+                                <a href="#">Category</a>
+                                <ul class="dropdown">
+                                    {% for category in categories %}
+                                    <li><a href="{% url 'accounts:instructor-register' %}">{{ category}}</a></li>
+                                    {% endfor %}
 
-                            <!-- Nav Start -->
-                            <div class="classynav">
-                                <ul>
-                                    <li class="pr-12 active"><a href="{% url 'coresite:home' %}">Home</a></li>   
-                                    <li class="pr-12"><a href="{% url 'courses:courses' %}">Courses</a></li>
-                                    <li class=""><a href="{% url 'coresite:about' %}">About Us</a></li>
-                                    <li class="cn-dropdown-item has-down pr-12">
-                                        <a href="#">Category</a>
-                                        <ul class="dropdown">
-                                            {% for category in categories %}
-                                            <li><a href="{% url 'accounts:instructor-register' %}">{{ category}}</a></li>
-                                            {% endfor %}
-                                            
-                                        </ul>
-                                            <span class="dd-trigger"></span><span class="dd-arrow"></span>
-                                    </li>   
-                                    
-
-                                    {% if not user.is_authenticated %}
-
-                                    <li class="cn-dropdown-item has-down pr-12">
-                                        <a href="#">Register</a>
-                                        <ul class="dropdown">
-                                            <li><a href="{% url 'accounts:instructor-register' %}">Instructor</a></li>
-                                            <li><a href="{% url 'accounts:student-register' %}">Student</a></li>
-                                        </ul>
-                                            <span class="dd-trigger"></span><span class="dd-arrow"></span>
-                                    </li>
-                                        <li class="pl-3 pr-12"><a href="{% url 'accounts:login' %}">Login</a></li>
+                                </ul>
+                                <span class="dd-trigger"></span><span class="dd-arrow"></span>
+                            </li>
 
 
-                                    {% endif %}
-                                    <li class="pr-12"><a href="#search" class="search-btn"><i class="icofont-search-2"></i></a></li>
-                                    {% if user.is_authenticated %}                            
-                                    <li class="cn-dropdown-item has-down pr-12 pl-3">
-                                        <div class=" no-after peers fxw-nw ai-c lh-1">
-                                        <div class="peer mR-10"><img class="w-2r bdrs-50p" src="https://randomuser.me/api/portraits/men/10.jpg"
-                                            alt=""></div>
-                                    </div>
+                            {% if not user.is_authenticated %}
 
-                                    <ul class="dropdown profile">
-                                        <span class="ss">
-                                            <h6 class="card-title text-center text-uppercase"> Wellcome Back <br><br>{{ request.user.username }} </h6>
-                                            <li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
-                                            {% if request.user.role == 'stu' %}
-                                            <li><a href="{% url 'dashboard:my-courses' %}">My Courses</a></li>
-                                            {% elif request.user.role == 'tea' %}
-                                            <li><a href="{% url 'dashboard:instructor-courses' %}">My Courses</a></li>
-                                            <li><a href="{% url 'courses:create-course' %}">Pubsish New Course</a></li>
-                                            {% endif %}
-                                            <li><a href="{% url 'accounts:student-register' %}">Settings</a></li>
-                                            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-                                        </span>
-                                        </ul>
-                                            <span class="dd-trigger"></span><span class="dd-arrow"></span>
-                                    </li>
-                                    {% endif %}
-                                    {% if not request.user.role == 'tea' %}
-                                    <li class="pl-5">
-                                        <a href="{% url 'cart:cart' %}" class="">
-                                        <i class="icofont-shopping-cart count_c"></i>{{ request.session.cart_items }}
-                                        </a>
-                                    </li>
-                                    {% endif %}
+                            <li class="cn-dropdown-item has-down pr-12">
+                                <a href="#">Register</a>
+                                <ul class="dropdown">
+                                    <li><a href="{% url 'accounts:instructor-register' %}">Instructor</a></li>
+                                    <li><a href="{% url 'accounts:student-register' %}">Student</a></li>
+                                </ul>
+                                <span class="dd-trigger"></span><span class="dd-arrow"></span>
+                            </li>
+                            <li class="pl-3 pr-12"><a href="{% url 'accounts:login' %}">Login</a></li>
 
-                                     
 
-                             </ul>
-                            </div>
+                            {% endif %}
+                            <li class="pr-12"><a href="#search" class="search-btn"><i class="icofont-search-2"></i></a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="cn-dropdown-item has-down pr-12 pl-3">
+                                <div class=" no-after peers fxw-nw ai-c lh-1">
+                                    <div class="peer mR-10"><img class="w-2r bdrs-50p"
+                                            src="https://randomuser.me/api/portraits/men/10.jpg" alt=""></div>
+                                </div>
 
-                        </div>
-                    </nav>
+                                <ul class="dropdown profile">
+                                    <span class="ss">
+                                        <h6 class="card-title text-center text-uppercase"> Wellcome Back
+                                            <br><br>{{ request.user.username }} </h6>
+                                        <li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+                                        {% if request.user.role == 'stu' %}
+                                        <li><a href="{% url 'dashboard:my-courses' %}">My Courses</a></li>
+                                        {% elif request.user.role == 'tea' %}
+                                        <li><a href="{% url 'dashboard:instructor-courses' %}">My Courses</a></li>
+                                        <li><a href="{% url 'courses:create-course' %}">Pubsish New Course</a></li>
+                                        {% endif %}
+                                        <li><a href="{% url 'accounts:student-register' %}">Settings</a></li>
+                                        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                                    </span>
+                                </ul>
+                                <span class="dd-trigger"></span><span class="dd-arrow"></span>
+                            </li>
+                            {% endif %}
+                            {% if not request.user.role == 'tea' %}
+                            <li class="pl-3">
+                                <a href="{% url 'cart:cart' %}" class="">
+                                    <i class="icofont-shopping-cart"></i>
+                                </a>
+                            </li>
+                            <li class="pl-4 count-ajax">{{ request.session.cart_items }}</li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+
                 </div>
-            </div>
+            </nav>
         </div>
-        <!-- End Main Menu Area -->
-        
-        <!-- Start Search Popup Area -->
-        <div id="search-area">
-            <button type="button" class="close">×</button>
-            <form>
-                <input type="search" value="" placeholder="Search Kewword(s)">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-        </div>
-        <!-- End Search Popup Area -->
+    </div>
+</div>
+<!-- End Main Menu Area -->
 
-        
+<!-- Start Search Popup Area -->
+<div id="search-area">
+    <button type="button" class="close">×</button>
+    <form>
+        <input type="search" value="" placeholder="Search Kewword(s)">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+<!-- End Search Popup Area -->

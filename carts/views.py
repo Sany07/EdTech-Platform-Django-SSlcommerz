@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_
 from django.views.generic import CreateView, DetailView, RedirectView, View, ListView, TemplateView, FormView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
+from django.http import JsonResponse
 
 from courses.models import Course
 from .models import Cart
@@ -49,13 +49,24 @@ def cart_update(request):
         cart_obj, new_obj = Cart.objects.new_or_get(request)
         if product_obj in cart_obj.products.all():
             cart_obj.products.remove(product_obj)
+            added = False
             messages.success(request, 'Item Was Removed From Cart')
         else:
             cart_obj.products.add(product_obj)
+            added = True
             messages.success(request, 'Item Was Added On Cart')
 
-    request.session['cart_items'] = cart_obj.products.count()
 
+        request.session['cart_items'] = cart_obj.products.count()
+
+        if request.is_ajax(): # Asynchronous JavaScript And XML / JSON
+            print("Ajax request")
+            json_data = {
+                "added": added,
+                "removed": not added,
+                "CartItemCount": cart_obj.products.count()
+            }
+            return JsonResponse(json_data)
     return redirect("cart:cart")
 
 

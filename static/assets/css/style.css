@@ -4431,7 +4431,11 @@ a:hover {
 
 .count_c {
   position: absolute;
-  right: 10px;
-  top: 33px;
+  right: 15px;
+  top: 28px;
 
+}
+
+.count-ajax {
+  font-size: 18px;
 }

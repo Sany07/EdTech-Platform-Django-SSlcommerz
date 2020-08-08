@@ -161,3 +161,42 @@ jQuery(document).ready(function() {
 
 
 });
+
+
+jQuery(document).ready(function(){
+    var productForm = $(".course-ajax") // #form-product-ajax
+    
+    productForm.submit(function(event){
+        event.preventDefault();
+        var thisForm = $(this)
+        var actionEndpoint = thisForm.attr("action");
+        var httpMethod = thisForm.attr("method");
+        var formData = thisForm.serialize();
+
+        $.ajax({
+          url: actionEndpoint,
+          method: httpMethod,
+          data: formData,
+          success: function(data){
+            var submitSpan = thisForm.find(".button-ajax")
+            if (data.added){
+              submitSpan.html('<a href="" class=""><button class="btn btn-danger">Remove From cart</button></a>')
+            //   alert('Added')
+            } else {
+              submitSpan.html('<a href="" class=""><button class="btn btn-danger">Add to cart</button></a>')
+            //   alert('Removed')
+                
+            }
+            var cartCount = $(".count-ajax")
+            cartCount.text(data.CartItemCount)
+          },
+          error: function(errorData){
+            console.log("error")
+            console.log(errorData)
+          }
+        })
+
+    })
+
+
+  });

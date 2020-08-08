@@ -26,9 +26,9 @@ def sslcommerz_payment_gateway(request, cart, user):
     post_body['total_amount'] = cart.total
     post_body['currency'] = "BDT"
     post_body['tran_id'] = unique_trangection_id_generator()
-    post_body['success_url'] = 'http://127.0.0.1:8000/payment/success/'
-    post_body['fail_url'] = 'http://127.0.0.1:8000/payment/faild/'
-    post_body['cancel_url'] = 'http://127.0.0.1:8000/carts/'
+    post_body['success_url'] = 'https://gainskill.herokuapp.com/payment/success/'
+    post_body['fail_url'] = 'https://gainskill.herokuapp.com/payment/faild/'
+    post_body['cancel_url'] = 'https://gainskill.herokuapp.com/carts/'
     post_body['emi_option'] = 0
     post_body['cus_name'] = request.data["full_name"]
     post_body['cus_email'] = request.data["email"]
