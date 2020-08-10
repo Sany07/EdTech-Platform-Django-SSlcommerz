@@ -50,17 +50,15 @@ def cart_update(request):
         if product_obj in cart_obj.products.all():
             cart_obj.products.remove(product_obj)
             added = False
-            messages.success(request, 'Item Was Removed From Cart')
+            # messages.success(request, 'Item Was Removed From Cart')
         else:
             cart_obj.products.add(product_obj)
             added = True
-            messages.success(request, 'Item Was Added On Cart')
-
+            # messages.success(request, 'Item Was Added On Cart')
 
         request.session['cart_items'] = cart_obj.products.count()
 
         if request.is_ajax(): # Asynchronous JavaScript And XML / JSON
-            print("Ajax request")
             json_data = {
                 "added": added,
                 "removed": not added,

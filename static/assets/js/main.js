@@ -166,6 +166,31 @@ jQuery(document).ready(function() {
 jQuery(document).ready(function(){
     var productForm = $(".course-ajax") // #form-product-ajax
     
+    function toster_option(msg){
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            // "positionClass": "toast-bottom-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "hideMethod": "fadeOut"
+
+          }
+
+          toastr.success(msg);
+    }
+
+
     productForm.submit(function(event){
         event.preventDefault();
         var thisForm = $(this)
@@ -181,22 +206,26 @@ jQuery(document).ready(function(){
             var submitSpan = thisForm.find(".button-ajax")
             if (data.added){
               submitSpan.html('<a href="" class=""><button class="btn btn-danger">Remove From cart</button></a>')
-            //   alert('Added')
+            //   toastr.success('Item Was Added On Cart');
+                toster_option('Item Was Added On Cart.');
             } else {
               submitSpan.html('<a href="" class=""><button class="btn btn-danger">Add to cart</button></a>')
-            //   alert('Removed')
+                toster_option('Item Was Removed From Cart.');
+
+
                 
             }
             var cartCount = $(".count-ajax")
             cartCount.text(data.CartItemCount)
           },
           error: function(errorData){
-            console.log("error")
-            console.log(errorData)
+            toster_option('Somthing Went wrong !!');
           }
         })
 
     })
 
+});
 
-  });
+
+

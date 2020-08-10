@@ -8,7 +8,6 @@
     </head>
 <body>
     {% include 'includes/_header.html' with Category=Category %}
-    {% include 'includes/_notification.html' %}
 
     {% block content %}
 
@@ -17,5 +16,7 @@
     {% include 'includes/_footer.html' %}
 
     {% include 'includes/_scripts.html' %}
+    {% include 'includes/_notification.html' %}
+
 </body>
 </html>
