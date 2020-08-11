@@ -190,13 +190,14 @@ jQuery(document).ready(function(){
           toastr.success(msg);
     }
 
-
-    productForm.submit(function(event){
+    productForm.on("click", function(event){
+           
         event.preventDefault();
         var thisForm = $(this)
         var actionEndpoint = thisForm.attr("action");
         var httpMethod = thisForm.attr("method");
         var formData = thisForm.serialize();
+        
 
         $.ajax({
           url: actionEndpoint,
@@ -217,6 +218,12 @@ jQuery(document).ready(function(){
             }
             var cartCount = $(".count-ajax")
             cartCount.text(data.CartItemCount)
+            var currentPath = window.location.href
+
+            if (currentPath.indexOf("cart") > -1) {
+              refreshCart();
+
+            }
           },
           error: function(errorData){
             toster_option('Somthing Went wrong !!');
@@ -225,7 +232,59 @@ jQuery(document).ready(function(){
 
     })
 
-});
+  
+    function refreshCart(){
+        var cartTable = $(".table-ajax-refresh")
+        var cartBody = cartTable.find(".table-body-ajax-refresh")
+        var productRows = cartBody.find(".cart-product")
+        var currentUrl = window.location.href
+    
+        var refreshCartUrl = 'api/cart/'
+        var refreshCartMethod = "GET";
+        var data = {};
+
+        $.ajax({
+          url: refreshCartUrl,
+          method: refreshCartMethod,
+          data: data,
+          success: function(data){
+           
+            var CartItemRemoveForm = $(".course-remove-ajax")
+            if (data.products.length > 0){
+
+
+                productRows.html(" ")
+                i = data.products.length
+                $.each(data.products, function(index, value){
+
+                CartItemRemoveForm.find(".cart-item-product-id").val(value.id)
+                cartBody.append("<tr class=\"cart-product\"><td>" + i + "</td><td class=\"text-left\"><a href='" + value.url + "'>" + value.name + "</a></td><td>" + value.price + "</td><td>" + value.price + "</td><td class=\"course-remove-ajax\">"  + CartItemRemoveForm.html() +  "</td></tr>")
+                i --
+                })
+
+                //<td class=\"text-left\"><a href='" + value.url + "'>" + value.name + "</a></td><td>" + value.price + "</td><td>" + value.price + "</td><td class=\"course-remove-ajax\">"  + CartItemRemoveForm.html() +  
+                cartTable.find(".sub-amount").text(data.subtotal)
+                cartTable.find(".total-amount").text(data.total)
+
+            } else {
+
+                alert('empty')
+
+   
+            }
+            
+          },
+          error: function(errorData){
+            console.log('data')
+            //error tost
+          }
+        })
+
+    
+      }
+    
+
+})
 
 
 

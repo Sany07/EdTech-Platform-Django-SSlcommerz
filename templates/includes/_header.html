@@ -129,8 +129,12 @@
                                     <i class="icofont-shopping-cart"></i>
                                 </a>
                             </li>
-                            <li class="pl-4 count-ajax">{{ request.session.cart_items }}</li>
+                            <li class="pl-4 count-ajax">
+                                {{ request.session.cart_items }}
+                            </li>
+                            
                             {% endif %}
+
 
                         </ul>
                     </div>

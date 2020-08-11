@@ -20,7 +20,9 @@
         <section class="cart-area ptb-100">
             <div class="container">
             
-                    <div class="row">
+                    <div class="row table-ajax-refresh">
+
+                        {% if cart.products.count > 0 %}
                         <div class="col-lg-12 col-md-12">
                             <div class="cart-table table-responsive">
                                 <table class="table table-bordered">
@@ -35,9 +37,9 @@
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="table-body-ajax-refresh">
                                         {% for course in cart.products.all %}
-                                        <tr>
+                                        <tr class="cart-product">
 <!--                                             <td class="product-thumbnail">
                                                 <a href="#"><img src="assets/img/shop1.jpg" alt="shop"></a>
                                             </td> -->
@@ -57,13 +59,13 @@
                                             {% else %}
                                             <td>Free</td>
                                             {% endif %}
-
-                                            <form method='POST' action='{% url "cart:cart-update" %}'> 
-                                                {% csrf_token %}
-                                                <input type='hidden' name='product_id' value='{{ course.id }}' />
-                                                <td class="cart-buttons"><button class="btn btn-primary"><i class="icofont-close"></i></a></td>
-                                            </form>
-                                            
+                                            <td class="course-remove-ajax">
+                                                <form method='POST' class="course-ajax" action='{% url "cart:cart-update" %}'> 
+                                                    {% csrf_token %}
+                                                    <input class="cart-item-product-id" type='hidden' name='product_id' value='{{ course.id }}' />
+                                                    <div class="cart-buttons"><button class="btn btn-primary ccx"><i class="icofont-close"></i></button></div>
+                                                </form>
+                                            </td>    
                                         </tr>
 
                                         {% endfor %}
@@ -98,11 +100,11 @@
                                         <tbody>
                                             <tr>
                                                 <td>Subtotal</td>
-                                                <td class="amount">{{ cart.subtotal }}</td>
+                                                <td class="sub-amount">{{ cart.subtotal }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Total</td>
-                                                <td>{{ cart.total }}</td>
+                                                <td class="total-amount">{{ cart.total }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -112,6 +114,15 @@
                                 </div>
                             </div>
                         </div>
+
+                        {% else %}
+
+                        <div class="col-lg-12 col-md-12">
+                            Cart Is Empty
+                        </div>
+
+                        {% endif %}
+
                     </div>
            
             </div>
