@@ -134,7 +134,7 @@
                                             aria-expanded="{% if forloop.first %} true {% else %} false {% endif %}"
                                             aria-controls="collapse-{{ forloop.counter }}">
                                             <h5 class="mb-0">
-                                                {{ forloop.counter }}. {{ lesson.title }} <span><i
+                                                {{ forloop.counter }}. {{ lesson.curriculum_title }} <span><i
                                                         class="icofont-rounded-down"></i></span>
                                             </h5>
                                         </a>
@@ -151,7 +151,7 @@
                                                 <li>
                                                     <i class="icofont-ui-play"></i> Lecture {{ forloop.counter }}
                                                     
-                                                    <span><a href="#">{{ lessoncontent.title }}</a></span>
+                                                    <span class="ls-title"><a href="#">{{ lessoncontent.title }}</a></span>
                                                     
                                                     <span class="duration"><i class="icofont-clock-time"></i> 50 min</span>
                                                     
@@ -161,13 +161,13 @@
                                      
                                                 {% else %}
                                                 <li>
-                                                    <a  href="#"  style="cursor:pointer">
+                                                    <!-- <a  href="#"  style="cursor:pointer"> -->
                                                     
                                                     <i class="icofont-ui-text-chat"></i> Lecture {{ forloop.counter }}
-                                                        <span class="ls-title"> {{ lessoncontent.title }}</span>
+                                                        <span class="ls-title"><a href="#">{{ lessoncontent.title }}</span></a>
                                                         <span class="duration"><i class="icofont-clock-time"></i> 50
                                                             min</span>
-                                                    </a>
+                                                        
                                                 </li>
                                                 {% endif %}
                                                 {% endfor %}

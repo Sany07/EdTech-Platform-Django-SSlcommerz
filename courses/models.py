@@ -138,7 +138,7 @@ class LessonContent(models.Model):
 
 class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course')
-    title  = models.CharField(max_length=250, blank=False)
+    curriculum_title  = models.CharField(max_length=250, blank=False)
     video_link = models.ManyToManyField(LessonContent)
     # video_link = models.ForeignKey(LessonContent, on_delete=models.CASCADE, related_name='lessoncontent')
 
@@ -149,7 +149,7 @@ class Lesson(models.Model):
         db_table = "lessons"
 
     def __str__(self):
-        return self.title
+        return self.curriculum_title
 
     @property
     def lesson(self):

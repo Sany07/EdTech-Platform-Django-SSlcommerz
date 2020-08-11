@@ -18,7 +18,22 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12">
-
+                {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
                 <div class=" p-5 m-5">
                     <div class="apply-form">
                         <h3>Publish Course</h3>       
@@ -75,7 +90,7 @@
 
                                             <tr class="addlessoncontentlink">
                                                 <td><span class="lesson-number">Course</span></td>
-                                                <td class="ctitle"> {{ form.title }}</td>
+                                                <td class="ctitle"> {{ form.curriculum_title }}</td>
                                                 <td>
                                                     <div class="text-right">
                                                         <button class="btn btn-success add-form-row">+</button>
@@ -89,7 +104,7 @@
                                                 <tr>
                                                     <th>Lesson</th>
                                                     <th>Title</th>
-
+                                                    <th>Type</th>
                                                     <th>Content</th>
                                                     <th>Duration / Pages</th>
                                                     <th class="text-right"> <button class="btn btn-success addlessoncontent">+</button>
@@ -100,8 +115,21 @@
                                                     <td><span class="lesson-number">1</span></td>
                                                     <td> {{ form.title }}</td>
 
-                                                    <td>{{ form.video_link }}</td>
-                                                    <td><input type="text" name="curriculum[1][lesson][1][duration]"
+                                                    <td>
+                                                        <select name="curriculum_type" class="form-control courseContentTypeSel">
+                                                            <option value="1" selected="selected">Video</option>
+                                                            <option value="2">Text</option>
+                                                        </select>
+                                                    </td>
+
+                                                    <td>
+   
+                                                        {{ form.video_link }}
+                                                        {{ form.text_content }}
+                                                    
+                                                    </td>
+
+                                                    <td><input type="text" name="curriculum_duration"
                                                             placeholder="3:00 min / 5 pages"
                                                             class="form-control"></td>
                                                     <td>

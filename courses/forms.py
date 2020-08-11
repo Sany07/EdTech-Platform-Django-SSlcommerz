@@ -76,13 +76,14 @@ class CourseModelForm(forms.ModelForm):
 
 LessonFormset = modelformset_factory(
     Lesson,
-    fields=('title', ),
+    fields=('curriculum_title', ),
     extra=1,
     widgets={
-        'title': forms.TextInput(
+        'curriculum_title': forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter Lesson Title Here'
+                'placeholder': 'Enter Lesson Title Here',
+                'required': 'required'
             }
         )
     }
@@ -90,20 +91,32 @@ LessonFormset = modelformset_factory(
 )
 LessonContentFormset = modelformset_factory(
     LessonContent,
-    fields=('title', 'video_link', ),
+    fields=('title', 'video_link', 'text_content'),
     extra=1,
     widgets={
         'title': forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter Video title here'
+                'placeholder': 'Enter Video title here',
+                'required': 'required'
 
             }
         ),
         'video_link': forms.TextInput(
             attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter Video Link here'
+                'class': 'form-control lesson-video',
+                'placeholder': 'Enter Video Link here',
+                'value': 'html://',
+                # 'required': 'required'
+
+            }
+        ),        
+        'text_content': forms.TextInput(
+            attrs={
+                'style': 'display: none',
+                'class': 'form-control lesson-text',
+                'placeholder': 'Enter Text Content here',
+                # 'required': 'required'
             }
         )
     }

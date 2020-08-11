@@ -159,6 +159,18 @@ jQuery(document).ready(function() {
         $('#video-content').show(); //hide the button
         });
 
+        //.prop('required',false)
+        $('.addlessoncontentlink').on('change', '.courseContentTypeSel', function() {
+            var type = $(this).val();
+            if(type == 1) {
+                $(this).parents('tr').find('input.lesson-video').show();
+                $(this).parents('tr').find('input.lesson-text').hide();
+            }else{
+                $(this).parents('tr').find('input.lesson-video').hide();
+                $(this).parents('tr').find('input.lesson-text').show();
+            }
+        });
+
 
 });
 

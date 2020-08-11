@@ -97,19 +97,23 @@ def create_course_with_lessons(request):
             course.instructor = user
             course.save()
             
-            for form in ContentFormset:
-                lesson = form.save(commit=False)   
-                    
-                lesson.save()
+
             for form in formset:
-                author = form.save(commit=False)
-                author.course = course
-                author.save()
-                author.video_link.add(lesson)
-                
-                return redirect(reverse("courses:single-course", kwargs={
-                                    'slug': course.slug
-                                    }))
+                lesson = form.save(commit=False)
+                if lesson.curriculum_title != '':
+                    lesson.course = course
+                    lesson.save()
+
+                    for form in ContentFormset:
+                        lessoncontent = form.save(commit=False)
+                        if lessoncontent.title != '':
+                            lessoncontent.save()
+
+                            lesson.video_link.add(lessoncontent)
+                    # break
+            return redirect(reverse("courses:single-course", kwargs={
+                                'slug': course.slug
+                                }))
 
     categories = Category.objects.all()   
     return render(request, 'courses/create-course.html', {
