@@ -106,7 +106,6 @@ LessonContentFormset = modelformset_factory(
             attrs={
                 'class': 'form-control lesson-video',
                 'placeholder': 'Enter Video Link here',
-                'value': 'html://',
                 # 'required': 'required'
 
             }

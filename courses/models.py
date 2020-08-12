@@ -31,7 +31,7 @@ class Category(models.Model):
 
 class Course(models.Model):
     title = models.CharField(max_length=250,blank=False)
-    slug = models.SlugField(unique=True, max_length=300)
+    slug = models.SlugField(unique=True, max_length=1000)
     description = models.TextField()
     thumbnail = models.ImageField(upload_to='photos/course/%Y-%m-%d/')
     price = models.DecimalField(max_digits=100, decimal_places=2,null=True,blank=True)
