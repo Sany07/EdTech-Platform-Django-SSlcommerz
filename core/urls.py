@@ -13,7 +13,8 @@ urlpatterns = [
     path('mycourses/', include('enrolls.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-    path('admin/', admin.site.urls),
+    path('admin/', include('customadmin.urls')),
+    path('djangoadmin/', admin.site.urls),
 ]
 
 

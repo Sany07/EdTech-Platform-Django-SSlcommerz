@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+        {% include 'adminsection/includes/_head.html' %}
+        <title> 
+             {% block title %}  {% endblock %} GAINSKILL
+        </title>
+    </head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+        {% include 'adminsection/includes/_header.html' %}
+        {% include 'adminsection/includes/_sidebar.html' %}
+        
+        {% block content %}
+
+        {% endblock %}
+
+        {% include 'adminsection/includes/_footer.html' %}
+
+
+    </div>
+    {% include 'adminsection/includes/_scripts.html' %}
+    {% block scripts %}
+
+    {% endblock %}
+    {% include 'adminsection/includes/_notification.html' %}
+    
+</body>
+</html>
