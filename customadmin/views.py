@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
@@ -12,7 +12,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 User = settings.AUTH_USER_MODEL
 # Create your views here.
-from courses.models import Course
+from courses.models import Course, Lesson
 from accounts.models import CustomUser
 
 
@@ -86,3 +86,46 @@ class TotalStudentsView(ListView):
 
     def get_queryset(self):
         return super().get_queryset().filter(role='stu')
+
+class CoursesView(ListView):
+    model = Course
+    context_object_name = 'courses'
+    template_name = 'adminsection/pages/courses.html'
+
+    @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
+    @method_decorator(staff_member_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    
+
+class NewCoursesView(ListView):
+    model = Course
+    context_object_name = 'courses'
+    template_name = 'adminsection/pages/newcourses.html'
+
+    @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
+    @method_decorator(staff_member_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["new_courses"] = super().get_queryset().filter(is_published='False')
+        return context
+
+
+class CourseDetailView(DetailView):
+    model = Course
+    context_object_name = 'course'
+    template_name = 'adminsection/pages/course-detail.html'
+
+    def get_total_lecture(self):               
+        return Lesson.objects.filter(course=self.object).values('video_link').count()
+        
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_lecture'] = self.get_total_lecture()
+
+        return context

@@ -57,7 +57,7 @@ class SingleCourseView(FormMixin, DetailView):
         return self.model.objects.filter(category=self.object.category).order_by("-id")[:5]
 
     def get_total_lecture(self):               
-        return Lesson.objects.filter(course=self.object.id).values('video_link').count()
+        return Lesson.objects.filter(course=self.object).values('video_link').count()
         
     def get_reviews(self):       
         return Review.objects.filter_by_course(self.object).order_by("-id")   
@@ -76,6 +76,32 @@ class SingleCourseView(FormMixin, DetailView):
         return context
 
 
+    def post(self, request, *args, **kwargs):
+
+        """Check Operation If the form is valid or invalid."""
+
+        reviewform = self.get_form()
+        if reviewform.is_valid():            
+           return self.form_valid(reviewform)
+
+        else:
+            return self.form_invalid(reviewform)    
+
+    def form_valid(self, reviewform):
+
+        """If the form is valid, start save operation."""
+
+        form= reviewform.save(commit = False)
+        form.user = self.request.user
+        form.content_type = self.get_c_t()
+        form.save()           
+        return HttpResponseRedirect("/")
+
+    def form_invalid(self, form):
+
+        """If the form is invalid, render the invalid form."""
+
+        return self.render_to_response(self.get_context_data(form=form))
 
 @login_required
 @user_is_instructor
@@ -118,10 +144,10 @@ def create_course_with_lessons(request):
                             lesson.video_link.add(lessoncontent)
                     
 
-            # return redirect(reverse("courses:single-course", kwargs={
-            #                     'slug': course.slug
-            #                     }))
-            return redirect(reverse("courses:create-course"))
+            return redirect(reverse("courses:single-course", kwargs={
+                                'slug': course.slug
+                                }))
+
     categories = Category.objects.all()   
     return render(request, 'courses/create-course.html', {
         'courseform': courseform,

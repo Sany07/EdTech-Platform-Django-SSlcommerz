@@ -39,6 +39,7 @@ class Course(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     # language = models.CharField(max_length=50)
     ratings = GenericRelation(Rating, related_query_name='ratings')
+    is_published = models.BooleanField(default=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
     instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='instructor')
 
