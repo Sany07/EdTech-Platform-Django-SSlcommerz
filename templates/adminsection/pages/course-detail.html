@@ -3,8 +3,6 @@
 
 {% block content %}   
  
-  
-  
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -77,64 +75,74 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-12">
-                  <h4>Recent Activity</h4>
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                        </span>
-                        <span class="description">Shared publicly - 7:45 PM today</span>
+                <div class="col-12">                            
+                  <div class="accordion">
+                  {% for lesson in course.course.all %}
+                  <div class="card">
+                      <div class="card-header" role="tab" id="heading-{{ forloop.counter }}">
+                          <a {% if forloop.first %} {% else %} class="collapsed" {% endif %}
+                              data-toggle="collapse" data-parent="#accordionEx"
+                              href="#collapse-{{ forloop.counter }}"
+                              aria-expanded="{% if forloop.first %} true {% else %} false {% endif %}"
+                              aria-controls="collapse-{{ forloop.counter }}">
+                              <h5 class="mb-0">
+                                  {{ forloop.counter }}. {{ lesson.curriculum_title }} <span><i
+                                          class="icofont-rounded-down"></i></span>
+                              </h5>
+                          </a>
                       </div>
-                      <!-- /.user-block -->
-                      <p>
-                          {{ course.description }}
-                      </p>
 
-                      <p>
-                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
-                      </p>
-                    </div>
 
-                    <div class="post clearfix">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
-                        <span class="username">
-                          <a href="#">Sarah Ross</a>
-                        </span>
-                        <span class="description">Sent you a message - 3 days ago</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
-                      </p>
-                      <p>
-                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
-                      </p>
-                    </div>
+                          <div class="card-body">
+                              <ul>
+                                  {% for lessoncontent in lesson.video_link.all %}
+                                  {% if not lessoncontent.text_content %}
 
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                        </span>
-                        <span class="description">Shared publicly - 5 days ago</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
-                      </p>
+                                  <li class="my-3">
+                                      <i class="icofont-ui-play"></i> Lecture {{ forloop.counter }}
+                                      
+                                      <span class="pr-5 mr-5">{{ lessoncontent.title }}</span>
+                                      
+                                      <span class="pr-l ml-5 duration"><i class="icofont-clock-time"></i> 50 min</span>
+                                      
+                                      <a id="{{ lessoncontent.id }}" href="{{ lessoncontent.video_link }}" class="py-l ml-5 preview popup-video">Preview</a>
+                                  </li>
 
-                      <p>
-                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v1</a>
-                      </p>
-                    </div>
+                       
+                                  {% else %}
+                                  <li class="nav-item my-3">
+                                      <i class="icofont-ui-text-chat"></i> Lecture {{ forloop.counter }}
+                          
+                                          <div id="accordion">
+                                            <div id="heading-{{ forloop.counter }}">
+                                              
+                                                <span class="" data-toggle="collapse" data-target="#collapse-{{ forloop.counter }}" aria-expanded="false" aria-controls="collapseOne">
+                                                  {{ lessoncontent.title }}
+                                        
+                                                <span class="pr-l ml-5 duration align-right"><i class="icofont-clock-time "></i> TxT</span>
+                                                <a href='#'class="py-l ml-5 preview ">Preview</a>
+                                              </span>
+                                            </div>
+                                        
+                                            <div id="collapse-{{ forloop.counter }}" class="collapse" aria-labelledby="heading-{{ forloop.counter }}" data-parent="#accordion">
+                                              <div class="card-body">
+                                                {{ lessoncontent.text_content }}
+                                              </div>
+                                            </div>
+                                          </div>
+                                          
+                                  </li>
+                                  {% endif %}
+                                  {% endfor %}
+
+                              </ul>
+                          </div>
+          
+                  </div>
+                  {% endfor %}
+
+
+              </div>
                 </div>
               </div>
             </div>
@@ -150,13 +158,17 @@
 
               <h5 class="mt-5 text-muted">Thumbnail files</h5>
               <ul class="list-unstyled">
-                <li>
+                <li class="nav-item">
                   <a href="{{ course.thumbnail.url }}" class="btn-link text-secondary"><img src="{{ course.thumbnail.url }}" alt="" width="300px" height="200px"> </a>
                 </li>
               </ul>
               <div class="text-center mt-5 mb-3">
-                <a href="#" class="btn btn-sm btn-primary">Approved</a>
-                <a href="#" class="btn btn-sm btn-warning">Rejected</a>
+                <form action='{% url "customadmin:approvedorreject" %}' method='POST'>
+                  {% csrf_token %}
+                  <input type='hidden' name='course_id' value='{{ course.id }}' />
+                  <input type="Submit" class="btn btn-sm btn-primary" value="Approved"/>
+            
+              </form>
               </div>
             </div>
           </div>

@@ -1,14 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
-from django.conf import settings 
-
+from django.http import Http404
 from django.contrib.admin.views.decorators import staff_member_required
 
 
 # Create your models here.
+from django.conf import settings 
 
 User = settings.AUTH_USER_MODEL
 # Create your views here.
@@ -129,3 +129,29 @@ class CourseDetailView(DetailView):
         context['total_lecture'] = self.get_total_lecture()
 
         return context
+
+
+def approvedOrReject(request):
+
+    course_id = request.POST.get('course_id')
+    if course_id is not None:
+        try:
+            course_obj = Course.objects.get(id=course_id)
+            course_obj.is_published = True
+            course_obj.save()
+            return redirect("customadmin:courses")
+            print('ok')
+        except Course.DoesNotExist:
+            raise Http404()
+            
+
+
+        # if request.is_ajax(): # Asynchronous JavaScript And XML / JSON
+        #     json_data = {
+        #         "added": added,
+        #         "removed": not added,
+        #         "CartItemCount": cart_obj.products.count()
+        #     }
+        #     return JsonResponse(json_data)
+    return redirect("customadmin:dashboard")
+        

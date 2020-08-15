@@ -29,7 +29,8 @@ class CourseListView(ListView):
     template_name = "courses/courses.html"
 
     def get_queryset(self):
-        return self.model.objects.order_by('-id')
+        return super().get_queryset().filter(is_published='True').order_by('-id')
+    
 
     def get_context_data(self, **kwargs):
 
@@ -122,8 +123,6 @@ def create_course_with_lessons(request):
             course  = courseform.save(commit=False)
             course.instructor = user
             course.save()
-            
-
 
 
             for form in ContentFormset:
