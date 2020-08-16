@@ -1,0 +1,88 @@
+{% extends 'adminsection/base.html' %}
+{% load static %}
+
+{% block content %}   
+
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Payment Gateway Settings</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Payment Gateway Settings</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <!-- /.card-header -->
+              <!-- form start -->
+         
+
+            <!-- /.card -->
+            <!-- Horizontal Form -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Payment Gateway</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="POST" class="form-horizontal">
+                {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" id='store_id' name='store_id' class="col-sm-2 col-form-label">Store Id</label>
+                    <div class="col-sm-10">
+                      <input type="text" id='store_pass' name='store_pass' class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Store Password</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    </div>
+                  </div>
+                </div>
+
+        
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn  btn-info float-right">Submit</button>
+                </div>
+                <!-- /.card-footer -->
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+<!-- bs-custom-file-input -->
+{% block scripts %}
+<script src="{% static 'customadmin//plugins/bs-custom-file-input/bs-custom-file-input.min.js' %}"></script>
+{% endblock %}
+
+<!-- AdminLTE App -->
+{% endblock %}

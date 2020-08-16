@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, FormView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
@@ -8,9 +8,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 
 # Create your models here.
-from django.conf import settings 
+from .forms import *
 
-User = settings.AUTH_USER_MODEL
 # Create your views here.
 from courses.models import Course, Lesson
 from accounts.models import CustomUser
@@ -154,4 +153,29 @@ def approvedOrReject(request):
         #     }
         #     return JsonResponse(json_data)
     return redirect("customadmin:dashboard")
+
+
+class PaymentGatewaySettingsView(FormView):
+    form_class = GatewayForm
+    template_name = 'adminsection/pages/payment-gateway.html'
+    
+    
+    def dispatch(self, request, *args, **kwargs):
+
+        return super().dispatch(self.request, *args, **kwargs)
+
+
+
+    def get_form_class(self):
+        return self.form_class
+
+    def form_valid(self, form):
+        form.save()
         
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        """If the form is invalid, render the invalid form."""
+        messages.error(self.request, 'Faild ! Try Again')
+        
+        return self.render_to_response(self.get_context_data(form=form))    

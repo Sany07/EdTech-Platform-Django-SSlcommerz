@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import DashBoardView, approvedOrReject, \
+from .views import DashBoardView, approvedOrReject, PaymentGatewaySettingsView,  \
 TotalUsersView, TotalInstructorsView, TotalStudentsView, CoursesView, NewCoursesView, CourseDetailView
 
 
@@ -16,6 +16,7 @@ urlpatterns = [
     path('courses/', CoursesView.as_view(), name="courses"),
     path('new-courses/', NewCoursesView.as_view(), name="new-courses"),
     path('course/<slug:slug>/', CourseDetailView.as_view(), name="single-course"),
+    path('payment/gateway/', PaymentGatewaySettingsView.as_view(), name="gateway"),
     path('approvedorreject/', approvedOrReject, name="approvedorreject"),
 
 

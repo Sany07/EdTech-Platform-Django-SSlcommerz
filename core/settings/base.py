@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'coresite.apps.CoresiteConfig',   
     'accounts.apps.AccountsConfig',
     'courses.apps.CoursesConfig',
-    'siteconfigurations.apps.SiteconfigurationsConfig',
     'reviews.apps.ReviewsConfig',
     'carts.apps.CartsConfig',
     'billings.apps.BillingsConfig',

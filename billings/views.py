@@ -25,7 +25,6 @@ class CheckoutSuccessView(View):
     def post(self, request, *args, **kwargs):
 
         data = self.request.POST
-        
         user = get_object_or_404(CustomUser, id=data['value_a']) #value_a is a user instance
         cart = get_object_or_404(Cart, id = data['value_b'] ) #value_b is a user cart instance
 
