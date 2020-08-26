@@ -6,7 +6,7 @@ class HomeView(ListView):
     
     model = Course
     context_object_name = 'courses'
-    template_name = 'site/index.html'
+    template_name = 'mainsite/site/index.html'
 
     def get_queryset(self):
         return self.model.objects.order_by('-id')[:6]
@@ -15,7 +15,7 @@ class HomeView(ListView):
 class AboutView(TemplateView):
     
 
-    template_name = 'site/about.html'
+    template_name = 'mainsite/site/about.html'
 
 
 def handler404(request, exception):

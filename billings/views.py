@@ -12,7 +12,7 @@ from enrolls.models import EnrollCouese
 @method_decorator(csrf_exempt, name='dispatch')
 class CheckoutSuccessView(View):
     model = Transaction
-    template_name = 'carts/checkout-success.html'
+    template_name = 'mainsite/carts/checkout-success.html'
 
     
     def get(self, request, *args, **kwargs):
@@ -71,7 +71,7 @@ class CheckoutSuccessView(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class CheckoutFaildView(View):
-    template_name = 'carts/checkout-faild.html'
+    template_name = 'mainsite/carts/checkout-faild.html'
 
 
     def get(self, request, *args, **kwargs):

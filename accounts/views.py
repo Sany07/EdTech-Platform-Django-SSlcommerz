@@ -12,7 +12,7 @@ class InstructorRegisterView(CreateView):
     """
     model = CustomUser
     form_class = TeacherRegistrationForm
-    template_name = "accounts/instructor-register.html"
+    template_name = "mainsite/accounts/instructor-register.html"
 
 
     def dispatch(self, request, *args, **kwargs):
@@ -41,7 +41,7 @@ class StudentRegisterView(CreateView):
     """
     model = CustomUser
     form_class = StudentRegistrationForm
-    template_name = "accounts/student-register.html"
+    template_name = "mainsite/accounts/student-register.html"
 
 
     def dispatch(self, request, *args, **kwargs):
@@ -71,7 +71,7 @@ class LogInView(FormView):
     """
     success_url = '/'
     form_class = UserLoginForm
-    template_name = 'accounts/login.html'
+    template_name = 'mainsite/accounts/login.html'
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
@@ -115,7 +115,7 @@ class ProfileView(DetailView):
     model = CustomUser
     context_object_name = 'profile'
     pk_url_kwarg = 'id'
-    template_name = 'accounts/profile.html'
+    template_name = 'mainsite/accounts/profile.html'
 
 
     def get_course(self):               

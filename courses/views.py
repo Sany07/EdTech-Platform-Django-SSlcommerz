@@ -26,7 +26,7 @@ class CourseListView(ListView):
     model = Course
     context_object_name = 'courses'
     paginate_by = 6
-    template_name = "courses/courses.html"
+    template_name = "mainsite/courses/courses.html"
 
     def get_queryset(self):
         return super().get_queryset().filter(is_published='True').order_by('-id')
@@ -46,7 +46,7 @@ class SingleCourseView(FormMixin, DetailView):
     model = Course
     context_object_name = 'course'
     form_class = ReviewForm
-    template_name = "courses/single-courses.html"
+    template_name = "mainsite/courses/single-courses.html"
 
     
     @xframe_options_sameorigin

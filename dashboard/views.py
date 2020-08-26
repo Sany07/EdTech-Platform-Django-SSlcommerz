@@ -14,7 +14,7 @@ from courses.decorators import user_is_instructor, user_is_student
 
 class DashboardView(View):
     
-    template_name = 'site/dashboard.html'
+    template_name = 'mainsite/site/dashboard.html'
 
 
     def get(self, request, *args, **kwargs):
@@ -37,7 +37,7 @@ class DashboardView(View):
 class InstructorCourseListView(ListView):
     model = Course
     context_object_name = 'mycourses'
-    template_name = "site/instructor-courses.html"
+    template_name = "mainsite/site/instructor-courses.html"
 
     @method_decorator(login_required)
     @method_decorator(user_is_instructor)
@@ -58,7 +58,7 @@ class InstructorCourseListView(ListView):
 class MyEnrolledCourseListView(ListView):
     model = EnrollCouese
     context_object_name = 'mycourses'
-    template_name = "site/my-courses.html"
+    template_name = "mainsite/site/my-courses.html"
 
     @method_decorator(login_required)
     @method_decorator(user_is_student)
@@ -76,7 +76,7 @@ class StartCourseView(DetailView):
 
     model= Course
     context_object_name = 'course'
-    template_name = 'site/classroom.html'
+    template_name = 'mainsite/site/classroom.html'
 
     @method_decorator(login_required)
     

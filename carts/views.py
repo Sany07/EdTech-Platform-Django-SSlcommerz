@@ -13,7 +13,7 @@ from .sslcommerz import sslcommerz_payment_gateway
 
 class CartView(ListView):
     model = Cart
-    template_name = "carts/cart.html"
+    template_name = "mainsite/carts/cart.html"
 
     def get_queryset(self):
         return self.model.objects.new_or_get(self.request)
@@ -49,7 +49,7 @@ def cart_home(request):
         'cart': cart_obj
 
     }
-    return render(request, "carts/cart.html", context)
+    return render(request, "mainsite/carts/cart.html", context)
 
 
 def cart_update(request):
@@ -92,7 +92,7 @@ class CheckoutView(View):
         Provides the ability to checkout if user is authenticated
     """
     form_class = BillingForm
-    template_name = 'carts/checkout.html'
+    template_name = 'mainsite/carts/checkout.html'
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):

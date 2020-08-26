@@ -33,7 +33,7 @@ def cart_update(request):
 
 
 class EnrollView(View):
-    template_name = 'courses/courses.html'
+    template_name = 'mainsite/courses/courses.html'
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):

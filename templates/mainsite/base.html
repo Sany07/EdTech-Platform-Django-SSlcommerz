@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+        {% include 'mainsite/includes/_head.html' %}
+        <title> 
+             {% block title %}  {% endblock %} GAINSKILL
+        </title>
+    </head>
+<body>
+    {% include 'mainsite/includes/_header.html' with Category=Category %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% include 'mainsite/includes/_footer.html' %}
+
+    {% include 'mainsite/includes/_scripts.html' %}
+    {% include 'mainsite/includes/_notification.html' %}
+
+</body>
+</html>

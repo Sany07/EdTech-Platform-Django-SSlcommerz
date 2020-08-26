@@ -20,7 +20,7 @@ class DashBoardView(TemplateView):
     template_name = 'adminsection/pages/dashboard.html'
 
 
-    @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
+    @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))
     @method_decorator(staff_member_required)
 
     def dispatch(self, request, *args, **kwargs):
