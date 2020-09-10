@@ -29,5 +29,12 @@ class GatewayForm(forms.ModelForm):
         fields = '__all__'
 
 
+class FrontEndSettingsForm(forms.ModelForm):
+
+        class Meta:
+            model = FrontEndSettings
+            fields = '__all__'
+
+
 
 

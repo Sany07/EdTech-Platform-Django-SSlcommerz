@@ -15,13 +15,16 @@
         {% block content %}
 
         {% endblock %}
+        {% include 'mainsite/includes/_notification.html' %}
 
 
 
 
     </div>
     {% include 'adminsection/includes/_scripts.html' %}
+    {% block scripts %}
 
+    {% endblock %}
     
 </body>
 </html>

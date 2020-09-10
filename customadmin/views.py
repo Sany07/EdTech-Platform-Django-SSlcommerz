@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView, DetailView, FormView
+from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
@@ -9,29 +9,26 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your models here.
 from .forms import *
-
+from .models import PaymentGatewaySettings
 # Create your views here.
 from courses.models import Course, Lesson
 from accounts.models import CustomUser
 
 
 class DashBoardView(TemplateView):
-    
-    template_name = 'adminsection/pages/index.html'
 
+    template_name = 'adminsection/pages/index.html'
 
     @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))
     @method_decorator(staff_member_required)
-
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    
-    def get_total_statistics(self):      
+    def get_total_statistics(self):
         users = CustomUser.objects.all()
         totalusers = users.count()
-        totalteachers = users.filter(role = "tea").count()
-        totalstudents = users.filter(role = "stu").count()
+        totalteachers = users.filter(role="tea").count()
+        totalstudents = users.filter(role="stu").count()
         totalcourses = Course.objects.all().count()
         return totalusers, totalteachers, totalstudents, totalcourses
 
@@ -51,12 +48,11 @@ class TotalUsersView(ListView):
     context_object_name = 'users'
     template_name = 'adminsection/pages/users.html'
 
-
     @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
     @method_decorator(staff_member_required)
-
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
 
 class TotalInstructorsView(ListView):
     model = CustomUser
@@ -68,9 +64,9 @@ class TotalInstructorsView(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-
     def get_queryset(self):
         return super().get_queryset().filter(role='tea')
+
 
 class TotalStudentsView(ListView):
     model = CustomUser
@@ -82,9 +78,9 @@ class TotalStudentsView(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-
     def get_queryset(self):
         return super().get_queryset().filter(role='stu')
+
 
 class CoursesView(ListView):
     model = Course
@@ -96,7 +92,6 @@ class CoursesView(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    
 
 class NewCoursesView(ListView):
     model = Course
@@ -110,7 +105,8 @@ class NewCoursesView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["new_courses"] = super().get_queryset().filter(is_published='False')
+        context["new_courses"] = super().get_queryset().filter(
+            is_published='False')
         return context
 
 
@@ -119,9 +115,8 @@ class CourseDetailView(DetailView):
     context_object_name = 'course'
     template_name = 'adminsection/pages/course-detail.html'
 
-    def get_total_lecture(self):               
+    def get_total_lecture(self):
         return Lesson.objects.filter(course=self.object).values('video_link').count()
-        
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -142,8 +137,6 @@ def approvedOrReject(request):
             print('ok')
         except Course.DoesNotExist:
             raise Http404()
-            
-
 
         # if request.is_ajax(): # Asynchronous JavaScript And XML / JSON
         #     json_data = {
@@ -155,27 +148,64 @@ def approvedOrReject(request):
     return redirect("customadmin:dashboard")
 
 
-class PaymentGatewaySettingsView(FormView):
-    form_class = GatewayForm
-    template_name = 'adminsection/pages/payment-gateway.html'
-    
-    
-    def dispatch(self, request, *args, **kwargs):
+class FrontEndSettings(UpdateView):
+    pass
+#     model = FrontEndSettings
+#     form_class = FrontEndSettingsForm
+#     context_object_name = 'frontend'
+#     success_url = reverse_lazy('customadmin:frontend-settings')
+#     template_name = 'adminsection/pages/site-settings.html'
 
+
+#     @method_decorator(login_required(login_url=reverse_lazy('customadmin:login')))
+#     @method_decorator(staff_member_required)
+#     def dispatch(self, request, *args, **kwargs):
+#         return super().dispatch(self.request, *args, **kwargs)
+
+
+#     def get(self, request, *args, **kwargs):
+#         try:
+#             self.object = self.get_queryset().last()
+#         except Http404:
+#             raise Http404("Data doesn't exists")
+
+#         return self.render_to_response(self.get_context_data())
+
+
+class custompostmethod():
+    def post(self, request):
+
+        form = self.form_class(data=request.POST)
+
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+
+
+class PaymentGatewaySettingsView(UpdateView):
+    model = PaymentGatewaySettings
+    form_class = GatewayForm
+    ss = custompostmethod
+    context_object_name = 'paymentgateway'
+    success_url = reverse_lazy('customadmin:gateway-settings')
+    template_name = 'adminsection/pages/payment-gateway-settings.html'
+
+    @method_decorator(login_required(login_url=reverse_lazy('customadmin:login')))
+    @method_decorator(staff_member_required)
+    def dispatch(self, request, *args, **kwargs):
         return super().dispatch(self.request, *args, **kwargs)
 
+    def get(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+        except Http404:
+            raise Http404("User doesn't exists")
+        return self.render_to_response(self.get_context_data())
 
+    def get_object(self, queryset=None):
+        obj = super().get_queryset().last()
 
-    def get_form_class(self):
-        return self.form_class
+        if obj is None:
+            self.ss.post(self, self.request)
 
-    def form_valid(self, form):
-        form.save()
-        
-        return HttpResponseRedirect(self.get_success_url())
-
-    def form_invalid(self, form):
-        """If the form is invalid, render the invalid form."""
-        messages.error(self.request, 'Faild ! Try Again')
-        
-        return self.render_to_response(self.get_context_data(form=form))    
+        return obj

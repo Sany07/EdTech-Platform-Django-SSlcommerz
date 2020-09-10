@@ -1,0 +1,89 @@
+{% extends 'adminsection/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->                      
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container">
+
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="pull-left page-title">Form Validation</h4>
+                        <ol class="breadcrumb pull-right">
+                            <li><a href="#">Moltran</a></li>
+                            <li><a href="#">Forms</a></li>
+                            <li class="active">Form Validation</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h3 class="panel-title">Form validations</h3></div>
+                            <div class="panel-body">
+                                <div class=" form">
+                                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="{% url 'customadmin:gateway-settings' %}" novalidate="novalidate">
+                                        {% csrf_token %}
+                                        <div class="form-group ">
+                                            <label for="cname" class="control-label col-lg-2">Gateway Id</label>
+                                            <div class="col-lg-10">
+                                                <input class=" form-control" id="store_id" name="store_id" type="text" required="" aria-required="true" value="{{ paymentgateway.store_id }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="cemail" class="control-label col-lg-2">Gateway Password</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control " id="store_pass" type="password" name="store_pass" required="" aria-required="true" value="{{ paymentgateway.store_pass }}">
+                                            </div>
+                                        </div>
+
+
+                                        <a class="btn btn-inverse waves-effect waves-light" href="javascript:;" oncload="$.Notification.notify('black', 'top right', 'Sample Notification', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae orci ut dolor scelerisque aliquam.')">Black</a>
+
+
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-10">
+                                                <button class="btn btn-success waves-effect waves-light" type="submit">Submit</button>
+                                                <button class="btn btn-default waves-effect" type="button">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div> <!-- .form -->
+                            </div> <!-- panel-body -->
+                        </div> <!-- panel -->
+                    </div> <!-- col -->
+
+                </div> <!-- End row -->
+    </div> <!-- container -->
+                        
+        </div> <!-- content -->
+
+        <footer class="footer text-right">
+            2015 © Moltran.
+        </footer>
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Right content here -->
+    <!-- ============================================================== -->
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+<!--form validation -->
+
+<script type="text/javascript" src="{% static 'customadmin/assets/jquery.validate/jquery.validate.min.js' %}"></script>
+<script src="{% static 'customadmin/assets/jquery.validate/form-validation-init.js' %}"></script>
+{% endblock %}
+
