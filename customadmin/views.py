@@ -17,7 +17,7 @@ from accounts.models import CustomUser
 
 class DashBoardView(TemplateView):
     
-    template_name = 'adminsection/pages/dashboard.html'
+    template_name = 'adminsection/pages/index.html'
 
 
     @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))

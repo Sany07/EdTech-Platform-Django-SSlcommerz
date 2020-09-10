@@ -6,8 +6,8 @@
              {% block title %}  {% endblock %} GAINSKILL
         </title>
     </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+<body class="fixed-left">
+    <div id="wrapper">
 
         {% include 'adminsection/includes/_header.html' %}
         {% include 'adminsection/includes/_sidebar.html' %}
@@ -16,15 +16,12 @@
 
         {% endblock %}
 
-        {% include 'adminsection/includes/_footer.html' %}
+
 
 
     </div>
     {% include 'adminsection/includes/_scripts.html' %}
-    {% block scripts %}
 
-    {% endblock %}
-    {% include 'adminsection/includes/_notification.html' %}
     
 </body>
 </html>

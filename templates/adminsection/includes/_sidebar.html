@@ -1,162 +1,44 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link">
-    <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">GainSkill</span>
-  </a>
+            <!-- ========== Left Sidebar Start ========== -->
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-      </div>
-      <div class="info">
-        <a href="#" class="d-block">{{ request.user.get_full_name }}</a>
-      </div>
-    </div>
+            <div class="left side-menu">
+              <div class="sidebar-inner slimscrollleft">
+                  <div class="user-details">
+                      <div class="pull-left">
+                          <img src="images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
+                      </div>
+                      <div class="user-info">
+                          <div class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">John Doe <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                  <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div class="ripple-wrapper"></div></a></li>
+                                  <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
+                                  <li><a href="javascript:void(0)"><i class="md md-lock"></i> Lock screen</a></li>
+                                  <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> Logout</a></li>
+                              </ul>
+                          </div>
+                          
+                          <p class="text-muted m-0">Administrator</p>
+                      </div>
+                  </div>
+                  <!--- Divider -->
+                  <div id="sidebar-menu">
+                      <ul>
+                          <li>
+                              <a href="index.html" class="waves-effect active"><i class="md md-home"></i><span> Dashboard </span></a>
+                          </li>
 
-    <!-- SidebarSearch Form -->
-    <div class="form-inline">
-      <div class="input-group" data-widget="sidebar-search">
-        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-sidebar">
-            <i class="fas fa-search fa-fw"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sidebar Menu -->
-    <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
-
-
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
-            <p>
-             Member Settings
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{% url 'customadmin:users' %}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>All Members</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'customadmin:instructors' %}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>All Instructors</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'customadmin:students' %}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>All Students</p>
-              </a>
-            </li>
-          </ul>
-        </li>        
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Course Settings
-              <span class="right badge badge-danger">9</span>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{% url 'customadmin:new-courses' %}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>New Courses
-                  <span class="right badge badge-danger">9</span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'customadmin:courses' %}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>All Courses</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-desktop"></i>
-
-            <p>
-             FrontEnd Settings
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="pages/layout/top-nav.html" class="nav-link">
-                <i class="far fa-image nav-icon"></i>
-                <p> Logo Settings</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/layout/top-nav.html" class="nav-link">
-                <i class="fab fa-algolia nav-icon"></i>
-                <p> Counter</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/layout/top-nav.html" class="nav-link">
-                <i class="far fa-image nav-icon"></i>
-                
-                <p> Logo Settings</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="pages/layout/top-nav.html" class="nav-link">
-                <i class="far fa-address-card nav-icon"></i><p> Footer</p>
-              </a>
-            </li>
-
-          </ul>
-        </li>
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="fa-cog  nav-icon fas"></i>
-            <p>
-              General Settings
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="pages/layout/top-nav.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Aws Settings</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'customadmin:gateway' %}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Payment Gateway Settings</p>
-              </a>
-            </li>
-
-          </ul>
-        </li>
-
-      </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
-  </div>
-  <!-- /.sidebar -->
-</aside>
+                          <li class="has_sub">
+                              <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Mail </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                              <ul class="list-unstyled">
+                                  <li><a href="inbox.html">Inbox</a></li>
+                                  <li><a href="email-compose.html">Compose Mail</a></li>
+                                  <li><a href="email-read.html">View Mail</a></li>
+                              </ul>
+                          </li>
+                      </ul>
+                      <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
+          </div>
+          <!-- Left Sidebar End --> 
