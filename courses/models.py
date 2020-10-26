@@ -8,7 +8,6 @@ from django.contrib.contenttypes.fields import GenericRelation
 from courses.utils import unique_slug_generator
 from django.contrib.contenttypes.models import ContentType 
 from django.conf import settings
-# Create your models here.
 
 User = settings.AUTH_USER_MODEL
 
@@ -19,6 +18,8 @@ from reviews.models import Review
 
 class Category(models.Model):
     name = models.CharField(max_length=20)
+    # slug = models.SlugField()
+    parent = models.ForeignKey('self',blank=True, null=True ,on_delete=models.CASCADE, related_name='children')
 
     class Meta:
         verbose_name = "Category"

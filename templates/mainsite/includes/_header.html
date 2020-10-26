@@ -74,7 +74,7 @@
                                 <a href="#">Category</a>
                                 <ul class="dropdown">
                                     {% for category in categories %}
-                                    <li><a href="{% url 'accounts:instructor-register' %}">{{ category}}</a></li>
+                                    <li><a href="{% url 'accounts:instructor-register' %}">{{ category }}</a></li>
                                     {% endfor %}
 
                                 </ul>
@@ -101,8 +101,7 @@
                             {% if user.is_authenticated %}
                             <li class="cn-dropdown-item has-down pr-12 pl-3">
                                 <div class=" no-after peers fxw-nw ai-c lh-1">
-                                    <div class="peer mR-10"><img class="w-2r bdrs-50p"
-                                            src="https://randomuser.me/api/portraits/men/10.jpg" alt=""></div>
+                                    <div class="peer mR-10"><i class="icofont-ui-user"></i></div>
                                 </div>
 
                                 <ul class="dropdown profile">
@@ -120,7 +119,7 @@
                                         <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
                                     </span>
                                 </ul>
-                                <span class="dd-trigger"></span><span class="dd-arrow"></span>
+                                <span class="dd-trigger"></span><span class="dd-arrow" style="top: 9px !important"></span>
                             </li>
                             {% endif %}
                             {% if not request.user.role == 'tea' %}
