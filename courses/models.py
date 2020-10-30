@@ -32,11 +32,11 @@ class Category(models.Model):
 
 class Course(models.Model):
     title = models.CharField(max_length=250,blank=False)
-    slug = models.SlugField(unique=True, max_length=1000)
+    slug = models.SlugField(unique=True, max_length=255)
     description = models.TextField()
     thumbnail = models.ImageField(upload_to='photos/course/%Y-%m-%d/')
-    price = models.DecimalField(max_digits=100, decimal_places=2,null=True,blank=True)
-    offer_price =  models.DecimalField(max_digits=100, decimal_places=2,null=True,blank=True)
+    price = models.DecimalField(max_digits=65, decimal_places=2,null=True,blank=True)
+    offer_price =  models.DecimalField(max_digits=65, decimal_places=2,null=True,blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     # language = models.CharField(max_length=50)
     ratings = GenericRelation(Rating, related_query_name='ratings')

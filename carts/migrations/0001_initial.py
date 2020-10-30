@@ -19,8 +19,8 @@ class Migration(migrations.Migration):
             name='Cart',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('subtotal', models.DecimalField(decimal_places=2, default=0.0, max_digits=100)),
-                ('total', models.DecimalField(decimal_places=2, default=0.0, max_digits=100)),
+                ('subtotal', models.DecimalField(decimal_places=2, default=0.0, max_digits=65)),
+                ('total', models.DecimalField(decimal_places=2, default=0.0, max_digits=65)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),
                 ('products', models.ManyToManyField(blank=True, to='courses.Course')),
