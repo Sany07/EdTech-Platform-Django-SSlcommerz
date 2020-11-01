@@ -11,7 +11,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .forms import *
 from .models import PaymentGatewaySettings
 # Create your views here.
-from courses.models import Course, Lesson
+from courses.models import *
 from accounts.models import CustomUser
 
 

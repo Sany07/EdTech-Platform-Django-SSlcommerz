@@ -3,8 +3,6 @@
 {% load youtube_link_replace %}
 
 {% block content %}
-
-
 <!-- Start Page Title Area -->
 <div class="page-title">
     <div class="d-table">
@@ -21,135 +19,49 @@
 <section class="course-details-area ptb-100">
     <div class="container-fluid">
         
-     
-        <div class="row m-1">
-
-            <div class="col-lg-4 col-md-10">
-
-                <div class="courses-details">
-
-
-                    <!-- <p>Learn how to use NumPy, Pandas, Seaborn, Matplotlib, Plotly, Scikit-Learn, Machine Learning, Tensorflow, and more!</p> -->
-
-                    <div class="">
+        <div class="row  px-4 mx-4">
+            <!-- {% for lesson in course.course.all %} -->
+            <div class="col-lg-4">
+               <div class="card">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        {% for tcontent in topic_category %}
+                        <a class="nav-link {% if forloop.first %}  active {% endif %} " id="v-pills-{{ tcontent.id }}-tab" data-toggle="pill" href="#v-pills-{{ tcontent.id }}" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <i class="icofont-ui-play pr-2"></i>Lecture {{ forloop.counter }}
+                            <span class="ls-title "> {{ tcontent.title }}</span>
+                            <span class="duration-r"><i class="icofont-clock-time"></i>
+                                 50 min
+                            </span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+            <div class="tab-content" id="v-pills-tabContent">
+                {% for tcontent in topic_category %}
+                    <div class="tab-pane fade {% if forloop.first %} show active{% endif %}" id="v-pills-{{ tcontent.id }}" role="tabpanel" aria-labelledby="v-pills-{{ tcontent.id }}-tab">
+                        {% if tcontent.video_link %}
+                        {% youtube_link_replace tcontent as videourl %}
                         
-                        <div class="content" id="tab_2_content">
-                            <div class="accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
-                                {% for lesson in course.course.all %}
-                                <div class="card">
-                                    <div class="card-header" role="tab" id="heading-{{ forloop.counter }}">
-                                        <a {% if forloop.first %} {% else %} class="collapsed" {% endif %}
-                                            href="#collapse-{{ forloop.counter }}" data-toggle="collapse"
-                                            data-parent="#accordionEx"
-                                            aria-expanded="{% if forloop.first %} true {% else %} false {% endif %}"
-                                            aria-controls="collapse-{{ forloop.counter }}">
-                                            <h5 class="mb-0">
-                                                {{ forloop.counter }}. {{ lesson.title }}
-                                                <span><i class="icofont-rounded-down"></i></span>
-                                            </h5>
-                                        </a>
-                                    </div>
-
-                                    <div id="collapse-{{ forloop.counter }}"
-                                        class="collapse {% if forloop.first %}show  {% endif %}" role="tabpanel"
-                                        aria-labelledby="heading-{{ forloop.counter }}" data-parent="#accordionEx">
-                                        <div class="card-body">
-                                            <ul>
-                                                {% for lessoncontent in lesson.video_link.all %}
-                                                    {% if not lessoncontent.text_content %}
-                                                    {% youtube_link_replace lessoncontent as videourl %}
-                                                    
-                                                    <li class="p-1 mpb">
-
-                                                        <a class="myButtons"  target="someFrame" id="{{ lessoncontent.id }}"
-                                                            {% if videourl %}
-                                                            href="{% youtube_link_replace lessoncontent%}"
-                                                            {% else %}
-                                                            href="{{ lessoncontent.video_url }}?&autoplay=true&crosstime=701"
-                                                            {% endif %}>
-                                                            <i class="icofont-ui-play pr-2"></i>Lecture {{ forloop.counter }}
-
-                                                            <span class="ls-title "> {{ lessoncontent.title }}</span>
-                                                        </a>
-                                                            <span class="duration-r"><i class="icofont-clock-time"></i>
-                                                                 50 min
-                                                            </span>
-
-                                                      
-                                                
-                                                    </li>
-                                                {% else %}
-                                                <li class="p-1">
-                                                    <a  href="#" id="ch-{{ lessoncontent.id }}" style="cursor:pointer">
-                                                        <input id="myText" type="hidden" value="{{ lessoncontent.text_content }}">
-                                                    <i class="icofont-ui-text-chat pr-2"></i>Lecture {{ forloop.counter }}
-                                                        <span class="ls-title"> {{ lessoncontent.title }}</span>
-                                                    </a>
-                                                </li>
-                                                {% endif %}
-                                                {% endfor %}
-                                            </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-
-                            </div>
+                        <div class="videoWrapper">
+                            {% if videourl %}
+                            <iframe width="920" height="500" type="text/html" src="{% youtube_link_replace tcontent %}?&autoplay=true" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            {% else %}
+                            <iframe width="920" height="500" type="text/html" src="{{ tcontent.video_link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            {% endif %}
                         </div>
-
-
+                        {% endif %}
+                    {% if tcontent.text_content != none %}
+                    <div class="course-details-tabs ml-5">
+                        {{ tcontent.text_content }}
                     </div>
-                </div>
+                    {% endif %}
+                  </div>
+                {% endfor %}
             </div>
-
-
-            <div class="col-lg-8 col-md-10">
-
-                <div id="video-content" style="background-color: #333;">
-                    <div id='reload-iframe' class="embed-responsive embed-responsive-16by9">
-                        <!-- <i id="loader1" class="icofont-spinner"></i>  -->
-                        <iframe id="iframe1" src="https://www.youtube.com/embed/eC8NdGjG_Sw?&autoplay=true&crosstime=701"  width="100%" height="500"
-                            name="someFrame" 
-                            id="iframe-ember1658" scrolling="no" seamless="" allow="autoplay">
-                        </iframe>
-                    </div>
-                </div>
-                <div id="text-content">
-                    
-                </div>
-
             </div>
-
+            <!-- {% endfor %} -->
         </div>
     </div>
-
-
 </section>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-<script>
-
-jQuery(document).ready(function() {
-{% for lesson in course.course.all %}
-{% for lessoncontent in lesson.video_link.all %}
-{% if lessoncontent.text_content %}
-    $('#ch-{{ lessoncontent.id }}').on('click', function () { 
-        // $('#video-content').toggle(); //hide the button
-    $('#video-content').hide(1000);
-    var val = $('input[id^="myText"]', this).val();
-    // $('#text-content').html(val);fadeIn(3000)
-    $('#text-content').show().html(val).fadeIn('fast',);
-    $('#text-content').show() //hide the button
-    $('#reload-iframe').load(' #reload-iframe > *');
-    //$(".rf").show().html().fadeIn('fast');
-      
-});
-    {% endif %}
-    {% endfor %}
-    {% endfor %}
-});
-</script>
 {% endblock %}

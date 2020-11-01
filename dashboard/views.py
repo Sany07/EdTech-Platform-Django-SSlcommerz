@@ -6,10 +6,11 @@ from django.contrib import messages
 from django.http import Http404
 
 from enrolls.models import EnrollCouese
-from courses.models import Course
+from courses.models import *
 from courses.decorators import user_is_instructor, user_is_student
 
 
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 
 class DashboardView(View):
@@ -79,6 +80,7 @@ class StartCourseView(DetailView):
     template_name = 'mainsite/site/classroom.html'
 
     @method_decorator(login_required)
+    @method_decorator(xframe_options_exempt)
     
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -93,9 +95,25 @@ class StartCourseView(DetailView):
     def get(self, request, *args, **kwargs):
         try:
             self.object = self.get_object()
+
         except Http404:
             raise Http404("Course doesn't exists")
         context = self.get_context_data(object=self.object)
+        vvid = Lesson.objects.filter(course=context['object'].id).values('video_link').all()
+
+        # print(vvid)
+        topic_category_dic =[]
+        for vlink in vvid:
+            # for topic in LessonContent.objects.filter(id=vlink['video_link']):
+                # print(topic)
+
+            for topic in LessonContent.objects.filter(id=vlink['video_link']):
+                # print( 'Link', topic.video_link, 'Text' , topic.text_content)
+                topic_category_dic.append(topic)
+                
+            
+        context['topic_category'] = topic_category_dic
+
         return self.render_to_response(context)
 
 

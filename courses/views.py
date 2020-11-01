@@ -104,8 +104,8 @@ class SingleCourseView(FormMixin, DetailView):
 
         return self.render_to_response(self.get_context_data(form=form))
 
-@login_required
-@user_is_instructor
+# @login_required
+# @user_is_instructor
 def create_course_with_lessons(request):
     courseform = CourseModelForm(request.POST or None)
     formset = LessonFormset(queryset=Lesson.objects.none())
@@ -119,7 +119,7 @@ def create_course_with_lessons(request):
         user = get_object_or_404(CustomUser, id=request.user.id)
         
         if courseform.is_valid and formset.is_valid() and ContentFormset.is_valid():
-            categories = Category.objects.get(id=1) 
+            categories = request.POST['category'] 
             course  = courseform.save(commit=False)
             course.instructor = user
             course.save()
@@ -148,7 +148,7 @@ def create_course_with_lessons(request):
                                 }))
 
     categories = Category.objects.all()   
-    return render(request, 'courses/create-course.html', {
+    return render(request, 'mainsite/courses/create-course.html', {
         'courseform': courseform,
         'formset': formset,
         'ContentFormset':ContentFormset,
