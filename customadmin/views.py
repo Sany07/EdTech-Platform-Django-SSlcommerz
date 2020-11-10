@@ -43,10 +43,10 @@ class DashBoardView(TemplateView):
         return context
 
 
-class TotalUsersView(ListView):
+class AllUsersView(ListView):
     model = CustomUser
     context_object_name = 'users'
-    template_name = 'adminsection/pages/users.html'
+    template_name = 'adminsection/pages/all-users.html'
 
     @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
     @method_decorator(staff_member_required)
@@ -209,3 +209,4 @@ class PaymentGatewaySettingsView(UpdateView):
             self.ss.post(self, self.request)
 
         return obj
+

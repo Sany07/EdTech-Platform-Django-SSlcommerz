@@ -9,7 +9,7 @@ urlpatterns = [
 
     
     path('', DashBoardView.as_view(), name="dashboard"),
-    path('users/', TotalUsersView.as_view(), name="users"),
+    path('users/', AllUsersView.as_view(), name="users"),
     path('instructors/', TotalInstructorsView.as_view(), name="instructors"),
     path('students/', TotalStudentsView.as_view(), name="students"),
     path('courses/', CoursesView.as_view(), name="courses"),

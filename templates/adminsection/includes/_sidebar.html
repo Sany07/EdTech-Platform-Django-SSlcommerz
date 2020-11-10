@@ -23,13 +23,13 @@
                   <div id="sidebar-menu">
                       <ul>
                           <li>
-                              <a href="index.html" class="waves-effect active"><i class="md md-home"></i><span> Dashboard </span></a>
+                              <a href="index.html" class="waves-effect "><i class="md md-home"></i><span> Dashboard </span></a>
                           </li>
 
                           <li class="has_sub">
-                              <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Mail </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                              <a href="#" class="waves-effect activez"><i class="md md-mail"></i><span> Users </span><span class="pull-right"><i class="md md-add"></i></span></a>
                               <ul class="list-unstyled">
-                                  <li><a href="inbox.html">Inbox</a></li>
+                                  <li ><a  href="{% url 'customadmin:users' %}">All Users</a></li>
                                   <li><a href="email-compose.html">Compose Mail</a></li>
                                   <li><a href="email-read.html">View Mail</a></li>
                               </ul>
