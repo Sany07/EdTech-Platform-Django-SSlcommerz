@@ -25,7 +25,7 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"></h3>
+                                    <h3 class="panel-title">Users</h3>
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -33,30 +33,25 @@
                                             <table id="datatable" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>First Name</th>
-                                                        <th>Username</th>
+                                                        <th>Name</th>
                                                         <th>Email</th>
+                                                        <th>Office</th>
                                                         <th>Type</th>
-                                                        <th>Joining Date</th>
-                                                        <th>Action</th>
+                                                        <th>Start date</th>
+                                                        <th>Salary</th>
                                                     </tr>
                                                 </thead>
 
                                             
                                                 <tbody>
-                                                    {% for user in users %}
+                                                    {% for student in students %}
                                                     <tr>
-                                                        <td>{{ user.get_full_name }}</td>
-                                                        <td>{{ user.username }}</td>
-                                                        <td>{{ user.email }}</td>
-                                                        <td>{% if user.role == 'stu' %}
-                                                                Student
-                                                            {% elif user.role == 'tea' %}
-                                                                Instructor
-                                                            {% endif %}
-                                                        </td>
-                                                        <td>{{ user.date_joined|date:"j-M-Y " }}</td>
-                                                        <td><a class="text-center" href="{% url 'customadmin:profile' user.id  %}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5">View</button></a></td>
+                                                        <td>{{ student.username }}</td>
+                                                        <td>{{ student.email }}</td>
+                                                        <td>New York</td>
+                                                        <td>{{ student.role }}</td>
+                                                        <td>{{ student.date_joined|date:"j-M-Y " }}</td>
+                                                        <td><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5">View</button></td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>

@@ -10,9 +10,10 @@ urlpatterns = [
     
     path('', DashBoardView.as_view(), name="dashboard"),
     path('users/', AllUsersView.as_view(), name="users"),
-    path('instructors/', TotalInstructorsView.as_view(), name="instructors"),
-    path('students/', TotalStudentsView.as_view(), name="students"),
+    path('instructors/', AllInstructorsView.as_view(), name="instructors"),
+    path('students/', AllStudentsView.as_view(), name="students"),
     path('courses/', CoursesView.as_view(), name="courses"),
+    path('profile/<int:pk>', ProfileView.as_view(), name="profile"),
     path('new-courses/', NewCoursesView.as_view(), name="new-courses"),
     path('course/<slug:slug>/', CourseDetailView.as_view(), name="single-course"),
     path('approvedorreject/', approvedOrReject, name="approvedorreject"),

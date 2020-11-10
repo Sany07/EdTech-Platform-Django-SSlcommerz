@@ -12,7 +12,7 @@ from .forms import *
 from .models import PaymentGatewaySettings
 # Create your views here.
 from courses.models import *
-from accounts.models import CustomUser
+from accounts.models import CustomUser, Profile
 
 
 class DashBoardView(TemplateView):
@@ -53,11 +53,10 @@ class AllUsersView(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-
-class TotalInstructorsView(ListView):
+class AllInstructorsView(ListView):
     model = CustomUser
     context_object_name = 'instructors'
-    template_name = 'adminsection/pages/instructors.html'
+    template_name = 'adminsection/pages/all-instructors.html'
 
     @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
     @method_decorator(staff_member_required)
@@ -68,10 +67,10 @@ class TotalInstructorsView(ListView):
         return super().get_queryset().filter(role='tea')
 
 
-class TotalStudentsView(ListView):
+class AllStudentsView(ListView):
     model = CustomUser
     context_object_name = 'students'
-    template_name = 'adminsection/pages/students.html'
+    template_name = 'adminsection/pages/all-students.html'
 
     @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
     @method_decorator(staff_member_required)
@@ -81,6 +80,14 @@ class TotalStudentsView(ListView):
     def get_queryset(self):
         return super().get_queryset().filter(role='stu')
 
+
+class ProfileView(DetailView):
+    model = Profile
+    context_object_name = 'profile'
+    template_name = 'adminsection/pages/profile.html'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user_profile=self.kwargs['pk'])
 
 class CoursesView(ListView):
     model = Course

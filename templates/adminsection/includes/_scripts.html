@@ -1,5 +1,17 @@
-{% load static %}        <script>
+{% load static %}        
+<script>
   var resizefunc = [];
+</script>
+<script type="text/javascript">
+  /* ==============================================
+  Counter Up
+  =============================================== */
+  jQuery(document).ready(function($) {
+      $('.counter').counterUp({
+          delay: 100,
+          time: 1200
+      });
+  });
 </script>
 
 <!-- jQuery  -->
@@ -47,14 +59,4 @@
 <script src="{% static 'customadmin/js/jquery.todo.js' %}"></script>
 
 
-<script type="text/javascript">
-  /* ==============================================
-  Counter Up
-  =============================================== */
-  jQuery(document).ready(function($) {
-      $('.counter').counterUp({
-          delay: 100,
-          time: 1200
-      });
-  });
-</script>
+
