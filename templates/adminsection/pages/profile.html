@@ -15,10 +15,10 @@
         <div class="wraper container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="bg-picture text-center" style="background-image:url('images/big/bg.jpg')">
+                    <div class="bg-picture text-center" style="background-image:url('{% static "customadmin/images/big/bg.jpg" %} ')">
                         <div class="bg-picture-overlay"></div>
                         <div class="profile-info-name">
-                            <img src="images/avatar-1.jpg" class="thumb-lg img-circle img-thumbnail" alt="profile-image">
+                            <img src="{{ profile.profile.profile_pic.url }}" class="thumb-lg img-circle img-thumbnail" alt="profile-image">
                             <h3 class="text-white">{{ profile }}</h3>
                         </div>
                     </div>
@@ -102,13 +102,11 @@
                                 <!-- Languages -->
                                 <div class="panel panel-default panel-fill">
                                     <div class="panel-heading"> 
-                                        <h3 class="panel-title">Languages</h3> 
+                                        <h3 class="panel-title">Website</h3> 
                                     </div> 
                                     <div class="panel-body"> 
                                         <ul>
-                                            <li>English</li>
-                                            <li>Franch</li>
-                                            <li>Greek</li>
+                                            <li>{{ profile.profile.website }}</li>
                                         </ul>
                                     </div> 
                                 </div>
@@ -181,26 +179,27 @@
                         <!-- Personal-Information -->
                         <div class="panel panel-default panel-fill">
                             <div class="panel-heading"> 
-                                <h3 class="panel-title">Courses</h3> 
+                                <h3 class="panel-title">Courses ({{ total_courses }})</h3> 
                             </div> 
                             <div class="panel-body"> 
                                 <div class="table-responsive">
                                     <table class="table">
+                                        {% if profile.role == 'tea' %}
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Project Name</th>
+                                                <th>Course Name</th>
                                                 <th>Submission Date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for course in courses.products.all %}
+                                            {% for course in courses %}
                                             <tr>
                                                 <td>{{ forloop.counter }}</td>
                                                 <td>{{ course.title }}</td>
-                                                <td>{{ course.timestamp }}</td>
+                                                <td>{{ course.timestamp|date:"j-M-Y "  }}</td>
                                                 <td>
                                                     {% if course.is_published == True %}
                                                     <span class="label label-success">
@@ -217,6 +216,39 @@
                                             {% endfor %}
 
                                         </tbody>
+                                        {% elif profile.role == 'stu' %}
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Course Name</th>
+                                                <th>Enrolled Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for course in courses.products.all %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ course.title }}</td>
+                                                <td>{{ courses.timestamp|date:"j-M-Y "  }}</td>
+                                                <td>
+                                                    {% if course.is_published == True %}
+                                                    <span class="label label-success">
+                                                        Published
+                                                    {% elif course.is_published == False %}
+                                                    <span class="label label-warning">
+                                                        Pending
+                                                    {% endif %}
+                                                    </span>
+                                                </td>
+                                                <!-- <td><span class="label label-warning">Coming soon</span></td> -->
+                                                <td>Coderthemes</td>
+                                            </tr>
+                                            {% endfor %}
+
+                                        </tbody>
+                                        {% endif %}
                                     </table>
                                 </div>
                             </div> 

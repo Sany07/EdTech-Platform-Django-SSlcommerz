@@ -8,8 +8,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 
 # Create your models here.
-from .forms import *
-from .models import PaymentGatewaySettings
+from ..forms import *
+from ..models import PaymentGatewaySettings
 # Create your views here.
 from accounts.models import CustomUser, Profile
 from courses.models import *
@@ -44,61 +44,6 @@ class DashBoardView(TemplateView):
         return context
 
 
-class AllUsersView(ListView):
-    model = CustomUser
-    context_object_name = 'users'
-    template_name = 'adminsection/pages/all-users.html'
-
-    @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
-    @method_decorator(staff_member_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-class AllInstructorsView(ListView):
-    model = CustomUser
-    context_object_name = 'instructors'
-    template_name = 'adminsection/pages/all-instructors.html'
-
-    @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
-    @method_decorator(staff_member_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_queryset(self):
-        return super().get_queryset().filter(role='tea')
-
-
-class AllStudentsView(ListView):
-    model = CustomUser
-    context_object_name = 'students'
-    template_name = 'adminsection/pages/all-students.html'
-
-    @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
-    @method_decorator(staff_member_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_queryset(self):
-        return super().get_queryset().filter(role='stu')
-
-
-class ProfileView(DetailView):
-    model = CustomUser
-    context_object_name = 'profile'
-    template_name = 'adminsection/pages/profile.html'
-
-    def get_courses_list(self):
-        if self.object.role == 'tea':
-            return Course.objects.filter(instructor=self.object)
-        elif self.object.role == 'stu':
-            return EnrollCouese.objects.filter(user=self.object).first() #here course is a 
-                                                                         #manytomany field key
-                                                                         #so we use first
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['courses'] = self.get_courses_list()
-        return context
 
 
 class CoursesView(ListView):
