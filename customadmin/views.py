@@ -11,8 +11,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .forms import *
 from .models import PaymentGatewaySettings
 # Create your views here.
-from courses.models import *
 from accounts.models import CustomUser, Profile
+from courses.models import *
+from enrolls.models import EnrollCouese
 
 
 class DashBoardView(TemplateView):
@@ -82,12 +83,23 @@ class AllStudentsView(ListView):
 
 
 class ProfileView(DetailView):
-    model = Profile
+    model = CustomUser
     context_object_name = 'profile'
     template_name = 'adminsection/pages/profile.html'
 
-    def get_queryset(self):
-        return super().get_queryset().filter(user_profile=self.kwargs['pk'])
+    def get_courses_list(self):
+        if self.object.role == 'tea':
+            return Course.objects.filter(instructor=self.object)
+        elif self.object.role == 'stu':
+            return EnrollCouese.objects.filter(user=self.object).first() #here course is a 
+                                                                         #manytomany field key
+                                                                         #so we use first
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['courses'] = self.get_courses_list()
+        return context
+
 
 class CoursesView(ListView):
     model = Course
