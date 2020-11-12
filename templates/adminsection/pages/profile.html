@@ -40,12 +40,6 @@
                             <span class="hidden-xs">Courses</span> 
                         </a> 
                     </li> 
-                    <li class="tab" > 
-                        <a href="#settings-2" data-toggle="tab" aria-expanded="false"> 
-                            <span class="visible-xs"><i class="fa fa-cog"></i></span> 
-                            <span class="hidden-xs">Settings</span> 
-                        </a> 
-                    </li> 
                 <div class="indicator"></div></ul> 
                 </div>
                 <div class="col-lg-6 col-md-3 col-sm-3 hidden-xs">
@@ -198,7 +192,7 @@
                                             {% for course in courses %}
                                             <tr>
                                                 <td>{{ forloop.counter }}</td>
-                                                <td>{{ course.title }}</td>
+                                                <td><a href="{{ course.get_absolute_url }}" target="_blank" rel="">{{ course.title }}</a></td>
                                                 <td>{{ course.timestamp|date:"j-M-Y "  }}</td>
                                                 <td>
                                                     {% if course.is_published == True %}
@@ -222,28 +216,15 @@
                                                 <th>#</th>
                                                 <th>Course Name</th>
                                                 <th>Enrolled Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {% for course in courses.products.all %}
                                             <tr>
                                                 <td>{{ forloop.counter }}</td>
-                                                <td>{{ course.title }}</td>
+                                                <td><a href="{{ course.get_absolute_url }}" target="_blank" rel="">{{ course.title }}</a></td>
                                                 <td>{{ courses.timestamp|date:"j-M-Y "  }}</td>
-                                                <td>
-                                                    {% if course.is_published == True %}
-                                                    <span class="label label-success">
-                                                        Published
-                                                    {% elif course.is_published == False %}
-                                                    <span class="label label-warning">
-                                                        Pending
-                                                    {% endif %}
-                                                    </span>
-                                                </td>
                                                 <!-- <td><span class="label label-warning">Coming soon</span></td> -->
-                                                <td>Coderthemes</td>
                                             </tr>
                                             {% endfor %}
 
@@ -255,58 +236,11 @@
                         </div>
                         <!-- Personal-Information -->
                     </div> 
-
-
-                    <div class="tab-pane" id="settings-2">
-                        <!-- Personal-Information -->
-                        <div class="panel panel-default panel-fill">
-                            <div class="panel-heading"> 
-                                <h3 class="panel-title">Edit Profile</h3> 
-                            </div> 
-                            <div class="panel-body"> 
-                                <form role="form">
-                                    <div class="form-group">
-                                        <label for="FullName">Full Name</label>
-                                        <input type="text" value="John Doe" id="FullName" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Email">Email</label>
-                                        <input type="email" value="first.last@example.com" id="Email" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Username">Username</label>
-                                        <input type="text" value="john" id="Username" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Password">Password</label>
-                                        <input type="password" placeholder="6 - 15 Characters" id="Password" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="RePassword">Re-Password</label>
-                                        <input type="password" placeholder="6 - 15 Characters" id="RePassword" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="AboutMe">About Me</label>
-                                        <textarea style="height: 125px;" id="AboutMe" class="form-control">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</textarea>
-                                    </div>
-                                    <button class="btn btn-primary waves-effect waves-light w-md" type="submit">Save</button>
-                                </form>
-
-                            </div> 
-                        </div>
-                        <!-- Personal-Information -->
-                    </div> 
                 </div> 
             </div>
             </div>
         </div> <!-- container -->
-                        
         </div> <!-- content -->
-
-        <footer class="footer text-right">
-            2015 © Moltran.
-        </footer>
-
     </div>
     <!-- ============================================================== -->
     <!-- End Right content here -->

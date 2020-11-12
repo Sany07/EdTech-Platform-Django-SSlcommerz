@@ -16,7 +16,7 @@
                         <div class="col-sm-12">
                             <ol class="breadcrumb pull-right">
                                 <li><a href="#">Dashboard</a></li>
-                                <li class="active">All Users</li>
+                                <li class="active">All courses</li>
                             </ol>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Users</h3>
+                                    <h3 class="panel-title"></h3>
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -33,23 +33,36 @@
                                             <table id="datatable" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>Full Name</th>
-                                                        <th>Username</th>
-                                                        <th>Email</th>
-                                                        <th>Joining Date</th>
+                                                        <th>No</th>
+                                                        <th>Course Title</th>
+                                                        <th>Instructor</th>
+                                                        <th>Price</th>
+                                                        <th>Discount Price</th>
+                                                        <th>Published Date</th>
+                                                        <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
 
                                             
                                                 <tbody>
-                                                    {% for instructor in instructors %}
+                                                    {% for course in courses %}
                                                     <tr>
-                                                        <td>{{ user.get_full_name }}</td>
-                                                        <td>{{ instructor.username }}</td>
-                                                        <td>{{ instructor.email }}</td>
-                                                        <td>{{ instructor.date_joined|date:"j-M-Y " }}</td>
-                                                        <td><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5">View</button></td>
+                                                        <td>{{ forloop.counter }}</td>
+                                                        <td><a href="{{ course.get_absolute_url }}" target="_blank" rel="{{ course.title }}">{{ course.title }}</a></td>
+                                                        <td><a href="" target="_blank" rel=""></a>{{ course.instructor.username }}</td>
+                                                        <td>{{ course.price }}</td>
+                                                        <td>{{ course.offer_price|title }}</td>
+                                                        <td>{{ course.timestamp|date:"j-M-Y " }}</td>
+                                                        <td>{% if course.is_published == True %}
+
+                                                            <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light w-sm m-b-5">Published</button>
+                                                            {% elif course.is_published == False %}
+                                                            <!-- <span class="label label-pink">Pink</span> -->
+                                                            <button type="button" class="btn btn-pink btn-rounded waves-effect waves-light w-sm m-b-5">Pending</button>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td><button type="button" class="btn btn-info btn-rounded waves-effect waves-light m-b-5">View</button></td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>
