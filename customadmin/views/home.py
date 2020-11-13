@@ -40,7 +40,8 @@ class DashBoardView(TemplateView):
         context["totalteachers"] = results[1]
         context["totalstudents"] = results[2]
         context["totalcourses"] = results[3]
-
+        
+        print(self.request.path)
         return context
 
 

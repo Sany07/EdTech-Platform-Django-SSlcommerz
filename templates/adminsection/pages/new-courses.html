@@ -16,7 +16,7 @@
                         <div class="col-sm-12">
                             <ol class="breadcrumb pull-right">
                                 <li><a href="#">Dashboard</a></li>
-                                <li class="active">All courses</li>
+                                <li class="active">Pending courses</li>
                             </ol>
                         </div>
                     </div>
@@ -54,10 +54,8 @@
                                                         <td>{{ course.price }}</td>
                                                         <td>{{ course.offer_price|title }}</td>
                                                         <td>{{ course.timestamp|date:"j-M-Y " }}</td>
-                                                        <td>{% if course.is_published == True %}
-
-                                                            <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light w-sm m-b-5">Published</button>
-                                                            {% elif course.is_published == False %}
+                                                        <td>
+                                                            {% if course.is_published == False %}
                                                             <!-- <span class="label label-pink">Pink</span> -->
                                                             <button type="button" class="btn btn-pink btn-rounded waves-effect waves-light w-sm m-b-5">Pending</button>
                                                             {% endif %}

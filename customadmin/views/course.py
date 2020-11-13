@@ -28,18 +28,16 @@ class CoursesView(ListView):
 class NewCoursesView(ListView):
     model = Course
     context_object_name = 'courses'
-    template_name = 'adminsection/pages/newcourses.html'
+    template_name = 'adminsection/pages/new-courses.html'
 
     @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
     @method_decorator(staff_member_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["new_courses"] = super().get_queryset().filter(
-            is_published='False')
-        return context
+    def get_queryset(self):
+        return super().get_queryset().filter(is_published=False)
+    
 
 
 class CourseDetailView(DetailView):
@@ -66,7 +64,6 @@ def approvedOrReject(request):
             course_obj.is_published = True
             course_obj.save()
             return redirect("customadmin:courses")
-            print('ok')
         except Course.DoesNotExist:
             raise Http404()
 
