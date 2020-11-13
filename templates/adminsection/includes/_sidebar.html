@@ -23,29 +23,29 @@
                   <div id="sidebar-menu">
                       <ul>
                           <li>
-                              <a href="index.html" class="waves-effect "><i class="md md-home"></i><span> Dashboard </span></a>
+                              <a href="{% url 'customadmin:dashboard' %}" class="waves-effect {% if 'dashboard' in request.path %} active {% endif %}"><i class="md md-home"></i><span> Dashboard </span></a>
                           </li>
 
                           <li class="has_sub">
                               <a href="#" class="waves-effect {% if 'users' in request.path or 'instructors' in request.path or 'students' in request.path %} active {% endif %} "><i class="md md-mail"></i><span>Manage Users </span><span class="pull-right"><i class="md md-add"></i></span></a>
                               <ul class="list-unstyled">
-                                  <li {% if 'users' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:users' %}"><i class="md md-chevron-right"></i>Users</a></li>
-                                  <li {% if 'instructors' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:instructors' %}"><i class="md md-chevron-right"></i>Instructors</a></li>
-                                  <li {% if 'students' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:students' %}"><i class="md md-chevron-right"></i>Students</a></li>
+                                  <li {% if 'users' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:users' %}"><i class="md md-forward"></i>All Users</a></li>
+                                  <li {% if 'instructors' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:instructors' %}"><i class="md md-forward"></i>All Instructors</a></li>
+                                  <li {% if 'students' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:students' %}"><i class="md md-forward"></i>All Students</a></li>
                               </ul>
                           </li>
                           <li class="has_sub">
-                            <a href="#" class="waves-effect {% if 'courses' in request.path or 'new-courses' in request.path  %} active {% endif %}"><i class="md md-mail"></i><span>Manage Courses </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                            <a href="#" class="waves-effect {% if 'courses' in request.path or 'new-courses' in request.path or 'students' in request.path %} active {% endif %}"><i class="md md-mail"></i><span>Manage Courses </span><span class="pull-right"><i class="md md-add"></i></span></a>
                             <ul class="list-unstyled">
-                                <li {% if 'courses' in request.path %} class="active" {% endif %}><a  href="{% url 'customadmin:all-courses' %}">All Courses</a></li>
-                                <li {% if 'newcourses' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:new-courses' %}">Pending Courses</a></li>
+                                <li {% if '/admin/courses/' == request.path %} class="active" {% endif %}><a  href="{% url 'customadmin:all-courses' %}"><i class="md md-forward"></i>All Courses</a></li>
+                                <li {% if 'newcourses' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:new-courses' %}"><i class="md md-forward"></i>Pending Courses</a></li>
                             </ul>
                         </li>
                           <li class="has_sub">
-                            <a href="#" class="waves-effect"><i class="md md-now-widgets"></i><span> Settings </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                            <a href="#" class="waves-effect {% if 'gateway' in request.path or 'frontend' in request.path %} active {% endif %}"><i class="md md-now-widgets"></i><span> Settings </span><span class="pull-right"><i class="md md-add"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="{% url 'customadmin:frontend-settings' %}">General Settings</a></li>
-                                <li><a href="{% url 'customadmin:gateway-settings' %}">Payment Gateway Settings</a></li>
+                                <li {% if 'frontend' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:frontend-settings' %}"><i class="md md-forward"></i>General Settings</a></li>
+                                <li {% if 'gateway' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:gateway-settings' %}"><i class="md md-forward"></i>Payment Gateway</a></li>
                                 <li><a href="form-validation.html">Form Validation</a></li>
                                 <li><a href="form-advanced.html">Advanced Form</a></li>
                                 <li><a href="form-wizard.html">Form Wizard</a></li>
