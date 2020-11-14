@@ -1,64 +1,103 @@
-            <!-- ========== Left Sidebar Start ========== -->
+<!-- ========== Left Sidebar Start ========== -->
 
-            <div class="left side-menu">
-              <div class="sidebar-inner slimscrollleft">
-                  <div class="user-details">
-                      <div class="pull-left">
-                          <img src="images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
-                      </div>
-                      <div class="user-info">
-                          <div class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">SANY <span class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                  <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div class="ripple-wrapper"></div></a></li>
-                                  <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
-                                  <li><a href="{% url 'accounts:logout' %}"><i class="md md-settings-power"></i> Logout</a></li>
-                              </ul>
-                          </div>
-                          
-                          <p class="text-muted m-0">Administrator</p>
-                      </div>
-                  </div>
-                  <!--- Divider -->
-                  <div id="sidebar-menu">
-                      <ul>
-                          <li>
-                              <a href="{% url 'customadmin:dashboard' %}" class="waves-effect {% if 'dashboard' in request.path %} active {% endif %}"><i class="md md-home"></i><span> Dashboard </span></a>
-                          </li>
+<div class="left side-menu">
+    <div class="sidebar-inner slimscrollleft">
+        <div class="user-details">
+            <div class="pull-left">
+                <img src="images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
+            </div>
+            <div class="user-info">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">SANY <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div
+                                    class="ripple-wrapper"></div></a></li>
+                        <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
+                        <li><a href="{% url 'accounts:logout' %}"><i class="md md-settings-power"></i> Logout</a></li>
+                    </ul>
+                </div>
 
-                          <li class="has_sub">
-                              <a href="#" class="waves-effect {% if 'users' in request.path or 'instructors' in request.path or 'students' in request.path %} active {% endif %} "><i class="md md-mail"></i><span>Manage Users </span><span class="pull-right"><i class="md md-add"></i></span></a>
-                              <ul class="list-unstyled">
-                                  <li {% if 'users' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:users' %}"><i class="md md-forward"></i>All Users</a></li>
-                                  <li {% if 'instructors' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:instructors' %}"><i class="md md-forward"></i>All Instructors</a></li>
-                                  <li {% if 'students' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:students' %}"><i class="md md-forward"></i>All Students</a></li>
-                              </ul>
-                          </li>
-                          <li class="has_sub">
-                            <a href="#" class="waves-effect {% if 'courses' in request.path or 'new-courses' in request.path or 'students' in request.path %} active {% endif %}"><i class="md md-mail"></i><span>Manage Courses </span><span class="pull-right"><i class="md md-add"></i></span></a>
-                            <ul class="list-unstyled">
-                                <li {% if '/admin/courses/' == request.path %} class="active" {% endif %}><a  href="{% url 'customadmin:all-courses' %}"><i class="md md-forward"></i>All Courses</a></li>
-                                <li {% if 'newcourses' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:new-courses' %}"><i class="md md-forward"></i>Pending Courses</a></li>
-                            </ul>
+                <p class="text-muted m-0">Administrator</p>
+            </div>
+        </div>
+        <!--- Divider -->
+        <div id="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="{% url 'customadmin:dashboard' %}"
+                        class="waves-effect {% if 'dashboard' in request.path %} active {% endif %}"><i
+                            class="md md-home"></i><span> Dashboard </span></a>
+                </li>
+
+                <li class="has_sub">
+                    <a href="#"
+                        class="waves-effect {% if 'users' in request.path or 'instructors' in request.path or 'students' in request.path %} active {% endif %} "><i
+                            class="md md-mail"></i><span>Manage Users </span><span class="pull-right"><i
+                                class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li {% if 'users' in request.path %} class="active" {% endif %}><a
+                                href="{% url 'customadmin:users' %}"><i class="md md-forward"></i>All Users</a></li>
+                        <li {% if 'instructors' in request.path %} class="active" {% endif %}><a
+                                href="{% url 'customadmin:instructors' %}"><i class="md md-forward"></i>All
+                                Instructors</a></li>
+                        <li {% if 'students' in request.path %} class="active" {% endif %}><a
+                                href="{% url 'customadmin:students' %}"><i class="md md-forward"></i>All Students</a>
                         </li>
-                          <li class="has_sub">
-                            <a href="#" class="waves-effect {% if 'gateway' in request.path or 'frontend' in request.path %} active {% endif %}"><i class="md md-now-widgets"></i><span> Settings </span><span class="pull-right"><i class="md md-add"></i></span></a>
-                            <ul class="list-unstyled">
-                                <li {% if 'frontend' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:frontend-settings' %}"><i class="md md-forward"></i>General Settings</a></li>
-                                <li {% if 'gateway' in request.path %} class="active" {% endif %}><a href="{% url 'customadmin:gateway-settings' %}"><i class="md md-forward"></i>Payment Gateway</a></li>
-                                <li><a href="form-validation.html">Form Validation</a></li>
-                                <li><a href="form-advanced.html">Advanced Form</a></li>
-                                <li><a href="form-wizard.html">Form Wizard</a></li>
-                                <li><a href="form-editor.html">WYSIWYG Editor</a></li>
-                                <li><a href="code-editor.html">Code Editors</a></li>
-                                <li><a href="form-uploads.html">Multiple File Upload</a></li>
-                                <li><a href="form-xeditable.html">X-editable</a></li>
-                            </ul>
+                    </ul>
+                </li>
+                <li class="has_sub">
+                    <a href="#"
+                        class="waves-effect {% if 'courses' in request.path or 'new-courses' in request.path or 'students' in request.path %} active {% endif %}"><i
+                            class="md md-mail"></i><span>Manage Courses </span><span class="pull-right"><i
+                                class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li {% if '/admin/courses/' == request.path %} class="active" {% endif %}><a
+                                href="{% url 'customadmin:all-courses' %}"><i class="md md-forward"></i>All Courses</a>
                         </li>
-                      </ul>
-                      <div class="clearfix"></div>
-                  </div>
-                  <div class="clearfix"></div>
-              </div>
-          </div>
-          <!-- Left Sidebar End --> 
+                        <li {% if 'newcourses' in request.path %} class="active" {% endif %}><a
+                                href="{% url 'customadmin:new-courses' %}"><i class="md md-forward"></i>Pending
+                                Courses</a></li>
+                    </ul>
+                </li>
+                <li class="has_sub">
+                    <a href="#"
+                        class="waves-effect {% if 'courses' in request.path or 'new-courses' in request.path or 'students' in request.path %} active {% endif %}"><i
+                            class="md md-mail"></i><span>Manage Categories </span><span class="pull-right"><i
+                                class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li {% if '/admin/courses/' == request.path %} class="active" {% endif %}><a
+                                href="{% url 'customadmin:all-courses' %}"><i class="md md-forward"></i>All Categories</a>
+                        </li>
+                        <li {% if 'newcourses' in request.path %} class="active" {% endif %}><a
+                                href="{% url 'customadmin:new-courses' %}"><i class="md md-forward"></i>Sub Categories</a></li>
+                    </ul>
+                </li>
+                <li class="has_sub">
+                    <a href="#"
+                        class="waves-effect {% if 'gateway' in request.path or 'frontend' in request.path %} active {% endif %}"><i
+                            class="md md-now-widgets"></i><span> Settings </span><span class="pull-right"><i
+                                class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li {% if 'frontend' in request.path %} class="active" {% endif %}><a
+                                href="{% url 'customadmin:frontend-settings' %}"><i class="md md-forward"></i>General
+                                Settings</a></li>
+                        <li {% if 'gateway' in request.path %} class="active" {% endif %}><a
+                                href="{% url 'customadmin:gateway-settings' %}"><i class="md md-forward"></i>Payment
+                                Gateway</a></li>
+                        <li><a href="form-validation.html">Form Validation</a></li>
+                        <li><a href="form-advanced.html">Advanced Form</a></li>
+                        <li><a href="form-wizard.html">Form Wizard</a></li>
+                        <li><a href="form-editor.html">WYSIWYG Editor</a></li>
+                        <li><a href="code-editor.html">Code Editors</a></li>
+                        <li><a href="form-uploads.html">Multiple File Upload</a></li>
+                        <li><a href="form-xeditable.html">X-editable</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- Left Sidebar End -->
