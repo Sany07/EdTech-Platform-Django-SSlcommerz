@@ -43,21 +43,21 @@ class QuizQuestion(models.Model):
         return self.question
 
 
-class QuizParticipent(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz')
-    question = models.CharField(max_length=250,blank=False)
-    image    = models.ImageField(upload_to='photos/quiz/%Y-%m-%d/', blank=True, null=True)
-    choice_one = models.CharField(max_length=250,blank=False)
-    choice_two = models.CharField(max_length=250,blank=False)
-    choice_three = models.CharField(max_length=250,blank=False)
-    choice_four =  models.CharField(max_length=250,blank=False)
-    ans = models.CharField(max_length=300,choices = QUIZ_CHOICES) 
+# class QuizParticipent(models.Model):
+#     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz')
+#     question = models.CharField(max_length=250,blank=False)
+#     image    = models.ImageField(upload_to='photos/quiz/%Y-%m-%d/', blank=True, null=True)
+#     choice_one = models.CharField(max_length=250,blank=False)
+#     choice_two = models.CharField(max_length=250,blank=False)
+#     choice_three = models.CharField(max_length=250,blank=False)
+#     choice_four =  models.CharField(max_length=250,blank=False)
+#     ans = models.CharField(max_length=300,choices = QUIZ_CHOICES) 
 
-    class Meta:
-        verbose_name = "QuizQuestion"
-        verbose_name_plural = "QuizQuestions"
+#     class Meta:
+#         verbose_name = "QuizQuestion"
+#         verbose_name_plural = "QuizQuestions"
 
-    def __str__(self):
-        return self.question
+#     def __str__(self):
+#         return self.question
 
 
