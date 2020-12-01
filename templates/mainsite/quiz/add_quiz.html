@@ -1,0 +1,22 @@
+
+
+
+<form class="form-horizontal" method="POST" action="">
+    {% csrf_token %}
+<div class="row spacer">
+<div class="col-2">
+    <label>{{bookform.choice_one.label}}</label>
+</div>
+<div class="col-4">
+    <div class="input-group">
+        {{bookform.choice_one}}
+    </div>
+</div>
+</div>
+
+<div class="row spacer">
+    <div class="col-4 offset-2">
+        <button type="submit" class="btn btn-block btn-primary">Create</button>
+    </div>
+</div>
+</form>
