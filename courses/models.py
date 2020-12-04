@@ -5,13 +5,12 @@ from django.shortcuts import reverse
 from django.utils.text import slugify
 from django.db.models.signals import pre_save, post_save
 from django.contrib.contenttypes.fields import GenericRelation
-from courses.utils import unique_slug_generator
 from django.contrib.contenttypes.models import ContentType 
 from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
 
-
+from courses.utils import unique_slug_generator
 from star_ratings.models import Rating
 from reviews.models import Review
 
