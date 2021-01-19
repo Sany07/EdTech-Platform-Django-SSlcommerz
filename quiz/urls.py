@@ -1,11 +1,12 @@
 
 from django.urls import include, path
-from .views import QuizAdd
+from .views import AddQuiz, AddQuizQuestion
 
 
 app_name = "quiz"
 urlpatterns = [
-    path('', QuizAdd, name="quiz"),
+    path('', AddQuiz, name="add_quiz"),
+    path('add/question/<int:id>/', AddQuizQuestion, name="add_quiz_question"),
 
 ]
 

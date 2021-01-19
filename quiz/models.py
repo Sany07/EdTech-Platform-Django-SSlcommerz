@@ -26,8 +26,8 @@ class Quiz(models.Model):
 
 
 class QuizQuestion(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz')
-    question = models.CharField(max_length=250,blank=False)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz',default=1)
+    question = models.CharField(max_length=250,blank=True, null=True)
     image    = models.ImageField(upload_to='photos/quiz/%Y-%m-%d/', blank=True, null=True)
     choice_one = models.CharField(max_length=250,blank=False)
     choice_two = models.CharField(max_length=250,blank=False)

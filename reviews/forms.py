@@ -21,7 +21,5 @@ class ReviewForm(forms.ModelForm):
         # c_type = self.cleaned_data.get("content_type")
         object_id = self.cleaned_data.get("object_id")
         content = self.cleaned_data.get("content")
-
-
         return super(ReviewForm, self).clean(*args, **kwargs)
 

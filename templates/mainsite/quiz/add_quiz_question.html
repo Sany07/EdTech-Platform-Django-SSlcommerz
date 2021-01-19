@@ -38,8 +38,8 @@
                     <div class="panel-body"> 
                         <div class="col-lg-12 col-md-12">
                             <div class="apply-form">
-                                <h3>Apply Now</h3>
-                                <form method="POST" action="{% url 'quiz:add_quiz' %}">
+                                <h3>Add Quiz Question</h3>
+                                <form method="POST" id="post-submit-ajax" action="{% url 'quiz:add_quiz_question' quiz.id %} ">
 
                                         {% csrf_token %}
                                         <div class="row">
@@ -50,7 +50,7 @@
                                                 </div>
                                             </div> -->
                                       
-                                            <!-- <div class="col-lg-12 col-md-12 px-5">
+                                            <div class="col-lg-12 col-md-12 px-5">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="question"
                                                     id="id_question" placeholder="Question">
@@ -94,8 +94,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 px-5">
-                                                <label class="labelc" for="category">Category</label> -->
-                                                <!-- <select name="ans" required="" id="id_ans" class="form-control">
+                                                <!-- <label class="labelc" for="category">Category</label> -->
+                                                <select name="ans" required="" id="id_ans" class="form-control">
 
                                                     <option selected disabled>Correct Ans</option>
                                                     
@@ -112,8 +112,8 @@
                 
                                                     
                                                 </select>
-                                            </div> -->
-{{ form.as_p }}
+                                            </div>
+
                                             <div class="col-lg-12 col-md-12">
                                                 <button class="btn btn-primary" type="submit">ADD</button>
                                             </div>
