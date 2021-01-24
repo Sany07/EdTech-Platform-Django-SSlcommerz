@@ -40,7 +40,52 @@ class CourseListView(ListView):
         # context['enrolled'] = EnrolledList(self.request)
         
         return context
-    
+
+class CategoryListView(ListView):
+    model = Category
+    context_object_name = 'categories'
+    # paginate_by = 6
+    template_name = "mainsite/courses/categories.html"
+
+    # def get_queryset(self):
+    #     return super().get_queryset().filter(is_published='True').order_by('-id')
+
+
+
+class SingleCategoryListView(DetailView):
+    model = Category
+    context_object_name = 'all_category'
+    pk_url_kwarg = 'id'
+    paginate_by = 6
+    template_name = "mainsite/courses/category-single.html"
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        context['cart_obj'] = cart_obj
+        context['courses'] = Course.objects.filter(
+            category=self.object.id, is_published=True).order_by('-id')
+
+        print(context['courses'] )
+        return context
+
+
+
+
+# class CategoryView(DetailView, MultipleObjectMixin): #MultipleObjectMixin for adding paginate..
+#     model = Category                                 #Functionality for news
+#     paginate_by = 6
+#     context_object_name = 'category'
+#     template_name = 'site/pages/category.html'
+
+#     def get_context_data(self, **kwargs):
+#         # context = super().get_context_data(**kwargs)
+#         news_list = News.objects.filter(
+#             category=self.object.id, is_published=True).order_by('-id')
+#         context= super().get_context_data(object_list=news_list, **kwargs)
+
+
 
 class SingleCourseView(FormMixin, DetailView):
     model = Course

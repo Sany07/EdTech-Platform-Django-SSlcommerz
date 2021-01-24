@@ -1,6 +1,18 @@
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
+
+
+
+
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL
+
+
+
+
 from courses.models import Course
+
 
 class HomeView(ListView):
     
@@ -16,6 +28,9 @@ class AboutView(TemplateView):
     
 
     template_name = 'mainsite/site/about.html'
+
+
+
 
 
 def handler404(request, exception):

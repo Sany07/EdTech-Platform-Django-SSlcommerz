@@ -1,5 +1,6 @@
 {% extends 'mainsite/base.html' %}
 {% load static %}
+{% load ratings %}
 {% load is_already_enrolled %}
 {% load add_or_remove_from_cart %}
 
@@ -39,18 +40,18 @@
                     <div class="courses-content">
                         <h3><a href="{{ course.get_absolute_url }}">{{ course.title}}</a></h3>
                         <ul>
-                            {{ course.ratings.Rating }}
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-                            <li><i class="icofont-star"></i></li>
-
+                            
+                            
                         </ul>
                     </div>
 
                     <div class="courses-content-bottom">
-                        <h4><i class="icofont-ui-user"></i> 120 Students</h4>
+                        <h4><i class="icofont-ui-user"></i> {{ course.get_enroll_count }} 
+                            {% if course.get_enroll_count > 1 %}
+                            Students</h4>
+                            {% else %}
+                            Student </h4>
+                            {% endif %}
 
                         <h4 class="price">
                             {% if course.offer_price %}
@@ -60,6 +61,10 @@
                             {% else %}
                             Free
                             {% endif %}
+                        </h4>
+                     
+                        <h4 class="ddd-rating">
+                            <i class="icofont-price"></i> Ratings : <span>{% ratings course %}</span>
                         </h4>
                         <h4 class="buy-cart cart-buttons">
 
@@ -83,12 +88,10 @@
                                
                                {% add_or_remove_from_cart request course as add_or_remove %}
                                {% if add_or_remove %}
-                                <a href="" class="button-ajax"><button class="btn btn-danger">Remove From cart</button></a>
+                                <a href="" class="ml-5 button-ajax"><button class="btn btn-danger">Remove From cart</button></a>
                                 {% else %}
-                                <a href="" class="button-ajax"><button class="btn btn-danger">Add to cart</button></a>
+                                <a href="" class="ml-5 button-ajax"><button class="btn btn-danger">Add to cart</button></a>
                                 {% endif %}
-
-
                             </form>
                             {% endif %}
                             {% endif %}
@@ -115,5 +118,31 @@
 
   </script>
 
+<style>
+
+.star-ratings-rating-background
+{
+    display: none;
+}
+.star-ratings-rate-action
+{
+    display: none;
+}
+
+
+.star-ratings-rating-average  {
+    margin-left: 20px;
+}
+.star-ratings-rating-count {
+    margin-left: 20px;
+}
+.ddd-rating {
+    width: 100%;
+    /* padding: 10px; */
+    top: 13px;
+    position: relative;
+}
+
+</style>
 
 {% endblock %}

@@ -11,4 +11,4 @@ class QuizForm(forms.ModelForm):
 class QuizQuestionForm(forms.ModelForm):
     class Meta:
         model = QuizQuestion
-        exclude = ['quiz']
+        exclude = '__all__'

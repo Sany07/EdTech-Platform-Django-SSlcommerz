@@ -48,7 +48,7 @@
             <nav class="classy-navbar justify-content-between" id="EduStudyNav">
 
                 <!-- Logo -->
-                <a class="nav-brand" href="index.html">
+                <a class="nav-brand" href="{% url 'coresite:home' %}">
                     <img src="" alt="GAINSKILL"></a>
 
                 <!-- Navbar Toggler -->
@@ -68,13 +68,13 @@
                     <div class="classynav">
                         <ul>
                             <li class="pr-12 active"><a href="{% url 'coresite:home' %}">Home</a></li>
-                            <li class="pr-12"><a href="{% url 'courses:courses' %}">Courses</a></li>
+                            <li class="pr-12"><a href="{% url 'courses:category' %}">Courses</a></li>
                             <li class=""><a href="{% url 'coresite:about' %}">About Us</a></li>
                             <li class="cn-dropdown-item has-down pr-12">
                                 <a href="#">Category</a>
                                 <ul class="dropdown">
                                     {% for category in categories %}
-                                    <li><a href="{% url 'accounts:instructor-register' %}">{{ category }}</a></li>
+                                    <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
                                     {% endfor %}
 
                                 </ul>

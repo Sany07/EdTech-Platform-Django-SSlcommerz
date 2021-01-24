@@ -27,6 +27,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("courses:single-category", kwargs={'id': self.id})
     
 
 class Course(models.Model):
@@ -67,6 +70,13 @@ class Course(models.Model):
         content_type = ContentType.objects.get_for_model(self.__class__)
         return content_type    
 
+    @property
+    def get_enroll_count(self):
+        
+        # comment_count = Course.objects.all().annotate(Count('products__id')).order_by('-products__id') 
+        enroll_count= self.products.values('products__id').aggregate(models.Count('products__id'))
+
+        return enroll_count['products__id__count']
 
 def rl_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:

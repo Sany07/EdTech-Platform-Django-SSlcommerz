@@ -1,7 +1,13 @@
 from django.contrib import messages, auth
 from django.shortcuts import render , redirect , HttpResponseRedirect, get_object_or_404
-from django.views.generic import CreateView, DetailView, RedirectView, View , ListView, TemplateView, FormView
+from django.views.generic import CreateView, DetailView, RedirectView, View , UpdateView , ListView, TemplateView, FormView
 from django.urls import reverse, reverse_lazy
+
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, Http404
+from django.utils.decorators import method_decorator
+
+
 
 from accounts.models import *
 from accounts.forms import *
@@ -128,6 +134,29 @@ class ProfileView(DetailView):
         context['total'] = self.get_course().count()
 
         return context
+
+
+@login_required
+def EditProfileView(request):
+    if request.method == 'POST':
+        user_form = ProfileUpdateForm(request.POST, instance=request.user)
+        profile_form = UserProfileUpdateForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request,'Your profile was successfully updated!')
+            return redirect(reverse("accounts:profile", kwargs={
+                'id': request.user.id
+                }))
+        else:
+            messages.error(request,'Please correct the error below.')
+    else:
+        user_form = ProfileUpdateForm(instance=request.user)
+        profile_form = UserProfileUpdateForm(instance=request.user.profile)
+    return render(request, 'mainsite/accounts/edit_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
 
 
 

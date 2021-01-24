@@ -8,9 +8,9 @@ from courses.models import Course
 class EnrollCouese(models.Model):
 
     user        = models.OneToOneField(User, on_delete=models.DO_NOTHING)
-    products    = models.ManyToManyField(Course, blank=True)
+    products    = models.ManyToManyField(Course, blank=True, related_name='products')
     timestamp   = models.DateTimeField(auto_now= True, auto_now_add=False)
-    timestamp.editable = True
+    #timestamp.editable = True
 
     class Meta:
         verbose_name = "Enroll"

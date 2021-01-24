@@ -2,7 +2,7 @@
 from django.urls import path
 
 
-from .views import InstructorRegisterView, ProfileView, LogInView, LogoutView, StudentRegisterView
+from .views import InstructorRegisterView, ProfileView, LogInView, LogoutView, StudentRegisterView,EditProfileView
 
 
 app_name = "accounts"
@@ -15,6 +15,8 @@ urlpatterns = [
     path('profile/<int:id>/', ProfileView.as_view(), name="profile"),
     path('student/register/', StudentRegisterView.as_view(), name="student-register"),
     path('instructor/register/', InstructorRegisterView.as_view(), name="instructor-register"),
+    path('profile/update/',EditProfileView ,name="profile-update",
+    )
  
     
 ]

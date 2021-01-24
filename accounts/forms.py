@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib import messages
 
 
-from accounts.models import CustomUser
+from accounts.models import CustomUser, Profile
 from courses.models import *
 
 
@@ -128,6 +128,40 @@ class StudentChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ['email', 'username', 'first_name', 'last_name',  'password']
+
+class ProfileUpdateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ProfileUpdateForm, self).__init__(*args, **kwargs)
+        self.fields["first_name"].widget.attrs.update(
+            {
+                "placeholder": "Enter First Name",
+            }
+        )
+        self.fields["last_name"].widget.attrs.update(
+            {
+                "placeholder": "Enter Last Name",
+            }
+        )
+    class Meta:
+        model = CustomUser
+        fields = ['first_name', 'last_name']
+
+class UserProfileUpdateForm(forms.ModelForm):
+    # def __init__(self, *args, **kwargs):
+    #     super(ProfileUpdateForm, self).__init__(*args, **kwargs)
+    #     self.fields["first_name"].widget.attrs.update(
+    #         {
+    #             "placeholder": "Enter First Name",
+    #         }
+    #     )
+    #     self.fields["last_name"].widget.attrs.update(
+    #         {
+    #             "placeholder": "Enter Last Name",
+    #         }
+    #     )
+    class Meta:
+        model = Profile
+        exclude = ['user_profile']
 
 
 class UserLoginForm(forms.Form):

@@ -44,11 +44,11 @@
                                         {% csrf_token %}
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 px-5">
-                                                <!-- <div class="form-group">
-                                                    <input type="select" class="form-control" name="quiz"
-                                                    id="id_quiz" placeholder="">
-                                                </div>
-                                            </div> -->
+                                                
+                                                <input type="hidden" name="quiz"
+                                                    id="id_quiz" value="{{ quiz.id }}">
+                                            
+                                            
                                       
                                             <div class="col-lg-12 col-md-12 px-5">
                                                 <div class="form-group">
@@ -113,7 +113,6 @@
                                                     
                                                 </select>
                                             </div>
-
                                             <div class="col-lg-12 col-md-12">
                                                 <button class="btn btn-primary" type="submit">ADD</button>
                                             </div>
