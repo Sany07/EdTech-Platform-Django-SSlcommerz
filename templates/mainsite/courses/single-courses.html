@@ -254,7 +254,7 @@
                                     </div>
 
                                     <div class="client-content">
-                                        <h4>{{ review.user.username }}</h4>
+                                        <h4><a href="{% url 'accounts:profile' review.user.id %}">{{ review.user.username }}</a></h4>
                                         <ul>
                                             {{ review.timestamp  | timesince }}
                                             <!-- <li><i class="icofont-star"></i></li>
@@ -289,7 +289,7 @@
 
                             <li><i class="icofont-read-book"></i> Language <span>English</span></li>
 
-                            <li><i class="icofont-users-social"></i> Students <span>560</span></li>
+                            <li><i class="icofont-users-social"></i> Students <span>{{ course.get_enroll_count }} </span></li>
 
                             <!-- <li><i class="icofont-certificate-alt-1"></i> Certificate <span>Yes</span></li> -->
 
@@ -317,7 +317,7 @@
                         {% for similar_category_course in similar_category_courses %}
                         <div class="single-latest-courses">
                             <div class="img">
-                                <img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" />
+                                <img style="height: 134px; width: 134px;" src="{{ similar_category_course.thumbnail.url }}" alt="course" />
                             </div>
 
                             <div class="content">

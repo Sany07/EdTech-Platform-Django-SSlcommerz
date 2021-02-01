@@ -9,14 +9,16 @@ from .models import *
 
 
 
-def AddQuiz(request):
+def AddQuiz(request, id):
     template_name = 'mainsite/quiz/add_quiz.html'
     
     form = QuizForm(request.POST or None , request.FILES or None)
     if request.method == 'POST':
         if form.is_valid():
+            courseid = get_object_or_404(Course, id= id)
             # first save this book, as its reference will be used in `Author`
             form  = form.save(commit=False)
+            form.course = courseid
             form.save()
             return redirect(reverse("quiz:add_quiz_question", kwargs={
                 'id': form.id
@@ -60,7 +62,7 @@ lst = []
 anslist = []
 
 
-def Exam(request):
+def Exam(request, id):
     # print(lst)
     # print(anslist)
     # print(len(anslist))
@@ -68,13 +70,13 @@ def Exam(request):
     if len(anslist) == 0:
         print('a')
 
-        answers = QuizQuestion.objects.all()
+        answers = QuizQuestion.objects.filter(quiz = id)
         for i in answers:
             print(i)
             anslist.append(i.ans)
     # print(anslist)
-    obj = QuizQuestion.objects.all()
-    count = QuizQuestion.objects.all().count()
+    obj = QuizQuestion.objects.filter(quiz = id)
+    count = QuizQuestion.objects.filter(quiz = id).count()
     paginator = Paginator(obj,1)
     try:
         page = int(request.GET.get('page','1'))  

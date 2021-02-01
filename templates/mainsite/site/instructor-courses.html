@@ -3,58 +3,59 @@
 {% load ratings %}
 
 {% block content %}
-        
 
-        
-        <!-- Start Page Title Area -->
-        <div class="page-">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="container-fluid mx-2">
-                        <div class="student-dashboard__banner mx-4">
-                            <div class="student-dashboard__container mx-5">
-                                <p class="student-dashboard__welcome px-5 mx-5">Welcome Back, {{ request.user.get_full_name }} !</p>
-                            </div>
-                        </div>
+
+
+<!-- Start Page Title Area -->
+<div class="page-">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container-fluid mx-2">
+                <div class="student-dashboard__banner mx-4">
+                    <div class="student-dashboard__container mx-5">
+                        <p class="student-dashboard__welcome px-5 mx-5">Welcome Back, {{ request.user.get_full_name }} !
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        
-        <!-- End Page Title Area -->
-        <!-- Start Courses Area -->
-        <section class="courses-area ptb-100">
-            <div class="container">
-                <div class="row"> 
-                    <div class="col-lg-12 col-md-12">
-        <h3>Total Courses : {{ total }} </h3> </div>
-                {% for course in mycourses %}
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-courses-item">
-                            <div class="courses-img">
-                                <img src="{{ course.thumbnail.url }}" alt="course" />
-                            </div>
-                            
-                            <div class="courses-content">
-                                <h3><a href="{{ course.get_absolute_url }}">{{ course.title}}</a></h3>
-                            </div>
-                            
-                            <div class="courses-content-bottom">
-                                <h4 class="cart-buttons">                               
-                                    <!-- <a href="{% url 'dashboard:start-course' course.slug %}" class=""><button class="btn btn-danger">VIEW COURSE</button></a> -->
 
-                                </h4>
- 
-
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-                </div>
+<!-- End Page Title Area -->
+<!-- Start Courses Area -->
+<section class="courses-area m-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 pl-0 mb-5">
+                <h3>Total Courses : {{ total }} </h3>
             </div>
-        </section>
-        <!-- End Courses Area -->
-        
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Published / Pending</th>
+                        <th>Quiz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in mycourses %}
+                    <tr>
+                        <td><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></td>
+                        <td>{{ course.is_published }}</td>
+                        {% if course.courseref.all %} 
+                        <td>Assined</td>
+                        {% else %}
+                        <td><a href="{% url 'quiz:add_quiz' course.id  %}">Assign Quiz</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- End Courses Area -->
+
 {% endblock %}

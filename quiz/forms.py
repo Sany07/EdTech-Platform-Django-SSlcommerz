@@ -6,9 +6,10 @@ from .models import *
 class QuizForm(forms.ModelForm):
     class Meta:
         model = Quiz
-        exclude = '__all__'
+        fields = ['descriptions']
 
 class QuizQuestionForm(forms.ModelForm):
     class Meta:
         model = QuizQuestion
-        exclude = '__all__'
+        fields = '__all__'
+        

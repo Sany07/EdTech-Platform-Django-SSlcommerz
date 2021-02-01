@@ -100,7 +100,7 @@ class SingleCourseView(FormMixin, DetailView):
 
 
     def get_similar_category_courses(self):      
-        return self.model.objects.filter(category=self.object.category).order_by("-id")[:5]
+        return self.model.objects.filter(category=self.object.category).exclude(id=self.object.id).order_by("-id")[:5]
 
     def get_total_lecture(self):               
         return Lesson.objects.filter(course=self.object).values('video_link').count()

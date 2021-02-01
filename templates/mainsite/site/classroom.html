@@ -33,6 +33,14 @@
                             </span>
                         </a>
                         {% endfor %}
+                        {% for quiz in course.courseref.all %}
+                        <a href="{% url 'quiz:exam' quiz.id  %}" class="nav-link ">
+                            <i class="icofont-ui-play pr-2"></i>
+                            <span class="ls-title "> 
+                                    Participate Quiz
+                            </span>
+                        </a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

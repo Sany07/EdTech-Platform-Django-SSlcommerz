@@ -12,8 +12,8 @@ app_name = "dashboard"
 
 urlpatterns = [
     path('', DashboardView.as_view(), name="dashboard"),
-    path('my-published-courses/', InstructorCourseListView.as_view(), name="instructor-courses"),
-    path('my-courses/', MyEnrolledCourseListView.as_view(), name="my-courses"),
+    path('my-courses/', InstructorCourseListView.as_view(), name="instructor-courses"),
+    path('enrolled-courses/', MyEnrolledCourseListView.as_view(), name="my-courses"),
     path('classroom/<slug:slug>/', StartCourseView.as_view(), name="start-course"),
 ]
 
