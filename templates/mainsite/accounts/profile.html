@@ -53,7 +53,7 @@
                         <div class="col-lg-3 col-md-12">
                             <div class="teacher-contact">
                                 {% if request.user.id == profile.id  %}
-                                <a href="" class=""><button class="btn btn-danger">Add to cart</button></a>
+                                <a href="{% url 'accounts:profile-update' %}" class=""><button class="btn btn-danger">Edit Profile</button></a>
                                 {% endif %}
 
 

@@ -1,8 +1,9 @@
 {% extends 'mainsite/base.html' %}
 {% load static %}
+{% load ratings %}
 {% load is_already_enrolled %}
 {% load add_or_remove_from_cart %}
-{% load ratings %}
+{% load is_category_has_course %}
 {% block content %}
 
 <!-- End Search Popup Area -->
@@ -24,9 +25,10 @@
     <div class="container">
         <div class="row">
             {% for category in categories %}
-            <!-- {{ category }} -->
+            {% is_category_has_course category as is_category %}
+            {% if is_category  %}
             <div class="ml-3"><h1>Featured courses in <a style="color: #0f7c90;" href="{{ category.get_absolute_url }}">{{ category }}</a></h1></div>
-            
+            {% endif %}
             <!-- <div class="section-title text-center">
                 <h3>{{ category }}</h3>
                 </div> -->

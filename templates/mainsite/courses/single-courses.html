@@ -28,14 +28,14 @@
                         <ul>
                             <li>
                                 <div class="teacher-img">
-                                    <img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" />
+                                    <img style="height: 100px;" src="{{ course.instructor.profile.profile_pic.url }}" alt="course" />
                                 </div>
 
-                                Teacher: {{ course.instructor.get_short_name }}
+                                Teacher: <a href="{% url 'accounts:profile' course.instructor.id %}">{{ course.instructor.get_short_name }}</a>
                             </li>
-
+                            {{ category.get_absolute_url }}
                             <li>
-                                Category: {{ course.category }}
+                                Category: <a href="{{ course.category.get_absolute_url }}">{{ course.category }}</a>
                         </ul>
 
                         <div class="apply-btn">
@@ -211,8 +211,7 @@
                         <div class="content" id="tab_3_content">
                             <div class="course-author">
                                 <div class="img">
-                                    <img src="https://dummyimage.com/340x340/000000/fff.jpg" alt="course" />
-
+                                    <img style="height: 100px; width: 130px;" src="{{ course.instructor.profile.profile_pic.url }}" alt="course" />
                                 </div>
 
                                 <div class="author-content">
@@ -224,10 +223,7 @@
                                         <li><a href="#"><i class="icofont-twitter"></i></a></li>
                                         <li><a href="#"><i class="icofont-linkedin"></i></a></li>
                                     </ul>
-                                    <p>Aliquam pulvinar blandit eros, vel tempor tellus eleifend eget. Vestibulum
-                                        ultricies egestas ante, eu consectetur leo pretium vel. Aliquam mollis dolor
-                                        libero, ac sagittis velit dignissim at. Nulla a tellus eu enim porta posuere.
-                                        Sed posuere at lectus ac fringilla.</p>
+                                    <p>{{ course.instructor.profile.about }}.</p>
                                 </div>
                             </div>
                         </div>
@@ -254,7 +250,7 @@
 
                                 <div class="single-review">
                                     <div class="img">
-                                        <img src="assets/img/teacher-one.jpg" alt="client">
+                                        <img style="height: 80px; width: 80px; border-radius: 50%; " src="{{ review.user.profile.profile_pic.url }}" alt="client">
                                     </div>
 
                                     <div class="client-content">
