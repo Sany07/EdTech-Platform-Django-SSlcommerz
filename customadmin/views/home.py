@@ -44,46 +44,52 @@ class DashBoardView(TemplateView):
         print(self.request.path)
         return context
 
-
-
-class FrontEndSettings(UpdateView):
-    pass
-#     model = FrontEndSettings
-#     form_class = FrontEndSettingsForm
-#     context_object_name = 'frontend'
-#     success_url = reverse_lazy('customadmin:frontend-settings')
-#     template_name = 'adminsection/pages/site-settings.html'
-
-
-#     @method_decorator(login_required(login_url=reverse_lazy('customadmin:login')))
-#     @method_decorator(staff_member_required)
-#     def dispatch(self, request, *args, **kwargs):
-#         return super().dispatch(self.request, *args, **kwargs)
-
-
-#     def get(self, request, *args, **kwargs):
-#         try:
-#             self.object = self.get_queryset().last()
-#         except Http404:
-#             raise Http404("Data doesn't exists")
-
-#         return self.render_to_response(self.get_context_data())
-
-
-class custompostmethod():
+class customPostMethod():
     def post(self, request):
 
-        form = self.form_class(data=request.POST)
+        form = self.form_class(request.POST or None , request.FILES or None)
 
         if form.is_valid():
-            user = form.save(commit=False)
-            user.save()
+            form = form.save(commit=False)
+            form.save()
+
+class FrontEndSettings(UpdateView):
+    model = FrontEndSettings
+    form_class = FrontEndSettingsForm
+    context_object_name = 'frontend_settings'
+    customPost = customPostMethod
+    success_url = reverse_lazy('customadmin:frontend-settings')
+    template_name = 'adminsection/pages/site-settings.html'
+
+
+    @method_decorator(login_required(login_url=reverse_lazy('customadmin:login')))
+    @method_decorator(staff_member_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(self.request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+        except Http404:
+            raise Http404("Settings doesn't exists")
+        return self.render_to_response(self.get_context_data())
+
+    def get_object(self, queryset=None):
+        obj = super().get_queryset().last()
+
+        if obj is None:
+            self.customPost.post(self, self.request)
+
+        return obj
+
+
+
 
 
 class PaymentGatewaySettingsView(UpdateView):
     model = PaymentGatewaySettings
     form_class = GatewayForm
-    ss = custompostmethod
+    customPost = customPostMethod
     context_object_name = 'paymentgateway'
     success_url = reverse_lazy('customadmin:gateway-settings')
     template_name = 'adminsection/pages/payment-gateway-settings.html'
@@ -97,14 +103,14 @@ class PaymentGatewaySettingsView(UpdateView):
         try:
             self.object = self.get_object()
         except Http404:
-            raise Http404("User doesn't exists")
+            raise Http404("Settings doesn't exists")
         return self.render_to_response(self.get_context_data())
 
     def get_object(self, queryset=None):
         obj = super().get_queryset().last()
 
         if obj is None:
-            self.ss.post(self, self.request)
+            self.customPost.post(self, self.request)
 
         return obj
 

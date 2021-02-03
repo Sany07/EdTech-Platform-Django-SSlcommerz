@@ -1,6 +1,9 @@
 {% extends 'adminsection/base.html' %}
 {% load static %}
 
+{% block title %}
+    All Courses |
+{% endblock %}
 {% block content %}
 
         <!-- ============================================================== -->
@@ -62,7 +65,7 @@
                                                             <button type="button" class="btn btn-pink btn-rounded waves-effect waves-light w-sm m-b-5">Pending</button>
                                                             {% endif %}
                                                         </td>
-                                                        <td><button type="button" class="btn btn-info btn-rounded waves-effect waves-light m-b-5"><a class="text-center" href="{{ course.get_absolute_url }}">View</a></button></td>
+                                                        <td><a class="text-center" href="{{ course.get_absolute_url }}"><button type="button" class="btn btn-info btn-rounded waves-effect waves-light m-b-5">View</button></a></td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>

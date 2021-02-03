@@ -3,6 +3,7 @@ from django.forms import modelformset_factory
 
 
 from customadmin.models import *
+from courses.models import *
 
 
 
@@ -33,6 +34,13 @@ class FrontEndSettingsForm(forms.ModelForm):
 
         class Meta:
             model = FrontEndSettings
+            fields = '__all__'
+
+
+class CategoryForm(forms.ModelForm):
+
+        class Meta:
+            model = Category
             fields = '__all__'
 
 

@@ -11,77 +11,72 @@
         <!-- Start content -->
         <div class="content">
             <div class="container">
-                <!-- Form-validation -->
+
+                <!-- Page-Title -->
                 <div class="row">
-                
+                    <div class="col-sm-12">
+                        <h4 class="pull-left page-title">Form Validation</h4>
+                        <ol class="breadcrumb pull-right">
+                            <li><a href="#">Moltran</a></li>
+                            <li><a href="#">Forms</a></li>
+                            <li class="active">Form Validation</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading"><h3 class="panel-title">Form validations</h3></div>
                             <div class="panel-body">
                                 <div class=" form">
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="#" novalidate="novalidate" enctype="multipart/form-data">
+                                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="{% url 'customadmin:frontend-settings' %}" enctype="multipart/form-data">
                                         {% csrf_token %}
-                                        <div class="form-group ">
-                                            <label for="firstname" class="control-label col-lg-2">Logo Text *</label>
-                                            <div class="col-lg-10">
-                                                <input class=" form-control" id="id_text_logo" name="text_logo" type="text">
-                                            </div>
-                                        </div>
                                         <div class="form-group ">
                                             <label for="lastname" class="control-label col-lg-2">Logo</label>
                                             <div class="col-lg-10">
-                                                <input type="file" name="logo" accept="image/*" required="" id="id_logo">
+                                                <img  src="{{ frontend_settings.logo.url }}" alt="">
+                                                <input style="margin-top: 10px;" type="file" name="logo" accept="image/*" id="id_logo">
                                             </div>
                                         </div>
                                         <div class="form-group ">
-                                            <label for="username" class="control-label col-lg-2">Footer Branding *</label>
+                                            <label for="cname" class="control-label col-lg-2">Text Logo</label>
                                             <div class="col-lg-10">
-                                                <input class="form-control " id="footer" name="footer" type="text">
+                                                <input class=" form-control" id="id_text_logo" name="text_logo" type="text" required="" aria-required="true" value="{{ frontend_settings.text_logo }}">
                                             </div>
                                         </div>
-                                        <!-- <div class="form-group ">
-                                        <label for="agree" class="control-label col-lg-2 col-sm-3">Agree to Our Policy *</label>
-                                        <div class="col-lg-10 col-sm-9">
-                                            <input type="checkbox" style="width: 16px" class="checkbox form-control" id="agree" name="agree">
+                                        <div class="form-group ">
+                                            <label for="cemail" class="control-label col-lg-2">Footer Copyright</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control " id="id_footer" type="text" name="footer" required="" aria-required="true" value="{{ frontend_settings.footer }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label for="newsletter" class="control-label col-lg-2 col-sm-3">Receive the Newsletter</label>
-                                        <div class="col-lg-10 col-sm-9">
-                                            <input type="checkbox" style="width: 16px" class="checkbox form-control" id="newsletter" name="newsletter">
-                                        </div>
-                                    </div>
-                                         -->
 
                                         <div class="form-group">
                                             <div class="col-lg-offset-2 col-lg-10">
-                                                <button class="btn btn-success waves-effect waves-light" type="submit">Save</button>
-                                                <button class="btn btn-default waves-effect" type="button">Cancel</button>
+                                                <button class="btn btn-success waves-effect waves-light" type="submit">Submit</button>
                                             </div>
                                         </div>
                                     </form>
                                 </div> <!-- .form -->
-
                             </div> <!-- panel-body -->
                         </div> <!-- panel -->
                     </div> <!-- col -->
 
                 </div> <!-- End row -->
-
-
-
     </div> <!-- container -->
                         
         </div> <!-- content -->
 
-        <footer class="footer text-right">
-            2015 © Moltran.
-        </footer>
+ 
 
     </div>
     <!-- ============================================================== -->
     <!-- End Right content here -->
     <!-- ============================================================== -->
+
+
+
 
 {% endblock %}
 
@@ -91,3 +86,4 @@
 <script type="text/javascript" src="{% static 'customadmin/assets/jquery.validate/jquery.validate.min.js' %}"></script>
 <script src="{% static 'customadmin/assets/jquery.validate/form-validation-init.js' %}"></script>
 {% endblock %}
+
