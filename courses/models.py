@@ -30,7 +30,10 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse("courses:single-category", kwargs={'id': self.id})
-    
+
+    def get_course_count_by_category(self):
+        enroll_count= self.category.values('category__id').aggregate(models.Count('category__id'))
+        return enroll_count['category__id__count']    
 
 class Course(models.Model):
     title = models.CharField(max_length=250,blank=False)

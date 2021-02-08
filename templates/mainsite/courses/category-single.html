@@ -32,17 +32,22 @@
                         <img src="" alt="course" />
                         
                         {% else %}
-                        <img src="{{ course.thumbnail.url }}" alt="" />
+                        <img style="width: 100%;" src="{{ course.thumbnail.url }}" alt="" />
 
                         {% endif %}
                     </div>
 
-                    <div class="courses-content">
+                    <div class="courses-content" style="min-height: 140px;">
                         <h3><a href="{{ course.get_absolute_url }}">{{ course.title}}</a></h3>
-                        <ul>
-                            
-                            
-                        </ul>
+                        <!-- <ul>
+                            {{ course.ratings.Rating }}
+                            <li><i class="icofont-star"></i></li>
+                            <li><i class="icofont-star"></i></li>
+                            <li><i class="icofont-star"></i></li>
+                            <li><i class="icofont-star"></i></li>
+                            <li><i class="icofont-star"></i></li>
+
+                        </ul> -->
                     </div>
 
                     <div class="courses-content-bottom">

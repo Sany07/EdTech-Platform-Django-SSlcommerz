@@ -19,7 +19,7 @@
                         <div class="col-sm-12">
                             <ol class="breadcrumb pull-right">
                                 <li><a href="#">Dashboard</a></li>
-                                <li class="active">All courses</li>
+                                <li class="active">All Categories</li>
                             </ol>
                         </div>
                     </div>
@@ -33,16 +33,14 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <th><button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal">Add Category</button>
+                                            <th><button class="btn btn-primary waves-effect waves-light" style="margin-bottom: 20px;" data-toggle="modal" data-target="#myModal">Add Category</button>
                                             </th>
                                             <table id="datatable" class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
-                                                        <th>Course Title</th>
-                                                        <th>Action</th>
-                                         
-                                                        
+                                                        <th>Category Title</th>
+                                                        <th>Total Course </th>
                                                     </tr>
                                                 </thead>
 
@@ -52,6 +50,7 @@
                                                     <tr>
                                                         <td>{{ forloop.counter }}</td>
                                                         <td><a href="{{ category.get_absolute_url }}" target="_blank" rel="{{ category.name }}">{{ category.name }}</a></td>
+                                                        <td>{{ category.get_course_count_by_category }}</td>
                                                  
                                                     </tr>
                                                     {% endfor %}

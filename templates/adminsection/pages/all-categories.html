@@ -37,7 +37,6 @@
                                                         <th>Username</th>
                                                         <th>Email</th>
                                                         <th>Joining Date</th>
-                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
 
@@ -49,7 +48,6 @@
                                                         <td>{{ student.username }}</td>
                                                         <td>{{ student.email }}</td>
                                                         <td>{{ student.date_joined|date:"j-M-Y " }}</td>
-                                                        <td><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5">View</button></td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>

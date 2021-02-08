@@ -4,11 +4,11 @@
     <div class="sidebar-inner slimscrollleft">
         <div class="user-details">
             <div class="pull-left">
-                <img src="images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
+                <img src="{{ request.user.profile.profile_pic.url }}" alt="" class="thumb-md img-circle">
             </div>
             <div class="user-info">
                 <div class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">SANY <span
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ request.user.username | upper  }} <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div
@@ -48,7 +48,7 @@
                 </li>
                 <li class="has_sub">
                     <a href="#"
-                        class="waves-effect {% if 'courses' in request.path or 'new-courses' in request.path or 'students' in request.path %} active {% endif %}"><i
+                        class="waves-effect {% if 'courses' in request.path or 'new-courses' in request.path %} active {% endif %}"><i
                             class="md md-mail"></i><span>Manage Courses </span><span class="pull-right"><i
                                 class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
@@ -62,7 +62,7 @@
                 </li>
                 <li class="has_sub">
                     <a href="#"
-                        class="waves-effect {% if 'categories' in request.path or 'newcourses' in request.path %} active {% endif %}"><i
+                        class="waves-effect {% if 'categories' in request.path %} active {% endif %}"><i
                             class="md md-mail"></i><span>Manage Categories </span><span class="pull-right"><i
                                 class="md md-add"></i></span></a>
                     <ul class="list-unstyled">

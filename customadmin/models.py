@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class FrontEndSettings(models.Model):
-    logo =models.ImageField(upload_to='photos/frontend/logo/')
+    logo =models.ImageField(upload_to='photos/frontend/logo/', blank=True, null=True)
     text_logo = models.CharField(blank=True, null=True, max_length=20)
     footer = models.CharField(max_length=30)
 

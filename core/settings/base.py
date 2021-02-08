@@ -74,6 +74,7 @@ TEMPLATES = [
 
                 # custom
                 'coresite.context_processors.categories_context_processor',
+                'coresite.context_processors.site_context_processor',
 
                 # 3rd Party
 

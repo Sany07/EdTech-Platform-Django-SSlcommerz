@@ -19,16 +19,15 @@
 <section class="course-details-area ptb-100">
     <div class="container-fluid">
         
-        <div class="row  px-4 mx-4">
+        <div class="row  px-0 mx-0">
             <!-- {% for lesson in course.course.all %} -->
-            <div class="col-lg-4">
+            <div class="col-lg-4 pr-0 mr-3">
                <div class="card">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         {% for tcontent in topic_category %}
-                        <a class="nav-link {% if forloop.first %}  active {% endif %} " id="v-pills-{{ tcontent.id }}-tab" data-toggle="pill" href="#v-pills-{{ tcontent.id }}" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                        <a onclick="reload({{ tcontent.id }});" class="nav-link {% if forloop.first %}  active {% endif %} " id="v-pills-{{ tcontent.id }}-tab" data-toggle="pill" href="#v-pills-{{ tcontent.id }}" role="tab" aria-controls="v-pills-home" aria-selected="true">
                             <i class="icofont-ui-play pr-2"></i>Lecture {{ forloop.counter }}
                             <span class="ls-title "> {{ tcontent.title }}</span>
-                            <span class="duration-r"><i class="icofont-clock-time"></i>
                                  50 min
                             </span>
                         </a>
@@ -44,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 pl-0 ml-0">
             <div class="tab-content" id="v-pills-tabContent">
                 {% for tcontent in topic_category %}
                     <div class="tab-pane fade {% if forloop.first %} show active{% endif %}" id="v-pills-{{ tcontent.id }}" role="tabpanel" aria-labelledby="v-pills-{{ tcontent.id }}-tab">
@@ -53,9 +52,10 @@
                         
                         <div class="videoWrapper">
                             {% if videourl %}
-                            <iframe width="920" height="500" type="text/html" src="{% youtube_link_replace tcontent %}?&autoplay=true" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            
+                            <iframe id="iframeid" width="920" height="500" type="text/html" src="{% youtube_link_replace tcontent  %}" frameborder="0" allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             {% else %}
-                            <iframe width="920" height="500" type="text/html" src="{{ tcontent.video_link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe id="iframeid" width="920" height="500" type="text/html" src="{{ tcontent.video_link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             {% endif %}
                         </div>
                         {% endif %}
@@ -72,4 +72,11 @@
         </div>
     </div>
 </section>
+<script> 
+    function reload(id) { 
+        console.log(id);
+        document.getElementById('iframeid').src += id;
+    } 
+    
+</script> 
 {% endblock %}

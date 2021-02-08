@@ -137,10 +137,10 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single-courses-item">
                     <div class="courses-img">
-                        <img src="{{ course.thumbnail.url }}" alt="course" />
+                        <img style="width: 100%;" src="{{ course.thumbnail.url }}" alt="course" />
                     </div>
-
-                    <div class="courses-content">
+       
+                    <div class="courses-content" style="min-height: 150px;">
                         <h3><a href="{{ course.get_absolute_url }}">{{ course.title}}</a></h3>
 
                     </div>

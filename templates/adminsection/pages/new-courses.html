@@ -1,6 +1,9 @@
 {% extends 'adminsection/base.html' %}
 {% load static %}
 
+{% block title %}
+    All Courses |
+{% endblock %}
 {% block content %}
 
         <!-- ============================================================== -->
@@ -16,7 +19,7 @@
                         <div class="col-sm-12">
                             <ol class="breadcrumb pull-right">
                                 <li><a href="#">Dashboard</a></li>
-                                <li class="active">Pending courses</li>
+                                <li class="active">All courses</li>
                             </ol>
                         </div>
                     </div>
@@ -54,13 +57,15 @@
                                                         <td>{{ course.price }}</td>
                                                         <td>{{ course.offer_price|title }}</td>
                                                         <td>{{ course.timestamp|date:"j-M-Y " }}</td>
-                                                        <td>
-                                                            {% if course.is_published == False %}
+                                                        <td>{% if course.is_published == True %}
+
+                                                            <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light w-sm m-b-5">Published</button>
+                                                            {% elif course.is_published == False %}
                                                             <!-- <span class="label label-pink">Pink</span> -->
                                                             <button type="button" class="btn btn-pink btn-rounded waves-effect waves-light w-sm m-b-5">Pending</button>
                                                             {% endif %}
                                                         </td>
-                                                        <td><button type="button" class="btn btn-info btn-rounded waves-effect waves-light m-b-5"><a class="text-center" href="{{ course.get_absolute_url }}">View</a></button></td>
+                                                        <td><a class="text-center" href="{{ course.get_absolute_url }}"><button type="button" class="btn btn-info btn-rounded waves-effect waves-light m-b-5">View</button></a></td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>

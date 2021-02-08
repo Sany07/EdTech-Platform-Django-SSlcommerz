@@ -48,9 +48,12 @@
             <nav class="classy-navbar justify-content-between" id="EduStudyNav">
 
                 <!-- Logo -->
+                {% if site_data.logo %}
                 <a class="nav-brand" href="{% url 'coresite:home' %}">
-                    <img src="" alt="GAINSKILL"></a>
-
+                    <img src="{{ site_data.logo.url }} " alt="GAINSKILL"></a>
+                {% else %}
+                    {{ site_data.text_logo }}
+                {% endif %}
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
