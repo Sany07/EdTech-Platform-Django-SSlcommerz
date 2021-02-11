@@ -64,9 +64,6 @@ class Course(models.Model):
     @property
     def lesson(self):
         return self.lesson_set.all()
-    #for review section
-    # def get_content_type(self):
-    #     return self.get_content_type
         
     @property
     def get_content_type(self):
@@ -75,10 +72,8 @@ class Course(models.Model):
 
     @property
     def get_enroll_count(self):
-        
         # comment_count = Course.objects.all().annotate(Count('products__id')).order_by('-products__id') 
         enroll_count= self.products.values('products__id').aggregate(models.Count('products__id'))
-
         return enroll_count['products__id__count']
 
 def rl_pre_save_receiver(sender, instance, *args, **kwargs):
@@ -122,15 +117,15 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
         return False
 
     #for local server
-    # new_file = instance.thumbnail
-    # if not old_file == new_file:
-    #     if os.path.isfile(old_file.path):
-    #         os.remove(old_file.path)
+    new_file = instance.thumbnail
+    if not old_file == new_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
     
     #for aws s3
-    new_avatar = instance.thumbnail
-    if old_file and old_file.url != new_avatar.url:
-        old_file.delete(save=False)
+    # new_avatar = instance.thumbnail
+    # if old_file and old_file.url != new_avatar.url:
+    #     old_file.delete(save=False)
 
 
 

@@ -14,26 +14,35 @@
 </div>
     <div class="mt-5 text-center"><h1>Question {{ questions.end_index }} of  {{count}}</h1></div>
     <div class="col-lg-8 border border-success p-4 m-4 mx-auto">
-                {% for i in questions%}
+        <form action="{% url 'quiz:save_ans' %}" method="POST"  id="quiz-submit-ajax">
+            {% csrf_token %}
+            <input type="hidden"  name="user" id="id_user" value="{{ request.user.id }}">
+                
+            {% for i in questions%}
+                <input type="hidden"  name="question"  id="id_question" value="{{i.id}}">
+
                 <h1 class="text-center m-4">{{i.question}}</h1>
-                <form>
+
                     <div class="radio">
-                    <label><input class="mr-3" type="radio" name="name"  id="option1" value="choice_one">{{i.choice_one}} </label> 
+                    <label><input class="mr-3" type="radio" name="ans"  id="id_ans" value="choice_one">{{i.choice_one}} </label> 
                     </div>
                     <div class="radio">
-                    <label > <input class="mr-3" type="radio" name="name"  id="option2" value="choice_two">{{i.choice_two}}</label>
+                    <label > <input class="mr-3" type="radio" name="ans"  id="id_ans" value="choice_two">{{i.choice_two}}</label>
                   </div>
                   <div class="radio">
-                    <label ><input class="mr-3" type="radio" name="name" id="option3" value="choice_three">{{i.choice_three}}</label>
+                    <label ><input class="mr-3" type="radio" name="ans" id="id_ans" value="choice_three">{{i.choice_three}}</label>
                   </div>
                     <div class="radio">
-                    <label ><input class="mr-3" type="radio" name="name"  id="option4" value="choice_four">{{i.choice_four}} </label>
+                    <label ><input class="mr-3" type="radio" name="ans"  id="id_ans" value="choice_four">{{i.choice_four}} </label>
                 </div>
-            </form>
+            
                 {%endfor%}
+
+                <!-- {{ QuizExamForm.as_p }} -->
                 <div class="form-group">
                     <button class="btn  btn-success" id="">Submit Answer</button>
                 </div>
+            </form>
                 <div class="paginetor">
                   <div class="form-group">
                     {%  if questions.has_next %}
@@ -45,25 +54,67 @@
                  </div>  
     </div>
     <script>
-        window.onload = initall;
-var  saveBookButton ;
-function initall() {
-    saveBookButton=document.getElementById('save_ans')
-    saveBookButton.onclick = save_ans;
-}
-function save_ans() {
-    var ans = $("input:radio[name=name]:checked").val()
-    console.log(ans);
-    alert("answer submited go next")
-    var url = '/quiz/save_ans?ans='+ans
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-     alert(req.responseText)
+//         window.onload = initall;
+// var  saveBookButton ;
+// function initall() {
+//     saveBookButton=document.getElementById('save_ans')
+//     saveBookButton.onclick = save_ans;
+// }
+
+// function save_ans() {
+//     var ans = $("input:radio[name=name]:checked").val()
+//     console.log(ans);
+//     alert("answer submited go next")
+//     var url = '/quiz/save_ans?ans='+ans
+//     var req = new XMLHttpRequest();
+//     req.onreadystatechange = function() {
+//     if (this.readyState == 4 && this.status == 200) {
+//      alert(req.responseText)
+//     }
+//   };
+//   req.open("GET", url, true);
+//   req.send();
+// }
+
+
+$(document).on('submit', '#quiz-submit-ajax',function(e){
+  e.preventDefault();
+  console.log('ss');
+  var form = $(this);
+  $.ajax({
+      type: form.attr("method"),
+      url:form.attr("action"),
+      data: form.serialize(),
+      success:function(res){
+        
+        $("#quiz-submit-ajax").trigger('reset');
+        console.log(res);
+
+      },
+      error : function(err) {
+        console.log(err);
     }
-  };
-  req.open("GET", url, true);
-  req.send();
+  });
+});
+
+
+function tostr(res){
+    var type = res.status;
+        switch(type){
+            case 'info':
+                toastr.info(res.msg);
+                break;
+            case 'warning':
+                toastr.warning(res.msg);
+                break;
+            case 'success':
+                toastr.success(res.msg);
+                break;
+            case 'error':
+                toastr.error(res.msg);
+                break;
+        } 
 }
-    </script>
+
+</script>
 {% endblock %}

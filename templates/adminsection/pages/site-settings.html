@@ -15,11 +15,10 @@
                 <!-- Page-Title -->
                 <div class="row">
                     <div class="col-sm-12">
-                        <h4 class="pull-left page-title">Form Validation</h4>
+                        <h4 class="pull-left page-title"></h4>
                         <ol class="breadcrumb pull-right">
-                            <li><a href="#">Moltran</a></li>
-                            <li><a href="#">Forms</a></li>
-                            <li class="active">Form Validation</li>
+                            <li><a href="{% url 'customadmin:dashboard' %}">Dashboard</a></li>
+                            <li class="active">General Settings</li>
                         </ol>
                     </div>
                 </div>
@@ -27,7 +26,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><h3 class="panel-title">Form validations</h3></div>
+                            <div class="panel-heading"><h3 class="panel-title">General Settings</h3></div>
                             <div class="panel-body">
                                 <div class=" form">
                                     <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="{% url 'customadmin:frontend-settings' %}" enctype="multipart/form-data">
@@ -35,7 +34,7 @@
                                         <div class="form-group ">
                                             <label for="lastname" class="control-label col-lg-2">Logo</label>
                                             <div class="col-lg-10">
-                                                <img  src="{{ frontend_settings.logo.url }}" alt="">
+                                                <img  src="{% if request.user.profile.profile_pic %}  {{ frontend_settings.logo.url }} {% endif %}" alt="">
                                                 <input style="margin-top: 10px;" type="file" name="logo" accept="image/*" id="id_logo">
                                             </div>
                                         </div>
@@ -43,6 +42,14 @@
                                             <label for="cname" class="control-label col-lg-2">Text Logo</label>
                                             <div class="col-lg-10">
                                                 <input class=" form-control" id="id_text_logo" name="text_logo" type="text" required="" aria-required="true" value="{{ frontend_settings.text_logo }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="cname" class="control-label col-lg-2">Teacher Registration</label>
+                                            <div class="col-lg-10">
+                                                <input style="margin: 11px;padding: 10px;" type="checkbox" name="is_teacher_register" id="id_is_teacher_register" {% if frontend_settings.is_teacher_register == True  %}checked{% endif %}>
+                                                <!-- <input style="margin: 11px;padding: 10px;" type="checkbox" name="is_teacher_register" id="id_is_teacher_register" value="coding" checked> -->
+                                            <!-- {{ frontend_settings.is_teacher_register }} -->
                                             </div>
                                         </div>
                                         <div class="form-group ">
@@ -56,7 +63,7 @@
                                             <div class="col-lg-offset-2 col-lg-10">
                                                 <button class="btn btn-success waves-effect waves-light" type="submit">Submit</button>
                                             </div>
-                                        </div>
+                                            
                                     </form>
                                 </div> <!-- .form -->
                             </div> <!-- panel-body -->

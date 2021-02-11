@@ -4,7 +4,7 @@
     <div class="sidebar-inner slimscrollleft">
         <div class="user-details">
             <div class="pull-left">
-                <img src="{{ request.user.profile.profile_pic.url }}" alt="" class="thumb-md img-circle">
+                <img src="{% if request.user.profile.profile_pic %}  {{ request.user.profile.profile_pic.url }} {% endif %}" alt="" class="thumb-md img-circle">
             </div>
             <div class="user-info">
                 <div class="dropdown">
@@ -75,23 +75,17 @@
                 </li>
                 <li class="has_sub">
                     <a href="#"
-                        class="waves-effect {% if 'gateway' in request.path or 'frontend' in request.path %} active {% endif %}"><i
+                        class="waves-effect {% if 'general' in request.path or 'gateway' in request.path %} active {% endif %}"><i
                             class="md md-now-widgets"></i><span>Settings </span><span class="pull-right"><i
                                 class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
-                        <li {% if 'frontend' in request.path %} class="active" {% endif %}><a
+                        <li {% if 'general' in request.path %} class="active" {% endif %}><a
                                 href="{% url 'customadmin:frontend-settings' %}"><i class="md md-forward"></i>General
                                 Settings</a></li>
                         <li {% if 'gateway' in request.path %} class="active" {% endif %}><a
                                 href="{% url 'customadmin:gateway-settings' %}"><i class="md md-forward"></i>Payment
-                                Gateway</a></li>
-                        <li><a href="form-validation.html">Form Validation</a></li>
-                        <li><a href="form-advanced.html">Advanced Form</a></li>
-                        <li><a href="form-wizard.html">Form Wizard</a></li>
-                        <li><a href="form-editor.html">WYSIWYG Editor</a></li>
-                        <li><a href="code-editor.html">Code Editors</a></li>
-                        <li><a href="form-uploads.html">Multiple File Upload</a></li>
-                        <li><a href="form-xeditable.html">X-editable</a></li>
+                                Gateway</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

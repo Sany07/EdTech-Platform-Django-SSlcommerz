@@ -37,7 +37,7 @@ class QuizQuestion(models.Model):
     choice_two = models.CharField(max_length=250,blank=False)
     choice_three = models.CharField(max_length=250,blank=False)
     choice_four =  models.CharField(max_length=250,blank=False)
-    ans = models.CharField(max_length=300,choices = QUIZ_CHOICES) 
+    ans = models.CharField(max_length=12,choices = QUIZ_CHOICES) 
 
     class Meta:
         verbose_name = "QuizQuestion"
@@ -58,6 +58,21 @@ class QuizResult(models.Model):
         verbose_name = "Result"
         verbose_name_plural = "Results"
         db_table = "quizresult"
+
+
+    def __str__(self):
+        return self.user.username
+
+
+class QuizExam(models.Model):
+    question = models.ForeignKey(QuizQuestion, on_delete=models.CASCADE, related_name='question_exam')
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='exam_user')
+    ans = models.CharField(max_length=12,choices = QUIZ_CHOICES) 
+
+    class Meta:
+        verbose_name = "Exam"
+        verbose_name_plural = "Exams"
+        db_table = "Exam"
 
 
     def __str__(self):

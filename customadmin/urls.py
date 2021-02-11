@@ -25,7 +25,7 @@ urlpatterns = [
 
     path('settings/', include([
             path('gateway/update',  PaymentGatewaySettingsView.as_view(), name="gateway-settings"),
-            path('frontend/update', FrontEndSettings.as_view(), name="frontend-settings"),
+            path('general/update', FrontEndSettings.as_view(), name="frontend-settings"),
     ])),
 
 

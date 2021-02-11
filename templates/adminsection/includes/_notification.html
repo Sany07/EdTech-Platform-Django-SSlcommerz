@@ -1,7 +1,73 @@
 {% if messages %}
 {% for message in messages %}
+<!-- <div class="mb-5 alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div> -->
 
-<a class="btn btn-inverse waves-effect waves-light" href="javascript:;" oncload="$.Notification.notify('black', 'top right', 'Sample Notification', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae orci ut dolor scelerisque aliquam.')">Black</a>
+<!-- <div class="jsdemo-notification-button">
+    <div class="">
+        <button type="button" class="btn bg-indigo btn-block waves-effect" data-placement-from="top" data-placement-align="right"
+                data-animate-enter="animated lightSpeedIn" data-animate-exit="animated lightSpeedOut"
+                data-color-name="bg-black">
+            LIGHT SPEED IN/OUT
+        </button>
+    </div>
+</div> -->
 
+
+<!-- 
+    <div data-notify="container" 
+    class="alert  {{ message.tags }}  alert-dismissible 
+    animated lightSpeedIn" 
+    style="display: inline-block; 
+    margin: 0px auto; position: fixed;  z-index: 1031; top: 70px; right: 20px;">
+    <button type="button" aria-hidden="true" class="close" 
+    data-notify="dismiss" style="position: absolute; right: 10px; top: 5px; z-index: 1033;">×</button>
+    <span data-notify="icon"></span>
+    <span data-notify="message">{{ message }}</span>
+    <a href="#" target="_blank" data-notify="url"></a></div> -->
+
+
+<!-- <div id="notification-alert" class="mb-5 alert {{ message.tags }} alert-dismissible animated lightSpeedIn" style="display: inline-block; 
+    margin: 0px auto; position: fixed;  z-index: 1031; top: 70px; right: 20px;" role="alert">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div> -->
+
+
+
+<script type="text/javascript">
+   
+
+jQuery(document).ready(function() {
+toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut",
+        "hideMethod": "fadeOut"
+      }
+
+   toastr.{{ message.tags }}('{{ message }}');
+
+  });
+
+
+</script>
 {% endfor %}
 {% endif %}

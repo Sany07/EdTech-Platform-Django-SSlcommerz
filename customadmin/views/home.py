@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -52,10 +53,11 @@ class customPostMethod():
         if form.is_valid():
             form = form.save(commit=False)
             form.save()
+            messages.success(request,'Update Successfull')
 
 class FrontEndSettings(UpdateView):
     model = FrontEndSettings
-    form_class = FrontEndSettingsForm
+    form_class = GeneralSettingsForm
     context_object_name = 'frontend_settings'
     customPost = customPostMethod
     success_url = reverse_lazy('customadmin:frontend-settings')

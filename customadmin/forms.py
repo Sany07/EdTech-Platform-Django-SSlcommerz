@@ -1,7 +1,4 @@
 from django import forms
-from django.forms import modelformset_factory
-
-
 from customadmin.models import *
 from courses.models import *
 
@@ -23,14 +20,18 @@ class GatewayForm(forms.ModelForm):
         # )
 
 
-
-
     class Meta:
         model = PaymentGatewaySettings
         fields = '__all__'
 
 
-class FrontEndSettingsForm(forms.ModelForm):
+# class FrontEndSettingsForm(forms.ModelForm):
+
+#         class Meta:
+#             model = FrontEndSettings
+#             fields = '__all__'
+
+class GeneralSettingsForm(forms.ModelForm):
 
         class Meta:
             model = FrontEndSettings
