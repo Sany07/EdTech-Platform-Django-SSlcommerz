@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 
-
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 from accounts.models import *
 from accounts.forms import *
@@ -160,3 +161,24 @@ def EditProfileView(request):
 
 
 
+
+@method_decorator(login_required(), name='dispatch')
+class SettingView(TemplateView):
+    template_name = 'mainsite/accounts/settings.html'
+
+@login_required
+def ChangePassword(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('accounts:change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'mainsite/accounts/change_password.html', {
+        'form': form
+    })

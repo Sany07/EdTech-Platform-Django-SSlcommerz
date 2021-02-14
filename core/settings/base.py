@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'enrolls.apps.EnrollsConfig',
     'dashboard.apps.DashboardConfig',
     'customadmin.apps.CustomadminConfig',
-    'quiz.apps.QuizConfig',
+    'quizapp.apps.QuizappConfig',
+    'payment.apps.PaymentConfig',
 
 
 

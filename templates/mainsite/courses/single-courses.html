@@ -28,7 +28,7 @@
                         <ul>
                             <li>
                                 <div class="teacher-img">
-                                    <img style="height: 100px;" src="{{ course.instructor.profile.profile_pic.url }}" alt="course" />
+                                        <img style="height: 100px;" src="{% if course.instructor.profile.profile_pic %} {{ course.instructor.profile.profile_pic.url }} {% endif %}" alt="course" />
                                 </div>
 
                                 Teacher: <a href="{% url 'accounts:profile' course.instructor.id %}">{{ course.instructor.get_short_name }}</a>
@@ -211,7 +211,7 @@
                         <div class="content" id="tab_3_content">
                             <div class="course-author">
                                 <div class="img">
-                                    <img style="height: 100px; width: 130px;" src="{{ course.instructor.profile.profile_pic.url }}" alt="course" />
+                                    <img style="height: 100px; width: 130px;" src="{% if course.instructor.profile.profile_pic %} {{ course.instructor.profile.profile_pic.url }} {% endif %}" alt="course" />
                                 </div>
 
                                 <div class="author-content">
@@ -250,18 +250,14 @@
 
                                 <div class="single-review">
                                     <div class="img">
-                                        <img style="height: 80px; width: 80px; border-radius: 50%; " src="{{ review.user.profile.profile_pic.url }}" alt="client">
+                                        <img style="height: 80px; width: 80px; border-radius: 50%; " src="{% if review.user.profile.profile_pic %} {{ review.user.profile.profile_pic.url }} {% endif %}" alt="client">
                                     </div>
 
                                     <div class="client-content">
                                         <h4><a href="{% url 'accounts:profile' review.user.id %}">{{ review.user.username }}</a></h4>
                                         <ul>
                                             {{ review.timestamp  | timesince }}
-                                            <!-- <li><i class="icofont-star"></i></li>
-                                            <li><i class="icofont-star"></i></li>
-                                            <li><i class="icofont-star"></i></li>
-                                            <li><i class="icofont-star"></i></li>
-                                            <li><i class="icofont-star"></i></li> -->
+                                      
                                         </ul>
                                         <p>{{ review.content }}</p>
                                     </div>

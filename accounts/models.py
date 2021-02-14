@@ -37,7 +37,7 @@ class Profile(models.Model):
     about = models.TextField()
     designation = models.CharField(max_length=100,blank=True)
     website = models.URLField( blank=True)
-    profile_pic =models.ImageField(upload_to='photos/profile/%Y-%m-%d/')
+    profile_pic =models.ImageField(upload_to='photos/profile/%Y-%m-%d/',blank=True)
 
 
     class Meta:

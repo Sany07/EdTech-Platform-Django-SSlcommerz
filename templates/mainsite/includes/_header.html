@@ -110,7 +110,7 @@
                                 <ul class="dropdown profile">
                                     <span class="ss">
                                         <h6 class="card-title text-center text-uppercase"> Wellcome Back
-                                            <br><br>{{ request.user.username }} </h6>
+                                            <br><br><a href="{% url 'accounts:profile' request.user.id %}">{{ request.user.username }} </h6></a>
                                         <li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
                                         {% if request.user.role == 'stu' %}
                                         <li><a href="{% url 'dashboard:my-courses' %}">My Courses</a></li>
@@ -118,7 +118,7 @@
                                         <li><a href="{% url 'dashboard:instructor-courses' %}">My Courses</a></li>
                                         <li><a href="{% url 'courses:create-course' %}">Pubsish New Course</a></li>
                                         {% endif %}
-                                        <li><a href="{% url 'accounts:profile' request.user.id %}">Settings</a></li>
+                                        <li><a href="{% url 'accounts:setting' %}">Settings</a></li>
                                         <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
                                     </span>
                                 </ul>

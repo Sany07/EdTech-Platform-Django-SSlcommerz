@@ -65,6 +65,7 @@ class QuizResult(models.Model):
 
 
 class QuizExam(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz_exam')
     question = models.ForeignKey(QuizQuestion, on_delete=models.CASCADE, related_name='question_exam')
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='exam_user')
     ans = models.CharField(max_length=12,choices = QUIZ_CHOICES) 

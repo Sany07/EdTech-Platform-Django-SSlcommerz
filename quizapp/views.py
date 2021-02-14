@@ -58,26 +58,19 @@ def AddQuizQuestion(request,id):
         'quiz':quiz
     })
 
-lst = []
+submitans = []
 anslist = []
 
 
 def Exam(request, id):
-    # print(lst)
-    # print(anslist)
-    # print(len(anslist))
-
+    answers = QuizQuestion.objects.filter(quiz = id).order_by('-id')
     if len(anslist) == 0:
-        print('a')
-
-        answers = QuizQuestion.objects.filter(quiz = id)
+        print('a')        
         for i in answers:
-            print(i)
             anslist.append(i.ans)
-    # print(anslist)
-    obj = QuizQuestion.objects.filter(quiz = id)
-    count = QuizQuestion.objects.filter(quiz = id).count()
-    paginator = Paginator(obj,1)
+    
+    count = answers.count()
+    paginator = Paginator(answers,1)
     try:
         page = int(request.GET.get('page','1'))  
     except:
@@ -88,29 +81,30 @@ def Exam(request, id):
 
         questions=paginator.page(paginator.num_pages)
     
-    return render(request,'mainsite/quiz/quiz_exam.html',{'QuizExamForm':QuizExamForm, 'obj':obj,'questions':questions,'count':count})
+    return render(request,'mainsite/quiz/quiz_exam.html',{'QuizExamForm':QuizExamForm, 'obj':answers,'questions':questions,'count':count, 'id':id})
 
-def result(request):
-    print('lst')
-    print(lst)
-    print(anslist)
+def result(request, id):
     score =0
-    for i in range(len(lst)):
-        if lst[i]==anslist[i]:
-            
-            score +=1
-    print(score)
-    lst.clear()
+    obj = QuizExam.objects.filter(quiz = id, user = request.user.id).order_by('-id')
     
-    return render(request,'mainsite/quiz/result.html',{'score':score,'lst':lst})
+    for o in obj:
+        submitans.append(o.ans)
+    print(submitans)
+    for i in range(len(anslist)):
+        print(i)
+        if anslist[i]==submitans[i]:
+            score +=1
+            print(submitans[i])
+    # print(score)
+    anslist.clear()
+    submitans.clear()
+
+    return render(request,'mainsite/quiz/result.html',{'score':score,'lst':submitans})
 
 def save_ans(request):
-    # ans = request.GET['ans']
-    # print(ans)
-    # lst.append(ans)
     response_data = {}
     success_status = 'success'
-    success_msg = 'Your Email Successfully Added'
+    success_msg = 'Ans Submitted'
     error_status = 'error'
     error_msg = 'Somthing went wrong. Please Try Again'
 

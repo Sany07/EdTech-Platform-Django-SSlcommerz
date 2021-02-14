@@ -21,7 +21,7 @@
             {% for i in questions%}
                 <input type="hidden"  name="question"  id="id_question" value="{{i.id}}">
 
-                <h1 class="text-center m-4">{{i.question}}</h1>
+                <h1 class="text-center m-4">{{i.question}} </h1>
 
                     <div class="radio">
                     <label><input class="mr-3" type="radio" name="ans"  id="id_ans" value="choice_one">{{i.choice_one}} </label> 
@@ -40,7 +40,7 @@
 
                 <!-- {{ QuizExamForm.as_p }} -->
                 <div class="form-group">
-                    <button class="btn  btn-success" id="">Submit Answer</button>
+                    <input type="submit" value="Submit" class="btn btn-success">
                 </div>
             </form>
                 <div class="paginetor">
@@ -48,73 +48,11 @@
                     {%  if questions.has_next %}
                     <a href="?page={{ questions.next_page_number }}"><button class="btn form-control btn-primary" id="save_ans">Next</button></a>
                   {% else %}
-                   <a href="{% url 'quiz:quiz_result' %}"><button class="btn form-control btn-success" id="save_ans">Submit Quiz</button></a>  
+                   <a href="{% url 'quiz:quiz_result' id %}"><button class="btn form-control btn-success" id="save_ans">Submit Quiz</button></a>  
                   {% endif %} 
                   </div>
                  </div>  
     </div>
-    <script>
-//         window.onload = initall;
-// var  saveBookButton ;
-// function initall() {
-//     saveBookButton=document.getElementById('save_ans')
-//     saveBookButton.onclick = save_ans;
-// }
-
-// function save_ans() {
-//     var ans = $("input:radio[name=name]:checked").val()
-//     console.log(ans);
-//     alert("answer submited go next")
-//     var url = '/quiz/save_ans?ans='+ans
-//     var req = new XMLHttpRequest();
-//     req.onreadystatechange = function() {
-//     if (this.readyState == 4 && this.status == 200) {
-//      alert(req.responseText)
-//     }
-//   };
-//   req.open("GET", url, true);
-//   req.send();
-// }
 
 
-$(document).on('submit', '#quiz-submit-ajax',function(e){
-  e.preventDefault();
-  console.log('ss');
-  var form = $(this);
-  $.ajax({
-      type: form.attr("method"),
-      url:form.attr("action"),
-      data: form.serialize(),
-      success:function(res){
-        
-        $("#quiz-submit-ajax").trigger('reset');
-        console.log(res);
-
-      },
-      error : function(err) {
-        console.log(err);
-    }
-  });
-});
-
-
-function tostr(res){
-    var type = res.status;
-        switch(type){
-            case 'info':
-                toastr.info(res.msg);
-                break;
-            case 'warning':
-                toastr.warning(res.msg);
-                break;
-            case 'success':
-                toastr.success(res.msg);
-                break;
-            case 'error':
-                toastr.error(res.msg);
-                break;
-        } 
-}
-
-</script>
 {% endblock %}
