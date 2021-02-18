@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # 3rd Party
     'star_ratings',
     'storages',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

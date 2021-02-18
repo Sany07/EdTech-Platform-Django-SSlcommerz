@@ -46,16 +46,16 @@
                                             <td>{{ forloop.counter }}</td>
                                             <td class="text-left"><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></td>
                                             {% if course.offer_price %}
-                                            <td>{{ course.offer_price }}</td>
+                                            <td>{{ course.offer_price }} {{ site_data.currency }} </td>
                                             {% elif course.price  %}
-                                            <td>{{ course.price }}</td>
+                                            <td>{{ course.price }} {{ site_data.currency }} </td>
                                             {% else %}
                                             <td>Free</td>
                                             {% endif %}
                                             {% if course.offer_price %}
-                                            <td>{{ course.offer_price }}</td>
+                                            <td>{{ course.offer_price }} {{ site_data.currency }} </td>
                                             {% elif course.price  %}
-                                            <td>{{ course.price }}</td>
+                                            <td>{{ course.price }} {{ site_data.currency }} </td>
                                             {% else %}
                                             <td>Free</td>
                                             {% endif %}
@@ -100,11 +100,11 @@
                                         <tbody>
                                             <tr>
                                                 <td>Subtotal</td>
-                                                <td class="sub-amount">{{ cart.subtotal }}</td>
+                                                <td class="sub-amount">{{ cart.subtotal }} {{ site_data.currency }} </td>
                                             </tr>
                                             <tr>
                                                 <td>Total</td>
-                                                <td class="total-amount">{{ cart.total }}</td>
+                                                <td class="total-amount">{{ cart.total }} {{ site_data.currency }} </td>
                                             </tr>
                                         </tbody>
                                     </table>

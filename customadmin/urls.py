@@ -22,10 +22,13 @@ urlpatterns = [
     path('create/category/', CreateCategoryView.as_view(), name="new-category"),
     path('course/<slug:slug>/', CourseDetailView.as_view(), name="single-course"),
     path('approvedorreject/', approvedOrReject, name="approvedorreject"),
+    path('testimonial/', TestimonialView.as_view(), name="testimonial"),
+    path('testimonial/add/', CreateTestimonialView.as_view(), name="add-testimonial"),
 
     path('settings/', include([
-            path('gateway/update',  PaymentGatewaySettingsView.as_view(), name="gateway-settings"),
-            path('general/update', FrontEndSettings.as_view(), name="frontend-settings"),
+            path('gateway/update/',  PaymentGatewaySettingsView.as_view(), name="gateway-settings"),
+            path('general/update/', FrontEndSettings.as_view(), name="frontend-settings"),
+            path('about/update/', AboutView.as_view(), name="about"),
     ])),
 
 

@@ -19,7 +19,7 @@ class CategoryView(ListView):
     context_object_name = 'categories'
     template_name = 'adminsection/pages/categories.html'
 
-    @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
+    @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))
     @method_decorator(staff_member_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -30,7 +30,7 @@ class CategoryView(ListView):
 class CreateCategoryView(CreateView):
     model = Category
     form_class = CategoryForm
-    @method_decorator(login_required(login_url=reverse_lazy('accounts:student-register')))
+    @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))
     @method_decorator(staff_member_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)

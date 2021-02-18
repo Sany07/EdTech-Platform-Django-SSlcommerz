@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView
+from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView, CreateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
@@ -10,7 +10,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your models here.
 from ..forms import *
-from ..models import PaymentGatewaySettings
+from ..models import PaymentGatewaySettings, FrontEndSettings, Testimonial
 # Create your views here.
 from accounts.models import CustomUser, Profile
 from courses.models import *
@@ -116,3 +116,53 @@ class PaymentGatewaySettingsView(UpdateView):
 
         return obj
 
+class AboutView(UpdateView):
+    model = About
+    form_class = AboutForm
+    context_object_name = 'about'
+    customPost = customPostMethod
+    success_url = reverse_lazy('customadmin:about')
+    template_name = 'adminsection/pages/about.html'
+
+
+    @method_decorator(login_required(login_url=reverse_lazy('customadmin:login')))
+    @method_decorator(staff_member_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(self.request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+        except Http404:
+            raise Http404("Object doesn't exists")
+        return self.render_to_response(self.get_context_data())
+
+    def get_object(self, queryset=None):
+        obj = super().get_queryset().last()
+
+        if obj is None:
+            self.customPost.post(self, self.request)
+
+        return obj
+
+
+class TestimonialView(ListView):
+    model = Testimonial
+    context_object_name = 'testimonials'
+    template_name = 'adminsection/pages/testimonial.html'
+
+    @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))
+    @method_decorator(staff_member_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class CreateTestimonialView(CreateView):
+    model = Testimonial
+    form_class = TestimonialForm
+    success_url = reverse_lazy('customadmin:testimonial')
+    
+    @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))
+    @method_decorator(staff_member_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)

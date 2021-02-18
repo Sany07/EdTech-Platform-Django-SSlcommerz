@@ -85,21 +85,26 @@ def Exam(request, id):
 
 def result(request, id):
     score =0
-    obj = QuizExam.objects.filter(quiz = id, user = request.user.id).order_by('-id')
-    
+    questions = QuizQuestion.objects.filter(quiz = id).order_by('-id')
+    obj = QuizExam.objects.filter(quiz = id, user = request.user.id).order_by('id')
+    print(obj)
     for o in obj:
         submitans.append(o.ans)
     print(submitans)
     for i in range(len(anslist)):
+        print('i')
         print(i)
         if anslist[i]==submitans[i]:
             score +=1
             print(submitans[i])
+        else:
+            score+=0
     # print(score)
     anslist.clear()
     submitans.clear()
-
-    return render(request,'mainsite/quiz/result.html',{'score':score,'lst':submitans})
+    print(anslist)
+    print(submitans)
+    return render(request,'mainsite/quiz/result.html',{'score':score,'lst':submitans, 'questions':questions, 'objs':obj})
 
 def save_ans(request):
     response_data = {}
@@ -126,13 +131,12 @@ def save_ans(request):
 
         else:
             response_data['status'] = error_status 
-            response_data['msg'] = error_msg
+            response_data['msg'] = form.errors
             return JsonResponse(response_data, safe=False)
 
     return redirect('/')
 
 def clr(request):
-    lst.clear()
+    submitans.clear()
     anslist.clear()
     return redirect('quiz:exam')
-

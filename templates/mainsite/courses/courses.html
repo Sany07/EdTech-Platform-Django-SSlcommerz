@@ -51,9 +51,9 @@
 
                         <h4 class="price">
                             {% if course.offer_price %}
-                            <span> {{ course.price }}</span> {{ course.offer_price }}
+                            <span> {{ course.price }} {{ site_data.currency }}</span> {{ course.offer_price }} {{ site_data.currency }}
                             {% elif course.price  %}
-                            {{ course.price }}
+                            {{ course.price }} {{ site_data.currency }}
                             {% else %}
                             Free
                             {% endif %}

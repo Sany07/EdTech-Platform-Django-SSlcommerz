@@ -13,6 +13,7 @@
     </div>
 </div>
 
+
 <!-- Start Register Area -->
 <section class="register-area ptb-100">
     <div class="container-fluid">
@@ -43,82 +44,18 @@
                                         {% csrf_token %}
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 px-5">
-                                                <!-- <div class="form-group">
-                                                    <input type="select" class="form-control" name="quiz"
-                                                    id="id_quiz" placeholder="">
-                                                </div>
-                                            </div> -->
-                                      
-                                            <!-- <div class="col-lg-12 col-md-12 px-5">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="question"
-                                                    id="id_question" placeholder="Question">
-                                                </div>
-                                            </div>
-                                       
                                             <div class="col-lg-12 col-md-12 px-5">
                                                 <div class="form-group">
-                                                    <input type="file" class="form-control" name="image"
-                                                    id="id_image" placeholder="">
+                                                    <label for="id_descriptions">Quiz Descriptions:</label>
+                                                    <input type="text" class="form-control" name="descriptions"
+                                                    id="id_descriptions" placeholder="Descriptions">
+                                                </div>
                                                 </div>
                                             </div>
-                                           
-                                            <div class="col-lg-12 col-md-12 px-5">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="choice_one"
-                                                    id="id_choice_one" placeholder="Option One">
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-lg-12 col-md-12 px-5">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="choice_two"
-                                                    id="id_choice_two" placeholder="Option Two">
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-lg-12 col-md-12 px-5">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="choice_three"
-                                                    id="id_choice_three" placeholder="Option Three">
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                            
-                                            <div class="col-lg-12 col-md-12 px-5">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="choice_four"
-                                                    id="id_choice_four" placeholder="Option Four">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 px-5">
-                                                <label class="labelc" for="category">Category</label> -->
-                                                <!-- <select name="ans" required="" id="id_ans" class="form-control">
-
-                                                    <option selected disabled>Correct Ans</option>
-                                                    
-                                                    <option value="choice_one">Option One</option>
-                
-                                                    
-                                                    <option value="choice_two">Option Two</option>
-                
-                                                    
-                                                    <option value="choice_three">Option Three</option>
-                
-                                                    
-                                                    <option value="choice_four">Option Four</option>
-                
-                                                    
-                                                </select>
-                                            </div> -->
-                                            {{ form.as_p }}
                                             <div class="col-lg-12 col-md-12">
                                                 <button class="btn btn-primary" type="submit">ADD</button>
                                             </div>
                                         </div>
-                                
-        
                                 </form>
                             </div>
                         </div>

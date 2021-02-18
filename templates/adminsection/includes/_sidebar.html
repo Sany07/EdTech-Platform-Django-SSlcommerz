@@ -75,7 +75,7 @@
                 </li>
                 <li class="has_sub">
                     <a href="#"
-                        class="waves-effect {% if 'general' in request.path or 'gateway' in request.path %} active {% endif %}"><i
+                        class="waves-effect {% if 'general' in request.path or 'gateway' in request.path or 'about' in request.path %} active {% endif %}"><i
                             class="md md-now-widgets"></i><span>Settings </span><span class="pull-right"><i
                                 class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
@@ -86,6 +86,9 @@
                                 href="{% url 'customadmin:gateway-settings' %}"><i class="md md-forward"></i>Payment
                                 Gateway</a>
                         </li>
+                        <li {% if 'about' in request.path %} class="active" {% endif %}><a
+                            href="{% url 'customadmin:about' %}"><i class="md md-forward"></i>About Page
+                    </li>
                     </ul>
                 </li>
             </ul>

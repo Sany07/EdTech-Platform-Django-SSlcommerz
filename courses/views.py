@@ -5,7 +5,7 @@ from django.db.models import Count,Q
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
+from django.contrib import messages
 from star_ratings.models import Rating , UserRating, AbstractBaseRating
 from django.contrib.contenttypes.models import ContentType
 
@@ -169,10 +169,8 @@ def create_course_with_lessons(request):
             course.instructor = user
             course.save()
 
-
             for form in ContentFormset:
                 lessoncontent = form.save(commit=False)
-
                 print(lessoncontent)
                 if lessoncontent.title != '':
                     lessoncontentfinal = lessoncontent
@@ -186,11 +184,13 @@ def create_course_with_lessons(request):
                             lesson.save()
 
                             lesson.video_link.add(lessoncontent)
-                    
 
-            return redirect(reverse("courses:single-course", kwargs={
-                                'slug': course.slug
-                                }))
+            messages.success(request, 'You Course Was Successfully Added')
+
+            return redirect("dashboard:dashboard")
+            # return redirect(reverse("dashboard:dashboard", kwargs={
+            #                     'slug': course.slug
+            #                     }))
 
     categories = Category.objects.all()   
     return render(request, 'mainsite/courses/create-course.html', {

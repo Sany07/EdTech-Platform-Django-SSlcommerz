@@ -291,7 +291,10 @@
 
                             <!-- <li><i class="icofont-checked"></i> Assessments <span>Yes</span></li> -->
 
-                            <li><i class="icofont-price"></i> Price <span>{{ course.price }}</span></li>
+                            <li><i class="icofont-price"></i> Price <span>{{ course.price }} {{ site_data.currency }} </span></li>
+                            {% if course.offer_price %}
+                            <li><i class="icofont-price"></i> Offer Price <span>{{ course.offer_price }} {{ site_data.currency }} </span></li>
+                            {% endif %}
                             <li><i class="icofont-price"></i> Ratings <span>{% ratings object %}</span></li>
                         </ul>
                     </div>
@@ -319,9 +322,9 @@
                             <div class="content">
                                 <h4><a href="{{ similar_category_course.get_absolute_url }}">{{ similar_category_course.title }}</a></h4>
                                 {% if similar_category_course.offer_price %}
-                                <p><span> {{ similar_category_course.price }}</span> {{ similar_category_course.offer_price }}</p>
+                                <p><span> {{ similar_category_course.price }} {{ site_data.currency }} </span> {{ similar_category_course.offer_price }} {{ site_data.currency }} </p>
                                     {% elif similar_category_course.price  %}
-                                <p>   {{ similar_category_course.price }} </p>
+                                <p>   {{ similar_category_course.price }} {{ site_data.currency }} </p>
                                     {% else %}
                                 <p>     Free </p>
                                     {% endif %}

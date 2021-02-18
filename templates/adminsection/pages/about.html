@@ -18,7 +18,7 @@
                         <h4 class="pull-left page-title"></h4>
                         <ol class="breadcrumb pull-right">
                             <li><a href="{% url 'customadmin:dashboard' %}">Dashboard</a></li>
-                            <li class="active">General Settings</li>
+                            <li class="active">About Page</li>
                         </ol>
                     </div>
                 </div>
@@ -26,53 +26,60 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><h3 class="panel-title">General Settings</h3></div>
+                            <div class="panel-heading"><h3 class="panel-title">About Page</h3></div>
                             <div class="panel-body">
                                 <div class=" form">
-                                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="{% url 'customadmin:frontend-settings' %}" enctype="multipart/form-data">
+                                    
+                                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="{% url 'customadmin:about' %}" enctype="multipart/form-data">
                                         {% csrf_token %}
+                                        
                                         <div class="form-group ">
-                                            <label for="lastname" class="control-label col-lg-2">Logo</label>
+                                            <label for="cname" class="control-label col-lg-2">Title</label>
                                             <div class="col-lg-10">
-                                                <img  src="{% if frontend_settings.logo %}  {{ frontend_settings.logo.url }} {% endif %}" alt="">
-                                                <input style="margin-top: 10px;" type="file" name="logo" accept="image/*" id="id_logo">
+                                                <input class=" form-control" id="id_title" name="title" type="text" required="" aria-required="true" value="{{ about.title }}">
                                             </div>
                                         </div>
                                         <div class="form-group ">
-                                            <label for="cname" class="control-label col-lg-2">Text Logo</label>
+                                            <label for="cname" class="control-label col-lg-2">Description</label>
                                             <div class="col-lg-10">
-                                                <input class=" form-control" id="id_text_logo" name="text_logo" type="text" required="" aria-required="true" value="{{ frontend_settings.text_logo }}">
+                                                {{ form.description }}
                                             </div>
-                                        </div>
+                                        </div> 
                                         <div class="form-group ">
-                                            <label for="cname" class="control-label col-lg-2">Teacher Registration</label>
+                                            <label for="cname" class="control-label col-lg-2">Our Mission</label>
                                             <div class="col-lg-10">
-                                                <input style="margin: 11px;padding: 10px;" type="checkbox" name="is_teacher_register" id="id_is_teacher_register" {% if frontend_settings.is_teacher_register == True  %}checked{% endif %}>
-                                                <!-- <input style="margin: 11px;padding: 10px;" type="checkbox" name="is_teacher_register" id="id_is_teacher_register" value="coding" checked> -->
-                                            <!-- {{ frontend_settings.is_teacher_register }} -->
+                                                {{ form.our_mission }}
                                             </div>
-                                        </div>
+                                        </div> 
                                         <div class="form-group ">
-                                            <label for="cname" class="control-label col-lg-2">Currency</label>
+                                            <label for="cname" class="control-label col-lg-2">Who We Are</label>
                                             <div class="col-lg-10">
-                                                <!-- <label class="labelc" for="category">Category</label> -->
-                                                <select name="currency"  id="id_currency" class="form-control">
-                                                    {% if frontend_settings.currency %}  
-                                                        
-                                                        <option selected disabled>{{ frontend_settings.currency }} </option>
-                                                    {% endif %}
-                                                    
-                                                    <option value="TK">TK(BDT)</option>
-                                                    <option value="$">$(USA)</option>
-                                                </select>
+                                                {{ form.who_we_are }}
                                             </div>
-                                        </div>
+                                        </div> 
+
                                         <div class="form-group ">
-                                            <label for="cemail" class="control-label col-lg-2">Footer Copyright</label>
+                                            <label for="lastname" class="control-label col-lg-2">Banner One</label>
                                             <div class="col-lg-10">
-                                                <input class="form-control " id="id_footer" type="text" name="footer" required="" aria-required="true" value="{{ frontend_settings.footer }}">
+                                                <img style="height: 100px; width: 100px ;" src="{% if about.thumbnail_one %}  {{ about.thumbnail_one.url }} {% endif %}" alt="">
+                                                <input style="margin-top: 10px;" type="file" name="thumbnail_one" accept="image/*" id="id_thumbnail_one">
+                                            </div>
+                                        </div>      
+                                        <div class="form-group ">
+                                            <label for="lastname" class="control-label col-lg-2">Banner Two</label>
+                                            <div class="col-lg-10">
+                                                <img style="height: 100px; width: 100px ;" src="{% if about.thumbnail_two %}  {{ about.thumbnail_two.url }} {% endif %}" alt="">
+                                                <input style="margin-top: 10px;" type="file" name="thumbnail_two" accept="image/*" id="id_thumbnail_two">
+                                            </div>
+                                        </div>      
+                                        <div class="form-group ">
+                                            <label for="lastname" class="control-label col-lg-2">Banner Three</label>
+                                            <div class="col-lg-10">
+                                                <img style="height: 100px; width: 100px ;" src="{% if about.thumbnail_three %}  {{ about.thumbnail_three.url }} {% endif %}" alt="">
+                                                <input style="margin-top: 10px;" type="file" name="thumbnail_three" accept="image/*" id="id_thumbnail_three">
                                             </div>
                                         </div>
+
 
                                         <div class="form-group">
                                             <div class="col-lg-offset-2 col-lg-10">

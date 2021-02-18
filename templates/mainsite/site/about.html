@@ -1,6 +1,5 @@
 {% extends 'mainsite/base.html' %}
 {% load static %}
-
 {% block content %}
 
 
@@ -24,30 +23,22 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <div class="about-text">
-                        <h3>Welcome To <span>GAINSKILL</span></h3>
+                        <h3>Welcome To <span>{{ about.title }}</span></h3>
                         
-                        <h5>Lorem ipsum dolor sit amet soluta saepe odit error, maxime praesentium sunt udiandae!</h5>
-                        
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisi cing elit. Quos dolo rem consequ untur, natus laudantium commodi earum aliquid in ullam.Lorem ipsum.</p>
-                        
-                        <p>Lorem ipsum dolor sit amet soluta saepe odit error, maxime praesentium sunt udiandae!</p>
-                        
-                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum sunt ut dolorem laboriosam culpa excepturi sed distinctio eius! Ut magnam numquam libero quia vero blanditiis fugit corporis quisquam, debitis quidem laudantium deleniti.</p>
+                        {{ about.description | safe }}
                     </div>
                 </div>
                 
                 <div class="col-lg-6 col-md-12">
                     <div class="about-slider">
-                        <div class="item">
-                            <img src="assets/img/about-img1.jpg" alt="about">
+                        <div class="item" style="height:340px; width:700px;">
+                            <img src="{% if about.thumbnail_one %}  {{ about.thumbnail_one.url }} {% endif %}" alt="about">
                         </div>
-                        
-                        <div class="item">
-                            <img src="assets/img/about-img2.jpg" alt="about">
+                        <div class="item" style="height:340px; width:700px;">
+                            <img src="{% if about.thumbnail_two %}  {{ about.thumbnail_two.url }} {% endif %}" alt="about">
                         </div>
-                        
-                        <div class="item">
-                            <img src="assets/img/about-img3.jpg" alt="about">
+                        <div class="item" style="height:340px; width:700px;">
+                            <img src="{% if about.thumbnail_three %}  {{ about.thumbnail_three.url }} {% endif %}" alt="about">
                         </div>
                     </div>
                 </div>
@@ -79,20 +70,14 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="about-content">
                         <h3>Who we are?</h3>
-                        
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, vestibulum molestie mi id rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, vestibulum molestie mi id rutrum.</p>
-                        
-                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, vestibulum molestie mi id rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, vestibulum molestie mi id rutrum.</p>
+                        <p class="mb-0">{{ about.our_mission | safe }}</p>
                     </div>
                 </div>
                 
                 <div class="col-lg-6 col-md-6">
                     <div class="about-content">
                         <h3>Our mission</h3>
-                        
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, vestibulum molestie mi id rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, vestibulum molestie mi id rutrum.</p>
-                        
-                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, vestibulum molestie mi id rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, vestibulum molestie mi id rutrum.</p>
+                        <p class="mb-0">{{ about.who_we_are | safe }}</p></p>
                     </div>
                 </div>
             </div>
@@ -152,7 +137,7 @@
     <!-- End Why Choose Us Area CSS -->
     
     <!-- Start Teacher Area -->
-    <section class="teacher-area ptb-100">
+    <!-- <section class="teacher-area ptb-100">
         <div class="container">
             <div class="section-title">
                 <h3>Our Teacher</h3>
@@ -275,7 +260,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- End Teacher Area -->
     
     <!-- Start Fun Facts Area -->
@@ -285,7 +270,7 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="fun-fact">
                         <div class="icon bg-1">
-                            <img src="assets/img/icon1.png" alt="icon">
+                            <img src="{% static 'assets/img/icon1.png' %}" alt="icon">
                         </div>
                         
                         <h3><span class="count">2500</span>+</h3>
@@ -296,7 +281,7 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="fun-fact">
                         <div class="icon bg-2">
-                            <img src="assets/img/icon2.png" alt="icon">
+                            <img src="{% static 'assets/img/icon2.png' %}" alt="icon">
                         </div>
                         
                         <h3><span class="count">100</span>+</h3>
@@ -307,7 +292,7 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="fun-fact">
                         <div class="icon bg-3">
-                            <img src="assets/img/icon3.png" alt="icon">
+                            <img src="{% static 'assets/img/icon3.png' %}" alt="icon">
                         </div>
                         
                         <h3><span class="count">55</span>+</h3>
@@ -318,7 +303,7 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="fun-fact">
                         <div class="icon bg-4">
-                            <img src="assets/img/icon4.png" alt="icon">
+                            <img src="{% static 'assets/img/icon4.png' %}" alt="icon">
                         </div>
                         
                         <h3><span class="count">1236</span>+</h3>
@@ -341,47 +326,21 @@
             
         <div class="row m-0">
             <div class="testimonials-slider">
+                {% for testimonial in testimonials %}
                 <div class="col-lg-12 col-md-12">
                     <div class="single-feedback">
-                        <img src="assets/img/client1.jpg" alt="client">
+                        <img style="height: 450px;" src="{{ about.thumbnail_one.url }}" alt="client">
                         
                         <div class="feedback-content">
                             <i class="icofont-quote-left"></i>
                             
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p>{{ testimonial.testimonial }}</p>
                             
-                            <h3>Jason Stamtham</h3>
+                            <h3>{{ testimonial.name }}</h3>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-12 col-md-12">
-                    <div class="single-feedback">
-                        <img src="assets/img/client2.jpg" alt="client">
-                        
-                        <div class="feedback-content">
-                            <i class="icofont-quote-left"></i>
-                            
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            
-                            <h3>Jason Stamtham</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-12 col-md-12">
-                    <div class="single-feedback">
-                        <img src="assets/img/client3.jpg" alt="client">
-                        
-                        <div class="feedback-content">
-                            <i class="icofont-quote-left"></i>
-                            
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            
-                            <h3>Jason Stamtham</h3>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

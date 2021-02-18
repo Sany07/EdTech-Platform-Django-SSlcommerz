@@ -43,7 +43,12 @@
                     {% for course in mycourses %}
                     <tr>
                         <td><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></td>
-                        <td>{{ course.is_published }}</td>
+                        <td>{% if course.is_published == 'True' %}
+                                Published
+                            {% else %}
+                                Pending
+                            {% endif %}
+                        </td>
                         {% if course.courseref.all %} 
                         <td>Assined</td>
                         {% else %}
