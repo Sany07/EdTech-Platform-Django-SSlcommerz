@@ -1,5 +1,5 @@
 
-from django.urls import path
+from django.urls import path, include
 
 
 from .views import InstructorRegisterView, ProfileView, LogInView, LogoutView, StudentRegisterView,EditProfileView, SettingView , ChangePassword
@@ -17,6 +17,9 @@ urlpatterns = [
     path('settings/', SettingView.as_view() ,name="setting"),
     path('profile/update/',EditProfileView ,name="profile-update"),
     path('password/', ChangePassword, name='change_password'),
+
+    
  
     
 ]
+

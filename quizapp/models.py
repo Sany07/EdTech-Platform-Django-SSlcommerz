@@ -49,15 +49,15 @@ class QuizQuestion(models.Model):
 
 
 
-class QuizResult(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz_name')
+class Certificate(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='courserefcertificate')
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='user')
-    marks = models.IntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = "Result"
-        verbose_name_plural = "Results"
-        db_table = "quizresult"
+        verbose_name = "Certificate"
+        verbose_name_plural = "Certificates"
+        db_table = "certificate"
 
 
     def __str__(self):

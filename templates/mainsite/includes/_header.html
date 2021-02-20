@@ -3,41 +3,18 @@
 
 
 <!-- Start Preloader Area -->
-<!-- <div class="preloader-area">
+<div class="preloader-area">
     <div class="loader">
-
         <div class="dots">
-            <i class="icofont-spinner ss"></i> 
-            <i class="dots-item dots-item-move-down"></i>
-            <i class="dots-item dots-item-move-left"></i>
-            <i class="dots-item dots-item-move-left"></i>
-            <i class="dots-item dots-item-move-left"></i>
-            <i class="dots-item dots-item-move-left"></i>
-            <i class="dots-item dots-item-move-down"></i>
-            <i class="dots-item dots-item-move-right"></i>
-            <i class="dots-item dots-item-move-right"></i>
-            <i class="dots-item dots-item-move-down"></i>
-            <i class="dots-item dots-item-move-up"></i>
-            <i class="dots-item dots-item-move-down"></i>
-            <i class="dots-item dots-item-move-up"></i>
-
-            <i class="dots-item"></i>
-
-            <i class="dots-item dots-item-move-down"></i>
-            <i class="dots-item dots-item-move-up"></i>
-            <i class="dots-item dots-item-move-down"></i>
-            <i class="dots-item dots-item-move-up"></i>
-            <i class="dots-item dots-item-move-left"></i>
-            <i class="dots-item dots-item-move-left"></i>
-            <i class="dots-item dots-item-move-up"></i>
-            <i class="dots-item dots-item-move-right"></i>
-            <i class="dots-item dots-item-move-right"></i>
-            <i class="dots-item dots-item-move-right"></i>
-            <i class="dots-item dots-item-move-right"></i>
-            <i class="dots-item dots-item-move-up"></i>
+            <i class="dots-item dots-item-move-down"></i> <i class="dots-item dots-item-move-left"></i> <i class="dots-item dots-item-move-left"></i> <i class="dots-item dots-item-move-left"></i>
+            <i class="dots-item dots-item-move-left"></i> <i class="dots-item dots-item-move-down"></i> <i class="dots-item dots-item-move-right"></i> <i class="dots-item dots-item-move-right"></i>
+            <i class="dots-item dots-item-move-down"></i> <i class="dots-item dots-item-move-up"></i> <i class="dots-item dots-item-move-down"></i> <i class="dots-item dots-item-move-up"></i> <i class="dots-item"></i>
+            <i class="dots-item dots-item-move-down"></i> <i class="dots-item dots-item-move-up"></i> <i class="dots-item dots-item-move-down"></i> <i class="dots-item dots-item-move-up"></i>
+            <i class="dots-item dots-item-move-left"></i> <i class="dots-item dots-item-move-left"></i> <i class="dots-item dots-item-move-up"></i> <i class="dots-item dots-item-move-right"></i>
+            <i class="dots-item dots-item-move-right"></i> <i class="dots-item dots-item-move-right"></i> <i class="dots-item dots-item-move-right"></i> <i class="dots-item dots-item-move-up"></i>
         </div>
     </div>
-</div> -->
+</div>
 <!-- End Preloader Area -->
 
 <!-- Start Main Menu Area -->
@@ -50,7 +27,8 @@
                 <!-- Logo -->
                 {% if site_data.logo %}
                 <a class="nav-brand" href="{% url 'coresite:home' %}">
-                    <img src="{{ site_data.logo.url }} " alt="GAINSKILL"></a>
+                    <img style="width:222px;
+                    height: 220px;" class="lld" src="{{ site_data.logo.url }} " alt="GAINSKILL"></a>
                 {% else %}
                     {{ site_data.text_logo }}
                 {% endif %}

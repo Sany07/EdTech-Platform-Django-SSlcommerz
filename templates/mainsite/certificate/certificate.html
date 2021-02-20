@@ -1,0 +1,101 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <link rel="stylesheet" href="{% static 'assets/certificate/base.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/certificate/fancy.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/certificate/main.css' %}" />
+
+        <title></title>
+    </head>
+    <body>
+
+        <div id="">
+        <div id="exampl">
+            
+            <div id="pf1" class="pf w0 h0" data-page-no="1">
+                <div class="pc pc1 w0 h0">
+                    <img class="bi x0 y0 w0 h0" alt="" src="{% static 'assets/certificate/bg1.png' %}" />
+                    <div class="">
+	                    <div class="padding t m0 x1 h1 y1 ff1 fs0 fc0 sc0 ls0 ws0 fdf">Gainskill</div>
+                        <div class="yoyo t m0 x2 h2 y2 ff2 fs1 fc0 sc1 ls0 ws0">CERTIFICATE OF APPRECIATION</div>
+	                    <div class="padding t m0 x3 h3 y3 ff3 fs1 fc0 sc1 ls1 ws0">THIS CERTIFICATE IS PROUDLY PRESENTED TO</div>
+	                    <div style="margin-left:44px;" class="padding2 jj t m0 x4 h4 y4 ff4 fs2 fc1 sc2 ls0 ws0"> {{ certificate.user.get_full_name }}  </div>
+	                    <div  class="padding oyoyee t m0 x6 h5 y6 ff2 fs3 fc0 sc1 ls1 ws0">for successfully completed {{ certificate.course }}</div>
+                        <div class="padding tto  t m0 x7 h5 y7 sig fs3 fc0 sc1 ls1 ws0" ><span style="position: relative;
+                            bottom: 71px;
+                            font-size: 70px;
+                            left: 102px;">{{ certificate.timestamp|date:"d M Y" }}</span> <span style="position: relative;
+bottom: 42px;
+font-size: 88px;
+left: 1245px;"><img style="width:67% ; height: 156px;" src="{% static 'assets/certificate/sig.png' %}" alt=""> </span></div>
+                        <div class="ppd t m0 x9 h5 y9 ff2 fs3 fc0 sc1 ls1 ws0">Date<span class="_ _0"> </span>Signature</div>
+	                    <div class=" t m0 xa h6 ya ff3 fs4 fc2 sc1 ls1 ws0"> Gain</div>
+	                    <div class=" t m0 xb h6 yb ff3 fs4 fc2 sc1 ls1 ws0">Skill</div>
+                	</div>
+                </div>
+                <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+            </div>
+        </div>
+        </div>
+        <div style="
+            position: relative;
+            text-align: center;
+            margin-top: 40px;
+       ">
+            <button class="myButton" OnClick="CallPrint(this.value)">PRINT</button>
+            
+        </div>
+    </body>
+
+    
+    <script>
+        function CallPrint(strid) {
+            var prtContent = document.getElementById("exampl");
+            var WinPrint = window.open('', '', 'left=0,top=0,width=300,height=400,toolbar=0,scrollbars=0,status=0');
+            WinPrint.document.write(prtContent.innerHTML);
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+        }
+    </script>
+
+
+<style>
+.myButton {
+	box-shadow: 0px 10px 14px -7px #3e7327;
+	background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+	background-color:#77b55a;
+	border-radius:4px;
+	border:1px solid #4b8f29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:6px 12px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #5b8a3c;
+    width: 102px;
+    height: 39px;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
+	background-color:#72b352;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+        
+
+</style>
+
+</html>

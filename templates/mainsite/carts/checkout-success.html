@@ -22,13 +22,74 @@
     <!-- Start Checkout Area -->
     <section class="checkout-area ptb-100">
         <div class="container">
-
-                <div class="row">
-                        <h1>Your Payment was Successful</h1>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="about-text">
+                        <h3>Your Payment was <span>Successful</span></h3>
+                        <h4 class="">Your Transaction id: {{ transaction.tran_id }}</h4>
+                        <h5 class="p-5">Save Your Invoice <a href="{% url 'billing:invoice' transaction.tran_id %}" target="_blank" rel="noopener noreferrer"><span style="border-left: olive;">Click Here</span></a></h5>
+                    </div>
                 </div>
-            </form>
+                
+                <!-- <div class="col-lg-6 col-md-12">
+                    <div class="about-slider">
+                        <div class="item" style="height:340px; width:700px;">
+                            <img src="{% if about.thumbnail_one %}  {{ about.thumbnail_one.url }} {% endif %}" alt="about">
+                        </div>
+                        <div class="item" style="height:340px; width:700px;">
+                            <img src="{% if about.thumbnail_two %}  {{ about.thumbnail_two.url }} {% endif %}" alt="about">
+                        </div>
+                        <div class="item" style="height:340px; width:700px;">
+                            <img src="{% if about.thumbnail_three %}  {{ about.thumbnail_three.url }} {% endif %}" alt="about">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-about">
+                        <i class="icofont-paper-plane"></i>
+                        <h3>Progressive Programs</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisi cing elit. Quos dolo rem consequ untur, natus laudantium commodi earum aliquid in ullam.Lorem ipsum.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-about">
+                        <i class="icofont-checked"></i>
+                        <h3>Online Courses</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisi cing elit. Quos dolo rem consequ untur, natus laudantium commodi earum aliquid in ullam.Lorem ipsum.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
+                    <div class="single-about">
+                        <i class="icofont-airplane-alt"></i>
+                        <h3>International Students</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisi cing elit. Quos dolo rem consequ untur, natus laudantium commodi earum aliquid in ullam.Lorem ipsum.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="about-content">
+                        <h3>Who we are?</h3>
+                        <p class="mb-0">{{ about.our_mission | safe }}</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="about-content">
+                        <h3>Our mission</h3>
+                        <p class="mb-0">{{ about.who_we_are | safe }}</p></p>
+                    </div>
+                </div> -->
+            </div>
         </div>
     </section>
-    <!-- End Checkout Area -->
+
+
 
 {% endblock %}
+
+<h1>Your Payment was Successful</h1>
+<h1>Your Transaction id {{ transaction.tran_id }}</h1>
+<h1>Print Your Invoice <a href="{% url 'billing:invoice' transaction.tran_id %}" target="_blank" rel="noopener noreferrer">Invoice</a></h1>

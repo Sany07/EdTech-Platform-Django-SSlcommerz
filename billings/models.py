@@ -52,3 +52,7 @@ class Transaction(models.Model):
     verify_sign_sha2 = models.CharField(max_length=255)
     risk_level = models.CharField(max_length=15)
     risk_title = models.CharField(max_length=25)
+
+
+    def __str__(self):
+        return self.user.username

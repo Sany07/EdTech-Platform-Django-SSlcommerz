@@ -1,0 +1,137 @@
+
+{% load static %}
+
+{% block content %}
+
+        <style type="text/css">
+          
+            span.cls_002{font-family:"DejaVu Serif Condensed",serif;font-size:17.3px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+            div.cls_002{font-family:"DejaVu Serif Condensed",serif;font-size:17.3px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+            span.cls_003{font-family:"DejaVu Sans Condensed Bold",serif;font-size:12.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+            div.cls_003{font-family:"DejaVu Sans Condensed Bold",serif;font-size:12.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+            span.cls_004{font-family:"DejaVu Sans Condensed",serif;font-size:9.8px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+            div.cls_004{font-family:"DejaVu Sans Condensed",serif;font-size:9.8px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+            span.cls_005{font-family:"DejaVu Sans Condensed Bold",serif;font-size:11.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+            div.cls_005{font-family:"DejaVu Sans Condensed Bold",serif;font-size:11.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+            span.cls_006{font-family:"DejaVu Sans Condensed Bold",serif;font-size:11.3px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+            div.cls_006{font-family:"DejaVu Sans Condensed Bold",serif;font-size:11.3px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+            span.cls_007{font-family:"DejaVu Sans Condensed",serif;font-size:9.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+            div.cls_007{font-family:"DejaVu Sans Condensed",serif;font-size:9.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+            span.cls_008{font-family:"DejaVu Sans Condensed Bold",serif;font-size:9.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+            div.cls_008{font-family:"DejaVu Sans Condensed Bold",serif;font-size:9.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+            span.cls_009{font-family:"DejaVu Sans Condensed",serif;font-size:11.3px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+            div.cls_009{font-family:"DejaVu Sans Condensed",serif;font-size:11.3px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+    
+        </style>
+
+        <div id="exampl">
+        <div style="position: absolute; left: 50%; margin-left: -420px; top: 0px; width: 841px; height: 794px; border-style: outset; overflow: hidden;">
+            <div style="position: absolute; left: 0px; top: 0px;">
+                <img src="{% static 'assets/img/background1.jpg' %}" width="841" height="1190" />
+              
+            </div>
+
+            <!-- <div style="position: absolute; left: 360.14px; top: 131.64px;" class="cls_002"><span class="cls_002">Carnival Internet</span></div> -->
+              
+            <div style="left: 64px; position: relative; top: 154.58px;" class="cls_002"><span class="cls_002">Payment Invoice {{ transaction.tran_id }}</span></div>
+            <div style="position: absolute; left: 91.28px; top: 214.96px;" class="cls_003"><span class="cls_003">GainSkill</span></div>
+            <div style="position: absolute; left: 91.28px; top: 230.88px;" class="cls_004"><span class="cls_004">BAUST,Saidpur</span></div>
+            <div style="position: absolute; left: 91.28px; top: 243.85px;" class="cls_004"><span class="cls_004">Nilphamari,Bangladesh.</span></div>
+            <div style="position: absolute; left: 91.28px; top: 268.09px;" class="cls_005"><span class="cls_005">Customer Information:</span></div>
+            <!-- <div style="position: absolute; left: 92.03px; top: 287.22px;" class="cls_006"><span class="cls_006">Customer Information:</span></div> -->
+            <div style="position: absolute; left: 92.03px; top: 302.15px;" class="cls_007"><span class="cls_007">{{ transaction.user.get_full_name }}</span></div>
+            <div style="position: absolute; left: 92.03px; top: 338.06px;" class="cls_007"><span class="cls_007">Email: {{ transaction.user.email }}</span></div>
+            <div style="position: absolute; left: 91.28px; top: 406.65px;" class="cls_005"><span class="cls_005">Payment Information</span></div>
+            <div style="position: absolute; left: 92.03px; top: 425.78px;" class="cls_006"><span class="cls_006">Payment Method:</span></div>
+            <div style="position: absolute; left: 333.23px; top: 428.78px;" class="cls_006"><span class="cls_006">Items Ordered</span></div>
+            <div style="position: absolute; left: 734.67px; top: 428.78px;" class="cls_006"><span class="cls_006">Price</span></div>
+            <div style="position: absolute; left: 92.03px; top: 440.71px;" class="cls_007"><span class="cls_007">Transaction Type : </span><span class="cls_008">Online</span></div>
+            <!-- <div style="position: absolute; left: 333.23px; top: 443.74px;" class="cls_006"><span class="cls_006">{{ transaction.user.email  }}</span></div> -->
+            <div style="position: absolute; left: 703.88px; top: 443.74px;" class="cls_009"><span class="cls_009">{{ transaction.currency }} {{ transaction.store_amount }}</span></div>
+            <div style="position: absolute; left: 92.03px; top: 452.68px;" class="cls_007"><span class="cls_007">Card Type : {{ transaction.card_type }}</span></div>
+            <div style="position: absolute; left: 92.03px; top: 464.65px;" class="cls_007"><span class="cls_007">Card Number: {{ transaction.card_issuer }}</span></div>
+            <div style="position: absolute; left: 92.03px; top: 476.62px;" class="cls_007"><span class="cls_007">Bank Authorize Id: {{ transaction.bank_tran_id }}</span></div>
+            <div style="position: absolute; left: 92.03px; top: 488.59px;" class="cls_007"><span class="cls_007">Card Holder's Name/Account :</span></div>
+            <div style="position: absolute; left: 544.61px; top: 489.45px;" class="cls_009"><span class="cls_009">Item(s) Subtotal:</span></div>
+            <div style="position: absolute; left: 703.88px; top: 489.45px;" class="cls_009"><span class="cls_009">{{ transaction.currency }} {{ transaction.store_amount }}</span></div>
+            <div style="position: absolute; left: 92.03px; top: 500.56px;" class="cls_007"><span class="cls_007">IP Address: 103.106.239.46.[Bangladesh.]</span></div>
+            <div style="position: absolute; left: 522.86px; top: 504.41px;" class="cls_009"><span class="cls_009">Shipping & Handling:</span></div>
+            <div style="position: absolute; left: 716.75px; top: 504.41px;" class="cls_009"><span class="cls_009">{{ transaction.currency }} 0.00</span></div>
+            <div style="position: absolute; left: 92.03px; top: 512.53px;" class="cls_007"><span class="cls_007">Gateway Currency: {{ transaction.currency }}</span></div>
+            <div style="position: absolute; left: 748.78px; top: 519.37px;" class="cls_009"><span class="cls_009">----</span></div>
+            <div style="position: absolute; left: 92.03px; top: 524.5px;" class="cls_007"><span class="cls_007">{{ transaction.currency }} Amount: {{ transaction.store_amount }} Taka</span></div>
+            <div style="position: absolute; left: 558.71px; top: 534.34px;" class="cls_006"><span class="cls_006">Grand Total:</span></div>
+            <div style="position: absolute; left: 697.8px; top: 534.34px;" class="cls_006"><span class="cls_006">{{ transaction.currency }} {{ transaction.store_amount }}</span></div>
+            <div style="position: absolute; left: 92.03px; top: 565.76px;" class="cls_006"><span class="cls_006">Billing Information :</span></div>
+            <div style="position: absolute; left: 92.03px; top: 580.69px;" class="cls_007"><span class="cls_007">{{ transaction.user.get_full_name }}</span></div>
+            <div style="position: absolute; left: 92.03px; top: 604.63px;" class="cls_007"><span class="cls_007">Phone: 01751006793</span></div>
+            <div style="position: absolute; left: 92.03px; top: 616.6px;" class="cls_007"><span class="cls_007">Email: {{ transaction.user.email }}</span></div>
+            <div style="position: absolute; left: 91.28px; top: 651.48px;" class="cls_006"><span class="cls_006">if any Questions? Email: operation@gainskill.xyz</span></div>
+        </div>
+        <img style="
+            position: relative;
+            left: 436px;
+            top: 232px;
+            opacity: 0.3;
+            height: 607px;
+       " src="{% static 'assets/img/PAID-1.png' %}"  />
+    </div>
+    <div style="
+    position: relative;
+    text-align: right;
+    margin: 0 40px;
+    top:-500px
+">
+    <button class="myButton" OnClick="CallPrint(this.value)">PRINT</button>
+    
+</div>
+
+    </section>
+
+    
+    <script>
+        function CallPrint(strid) {
+            var prtContent = document.getElementById("exampl");
+            var WinPrint = window.open('', '', 'left=0,top=0,width=794px,height=794px,toolbar=0,scrollbars=0,status=0');
+            WinPrint.document.write(prtContent.innerHTML);
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+        }
+
+    </script>
+
+    
+<style>
+    .myButton {
+        box-shadow: 0px 10px 14px -7px #3e7327;
+        background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+        background-color:#77b55a;
+        border-radius:4px;
+        border:1px solid #4b8f29;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:13px;
+        font-weight:bold;
+        padding:6px 12px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #5b8a3c;
+        width: 102px;
+        height: 39px;
+    }
+    .myButton:hover {
+        background:linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
+        background-color:#72b352;
+    }
+    .myButton:active {
+        position:relative;
+        top:1px;
+    }
+    
+            
+    
+    </style>
+{% endblock %}

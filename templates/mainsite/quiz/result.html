@@ -17,6 +17,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 pl-0 mb-5">
+                    <h3>{{ certificate.course }} </h3>
+                </div>
+                <div class="col-lg-12 col-md-12 pl-0 mb-5">
                     <h3>Your Score {{score}}:  </h3>
                 </div>
                 <div class="col-lg-8 col-md-8 pl-0 mb-5">
@@ -58,7 +61,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for i in objs %}
+                            {% for i in exam_ans %}
                             <tr>   
                                 <td>
                                     {% if i.ans == 'choice_one' %} 
@@ -83,9 +86,10 @@
                         <h4 class="buy-cart cart-buttons">
     
                                 
+                        {{ certificate }}        
+                        {{ certificate.id }}        
                                 
-                                
-                            <a class="ml-5 " href="/dashboard/classroom/python-tutorial-for-beginners/"><button class="btn btn-danger">Unlock the certificate</button></a>
+                            <a class="ml-5 " href="{% url 'quiz:certificate' certificate.id %}"><button class="btn btn-danger">Unlock the certificate</button></a>
                                                            
                                
                            </h4>

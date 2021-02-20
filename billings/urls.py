@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import  CheckoutSuccessView, CheckoutFaildView
+from .views import  CheckoutSuccessView, CheckoutFaildView, InvoiceView
 
 
 
@@ -11,6 +11,7 @@ urlpatterns = [
 
     
     path('success/', CheckoutSuccessView.as_view(), name='success'),
+    path('invoice/<slug:tran_id>', InvoiceView.as_view(), name='invoice'),
     path('faild/', CheckoutFaildView.as_view(), name='faild'),
 
 ]

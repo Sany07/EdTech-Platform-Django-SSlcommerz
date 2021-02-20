@@ -7,7 +7,8 @@ from django.contrib import messages
 from .forms import QuizQuestionForm, QuizForm , QuizExamForm
 from .models import *
 
-
+from courses.models import Course
+from accounts.models import CustomUser
 
 def AddQuiz(request, id):
     template_name = 'mainsite/quiz/add_quiz.html'
@@ -86,25 +87,36 @@ def Exam(request, id):
 def result(request, id):
     score =0
     questions = QuizQuestion.objects.filter(quiz = id).order_by('-id')
-    obj = QuizExam.objects.filter(quiz = id, user = request.user.id).order_by('id')
-    print(obj)
-    for o in obj:
+    exam_ans = QuizExam.objects.filter(quiz = id, user = request.user.id).order_by('id')
+    course = get_object_or_404(Course, courseref__id = id)
+    print('course')
+    print(course.id)
+    
+    print(exam_ans)
+    for o in exam_ans:
         submitans.append(o.ans)
     print(submitans)
     for i in range(len(anslist)):
-        print('i')
-        print(i)
+
         if anslist[i]==submitans[i]:
             score +=1
             print(submitans[i])
         else:
             score+=0
-    # print(score)
+    
+    certificate = Certificate.objects.get_or_create(
+        course =  get_object_or_404(Course, courseref__id = id), user = get_object_or_404(CustomUser, id = request.user.id)
+        )
+    print(certificate[0])
     anslist.clear()
     submitans.clear()
-    print(anslist)
-    print(submitans)
-    return render(request,'mainsite/quiz/result.html',{'score':score,'lst':submitans, 'questions':questions, 'objs':obj})
+    return render(request,'mainsite/quiz/result.html',{
+            'score':score,'lst':submitans, 
+            'questions':questions, 
+            'exam_ans':exam_ans,
+            'certificate':certificate[0]
+        }
+        )
 
 def save_ans(request):
     response_data = {}
@@ -140,3 +152,12 @@ def clr(request):
     submitans.clear()
     anslist.clear()
     return redirect('quiz:exam')
+
+
+def certificate(request, id):
+    certificate = get_object_or_404(Certificate, id = id)
+
+    return render(request,'mainsite/certificate/certificate.html',{
+            'certificate':certificate,
+        }
+        )

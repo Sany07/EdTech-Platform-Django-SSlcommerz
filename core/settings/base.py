@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'quizapp.apps.QuizappConfig',
     'payment.apps.PaymentConfig',
 
-
-
     # 3rd Party
     'star_ratings',
     'storages',
