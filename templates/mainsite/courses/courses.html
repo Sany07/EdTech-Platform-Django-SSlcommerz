@@ -29,7 +29,7 @@
                 <div class="single-courses-item">
                     <div class="courses-img">
                         {% if course.thumbnail.url == 'None' %}
-                        <img src="" alt="course" />
+                        <img style="width: 100%;" src="{% static 'assets/img/sa.jpg' %}" alt="course" />
                         
                         {% else %}
                         <img style="width: 100%;" src="{{ course.thumbnail.url }}" alt="" />

@@ -25,3 +25,7 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'coresite.views.handler404'
 handler500 = 'coresite.views.handler500'
+
+admin.site.site_header = "GainSkill Super Admin"
+admin.site.site_title = "GainSkill"
+admin.site.index_title = "Welcome to GainSkill"

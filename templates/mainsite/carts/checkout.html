@@ -78,24 +78,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="form-group">
-                                        <label>Country*</label>
-                                        <select class="form-control">
-                                            <option>Select Your Country</option>
-                                            <option>United States</option>
-                                            <option>Brazil</option>
-                                            <option>Mexico</option>
-                                            <option>Canada</option>
-                                            <option>Russia</option>
-                                            <option>Argentina</option>
-                                            <option>Bolivia</option>
-                                            <option>Colombia</option>
-                                            <option>Paraguay</option>
-                                            <option>Indonesia</option>
-                                        </select>
-                                    </div>
-                                </div>
 
                                 <div class="col-lg-12 col-md-12">
                                     <div class="form-group">
@@ -111,39 +93,34 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12 col-md-12">
+                                <!-- <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>District*</label>
+                                        <select class="form-control">
+                                            <option>Select Your District</option>
+                                            <option>Panchagarh</option>
+                                            <option>Thakurgaon</option>
+                                            <option>Saidpur</option>
+                                            <option>Nilphamari</option>
+                                            <option>Rangpur</option>
+                                            <option>Dinajpur</option>
+                                        </select>
+                                    </div>
+                                </div> -->
+                                <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>Town/City*</label>
                                         <input type="text" name="city" maxlength="50" required="" id="id_city" class="form-control">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-group">
-                                        <label>District*</label>
-                                        <select class="form-control">
-                                            <option>Select Your District</option>
-                                            <option>United States</option>
-                                            <option>Brazil</option>
-                                            <option>Mexico</option>
-                                            <option>Canada</option>
-                                            <option>Russia</option>
-                                            <option>Argentina</option>
-                                            <option>Bolivia</option>
-                                            <option>Colombia</option>
-                                            <option>Paraguay</option>
-                                            <option>Indonesia</option>
-                                        </select>
-                                    </div>
-                                </div>
-
+                                
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>Postcode/ZIP*</label>
                                         <input type="text" name="post_code" maxlength="50" required="" id="id_post_code" class="form-control">
                                     </div>
                                 </div>
-
                                 <div class="col-lg-12 col-md-12">
                                     <div class="form-check">
                                         <input id="is_save_billing" name="is_save_billing" value="True" type="checkbox">
@@ -180,9 +157,9 @@
                                             </td>
                                             <td>
                                                 {% if course.offer_price %}
-                                                <span class="amount">{{ course.offer_price }}</span>
+                                                <span class="amount">{{ course.offer_price }} </span> {{ site_data.currency }}
                                                 {% else %}
-                                                <span class="amount">{{ course.price }}</span>
+                                                <span class="amount">{{ course.price }} </span> {{ site_data.currency }}
                                                 {% endif %}
                                             </td>
                                             
@@ -196,7 +173,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>Total</td>
-                                                <td class="text-right">{{ cart.total }}</td>
+                                                <td class="text-right">{{ cart.total }} {{ site_data.currency }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -206,14 +183,14 @@
                             <div class="payment-information">
                                 <h3>Payment Information</h3>
                              
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <input type="checkbox" id="option1">
                                     <label>Direct Bank Transfer</label>
                                     <p>Make your payment directly into our bank account. Please use your Order ID as the
                                         payment reference. Your order won’t be shipped until the funds have cleared in our
                                         account.</p>
                                 </div>
-                        
+                         -->
 
                             </div>
 

@@ -43,7 +43,7 @@
                     {% for course in mycourses %}
                     <tr>
                         <td><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></td>
-                        <td>{% if course.is_published == 'True' %}
+                        <td>{% if course.is_published == True %}
                                 Published
                             {% else %}
                                 Pending

@@ -36,7 +36,7 @@ class Profile(models.Model):
     user_profile = models.OneToOneField(User, on_delete=models.CASCADE)
     about = models.TextField()
     designation = models.CharField(max_length=100,blank=True)
-    website = models.URLField( blank=True)
+    website = models.URLField(blank=True)
     profile_pic =models.ImageField(upload_to='photos/profile/%Y-%m-%d/',blank=True)
 
 
