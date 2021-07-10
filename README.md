@@ -48,7 +48,7 @@ python manage.py runserver
 
 <div align="left"> 
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/1.png" width="500"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/1.png" width="300"> <br>
    
  <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/2.png" width="500"> <br>
    
@@ -74,7 +74,9 @@ python manage.py runserver
    
  <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/13.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/14.png" width="500"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/14.png" width="500"> <br> 
+   
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/16.png" width="800"> <br> 
    
  <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/15.png" width="800"> <br> 
    
