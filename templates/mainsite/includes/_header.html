@@ -129,8 +129,8 @@
 <!-- Start Search Popup Area -->
 <div id="search-area">
     <button type="button" class="close">×</button>
-    <form>
-        <input type="search" value="" placeholder="Search Kewword(s)">
+    <form action="{% url 'coresite:searchrs' %}" class="search-form" method="GET">
+        <input type="search" id="text" name="text" value="" placeholder="Search Kewword(s)">
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>

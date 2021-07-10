@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
+from django.db.models import Count,Q
 
-
-
+from courses.models import Course
 
 from django.conf import settings
 
@@ -54,3 +54,20 @@ def handler500(request):
     return response
 
     
+
+def search(request):
+
+    search_post_list=Course.objects.filter(is_published='True').order_by('-id')
+    query= request.GET.get('text')
+    if query:
+        search_post_list= search_post_list.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query)
+        ).distinct()
+        print(search_post_list)
+    context={
+
+        'courses':search_post_list,
+        
+    }
+    return render(request,'mainsite/courses/result.html',context)

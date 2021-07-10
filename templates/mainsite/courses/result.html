@@ -1,0 +1,144 @@
+{% extends 'mainsite/base.html' %}
+{% load static %}
+{% load ratings %}
+{% load is_already_enrolled %}
+{% load add_or_remove_from_cart %}
+
+{% block content %}
+
+<!-- End Search Popup Area -->
+
+<!-- Start Page Title Area -->
+<div class="page-title">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <h3>All Courses</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start Courses Area -->
+<section class="courses-area ptb-100">
+    <div class="container">
+        <div class="row">
+            {% for course in courses %}
+            <div class="col-lg-4 col-md-6">
+                <div class="single-courses-item">
+                    <div class="courses-img">
+                        {% if course.thumbnail.url == 'None' %}
+                        <img style="width: 100%;" src="{% static 'assets/img/sa.jpg' %}" alt="course" />
+                        
+                        {% else %}
+                        <img style="width: 100%;" src="{{ course.thumbnail.url }}" alt="" />
+
+                        {% endif %}
+                    </div>
+
+                    <div class="courses-content" style="min-height: 150px;">
+                        <h3><a href="{{ course.get_absolute_url }}">{{ course.title}}</a></h3>
+                    </div>
+
+                    <div class="courses-content-bottom">
+                        <h4><i class="icofont-ui-user"></i> {{ course.get_enroll_count }} 
+                            {% if course.get_enroll_count > 1 %}
+                            Students</h4>
+                            {% else %}
+                            Student </h4>
+                            {% endif %}
+
+                        <h4 class="price">
+                            {% if course.offer_price %}
+                            <span> {{ course.price }} {{ site_data.currency }}</span> {{ course.offer_price }} {{ site_data.currency }}
+                            {% elif course.price  %}
+                            {{ course.price }} {{ site_data.currency }}
+                            {% else %}
+                            Free
+                            {% endif %}
+                        </h4>
+                     
+                        <h4 class="ddd-rating">
+                            <i class="icofont-price"></i> Ratings : <span>{% ratings course %}</span>
+                        </h4>
+                        <h4 class="buy-cart cart-buttons">
+
+                            {% is_already_enrolled request.user course as is_enrolled %}
+                            
+                            {% if is_enrolled %}
+                            <a href="{% url 'dashboard:start-course' course.slug %}" class=""><button class="btn btn-danger">Start Course</button></a>
+                            {% else %}
+                           
+                            
+                            {% if course.price is none %}
+                            <form method='POST' style="display: inline-block;" action='{% url "enrollment:enroll" %}'>
+                                {% csrf_token %}
+                                <input type='hidden' name='product_id' value='{{ course.id }}' />
+                                <a href="" class=""><button class="btn btn-danger">Enroll Now</button></a>
+                            </form>
+                            {% else %}
+                            <form method='POST' class="course-ajax" style="display: inline-block;" action='{% url "cart:cart-update" %}'>
+                                {% csrf_token %}
+                                <input type='hidden' name='product_id' value='{{ course.id }}' />
+                               
+                               {% add_or_remove_from_cart request course as add_or_remove %}
+                               {% if add_or_remove %}
+                                <a href="" class="ml-5 button-ajax"><button class="btn btn-danger">Remove From cart</button></a>
+                                {% else %}
+                                <a href="" class="ml-5 button-ajax"><button class="btn btn-danger">Add to cart</button></a>
+                                {% endif %}
+                            </form>
+                            {% endif %}
+                            {% endif %}
+
+
+                        </h4>
+
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+            {% include 'mainsite/includes/_pagination.html' %}
+        </div>
+    </div>
+</section>
+<!-- End Courses Area -->
+
+
+<script>
+
+
+  </script>
+
+<style>
+
+.star-ratings-rating-background
+{
+    display: none;
+}
+.star-ratings-rate-action
+{
+    display: none;
+}
+
+
+.star-ratings-rating-average  {
+    margin-left: 20px;
+}
+.star-ratings-rating-count {
+    margin-left: 20px;
+}
+.ddd-rating {
+    width: 100%;
+    /* padding: 10px; */
+    top: 13px;
+    position: relative;
+}
+
+</style>
+
+{% endblock %}

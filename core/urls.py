@@ -15,7 +15,7 @@ urlpatterns = [
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
     path('admin/', include('customadmin.urls')),
     path('quiz/', include('quizapp.urls')),
-    path('djangoadmin/', admin.site.urls),
+    path('superadmin/', admin.site.urls),
 ]
 
 
