@@ -48,33 +48,33 @@ python manage.py runserver
 
 <div align="left"> 
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/1.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/1.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/2.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/2.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/3.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/3.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/4.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/4.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/5.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/5.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/6.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/6.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/7.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/7.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/8.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/8.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/9.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/9.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/10.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/10.png" width="500"> <br>
   
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/11.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/11.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/12.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/12.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/13.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/13.png" width="500"> <br>
    
- <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/14.png" width="400"> <br>
+ <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/14.png" width="500"> <br>
    
  <img src="https://github.com/Sany07/Video-Course-Selling-Platform-Django/blob/master/sc/15.png" width="800"> <br> 
    
