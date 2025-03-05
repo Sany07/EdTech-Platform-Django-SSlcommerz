@@ -15,7 +15,7 @@ docutils==0.15.2
 gunicorn==20.0.4
 idna==2.10
 jmespath==0.10.0
-Pillow==7.2.0
+Pillow==10.3.0
 psycopg2==2.8.5
 python-dateutil==2.8.1
 pytz==2020.1
